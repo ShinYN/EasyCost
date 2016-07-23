@@ -1,0 +1,16 @@
+﻿<UserControl
+    x:Class="EasyCost.Controls.MainMenuItemControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EasyCost.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="200" Height="240.375">
+
+    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+        <Image x:Name="menuImage" Source="ms-appx:///Assets/MenuIcons/menuWriteCost.png" Stretch="Fill"/>
+        <TextBlock x:Name="menuName" Text="Menu" TextAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Name="menuDescription" Text="Menu Description"  TextAlignment="Center" Foreground="Gray"/>
+    </StackPanel>
+</UserControl>
