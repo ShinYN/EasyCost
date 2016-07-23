@@ -19,6 +19,8 @@ namespace EasyCost.Controls
 {
     public sealed partial class MainMenuItemControl : UserControl
     {
+        public delegate void MenuItemClickDelegate();
+        public event MenuItemClickDelegate MenuItemClick;
         public MainMenuItemControl()
         {
             this.InitializeComponent();
@@ -38,6 +40,11 @@ namespace EasyCost.Controls
         {
             get { return menuImage.Source; }
             set { menuImage.Source = value; }
+        }
+
+        private void menuImageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItemClick();
         }
     }
 }

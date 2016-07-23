@@ -9,13 +9,18 @@
     mc:Ignorable="d">
 
     <StackPanel  Orientation="Vertical">
-        <RelativePanel>
-            <Button x:Name="btnHome" Content="홈" Margin="0,0,20,0" RelativePanel.AlignLeftWithPanel="True" Click="btnHome_Click">
+        <RelativePanel MaxHeight="50">
+            <Button x:Name="btnHome" Background="Transparent" Foreground="Transparent" BorderThickness="0" Margin="0" RelativePanel.AlignLeftWithPanel="True" Click="btnHome_Click">
+                <Image x:Name="homeImage" Source="ms-appx:///Assets/MenuIcons/home.png"/>
             </Button>
-            <Button x:Name="btnBackward" Content="뒤로" Margin="0,0,20,0" RelativePanel.RightOf="btnHome" Click="btnBackward_Click" />
-            <Button x:Name="btnForward" Content="앞으로" Margin="0,0,20,0" RelativePanel.RightOf="btnBackward" Click="btnForward_Click"/>
+            <Button x:Name="btnBackward" Background="Transparent" Foreground="Transparent" BorderThickness="0" Margin="0" RelativePanel.RightOf="btnHome" Click="btnBackward_Click">
+                <Image x:Name="backwardImage" Source="ms-appx:///Assets/MenuIcons/backwardArrow.png"/>
+            </Button>
+            <Button x:Name="btnForward" Background="Transparent" Foreground="Transparent" BorderThickness="0" Margin="0" RelativePanel.RightOf="btnBackward" Click="btnForward_Click">
+                <Image x:Name="forwardImage"  Source="ms-appx:///Assets/MenuIcons/forwardArrow.png"/>
+            </Button>
             <TextBlock x:Name="currentDate" Text="2016.07.23" RelativePanel.AlignRightWithPanel="True" />
         </RelativePanel>
-        <Frame x:Name="mainFrame" VerticalAlignment="Center" HorizontalAlignment="Right" Width="1280" />
+        <Frame x:Name="mainFrame" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1280" />
     </StackPanel>
 </Page>

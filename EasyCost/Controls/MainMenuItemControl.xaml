@@ -9,7 +9,9 @@
     d:DesignWidth="200" Height="240.375">
 
     <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
-        <Image x:Name="menuImage" Source="ms-appx:///Assets/MenuIcons/menuWriteCost.png" Stretch="Fill"/>
+        <Button Name="menuImageBtn" Background="Transparent" Foreground="Transparent" BorderThickness="0" Click="menuImageBtn_Click">
+            <Image x:Name="menuImage" Source="ms-appx:///Assets/MenuIcons/menuWriteCost.png" Stretch="UniformToFill"/>
+        </Button>
         <TextBlock x:Name="menuName" Text="Menu" TextAlignment="Center" FontWeight="Bold"/>
         <TextBlock x:Name="menuDescription" Text="Menu Description"  TextAlignment="Center" Foreground="Gray"/>
     </StackPanel>

@@ -6,12 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Controls="using:EasyCost.Controls"
     x:Class="EasyCost.Pages.homePage"
-    mc:Ignorable="d">
+    mc:Ignorable="d" VerticalAlignment="Center" HorizontalAlignment="Center">
 
     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Controls:MainMenuItemControl x:Name="menuWriteCost" MenuName="지출 입력" MenuDescription="지출 정보를 입력합니다" ImageUri="ms-appx:///Assets/MenuIcons/menuWriteCost.png" Height="Auto"/>
-        <Controls:MainMenuItemControl x:Name="menuCostHistory" MenuName="이력 조회" MenuDescription="지출 이력을 조회합니다" ImageUri="ms-appx:///Assets/MenuIcons/menuStatistics.png" Height="Auto"/>
-        <Controls:MainMenuItemControl x:Name="menuSetting" MenuName="설정" MenuDescription="설정 정보를 입력합니다" ImageUri="ms-appx:///Assets/MenuIcons/menuSetting.png" Height="Auto"/>
+        <Controls:MainMenuItemControl x:Name="menuWriteCost" MenuName="지출 입력" MenuDescription="지출 정보를 입력합니다" ImageUri="ms-appx:///Assets/MenuIcons/menuWriteCost.png" Height="Auto" MenuItemClick="menuWriteCost_MenuItemClick"/>
+        <Controls:MainMenuItemControl x:Name="menuCostHistory" MenuName="이력 조회" MenuDescription="지출 이력을 조회합니다" ImageUri="ms-appx:///Assets/MenuIcons/menuStatistics.png" Height="Auto" MenuItemClick="menuCostHistory_MenuItemClick"/>
+        <Controls:MainMenuItemControl x:Name="menuSetting" MenuName="설정" MenuDescription="설정 정보를 입력합니다" ImageUri="ms-appx:///Assets/MenuIcons/menuSetting.png" Height="Auto" MenuItemClick="menuSetting_MenuItemClick"/>
     </StackPanel>
 
 </Page>

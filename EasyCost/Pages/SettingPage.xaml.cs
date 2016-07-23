@@ -20,26 +20,11 @@ namespace EasyCost.Pages
     /// <summary>
     /// 자체적으로 사용하거나 프레임 내에서 탐색할 수 있는 빈 페이지입니다.
     /// </summary>
-    public sealed partial class homePage : Page
+    public sealed partial class SettingPage : Page
     {
-        public homePage()
+        public SettingPage()
         {
             this.InitializeComponent();
-        }
-
-        private void menuWriteCost_MenuItemClick()
-        {
-            Frame.Navigate(typeof(InputCostPage));
-        }
-
-        private void menuCostHistory_MenuItemClick()
-        {
-            Frame.Navigate(typeof(StatisticsPage));
-        }
-
-        private void menuSetting_MenuItemClick()
-        {
-            Frame.Navigate(typeof(SettingPage));
         }
     }
 }

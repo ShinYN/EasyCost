@@ -107,6 +107,12 @@
     <Compile Include="Pages\InputCostPage.xaml.cs">
       <DependentUpon>InputCostPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StatisticsPage.xaml.cs">
+      <DependentUpon>StatisticsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +124,7 @@
   <ItemGroup>
     <Content Include="Assets\MenuIcons\backwardArrow.png" />
     <Content Include="Assets\MenuIcons\forwardArrow.png" />
+    <Content Include="Assets\MenuIcons\home.png" />
     <Content Include="Assets\MenuIcons\menuSetting.png" />
     <Content Include="Assets\MenuIcons\menuStatistics.png" />
     <Content Include="Assets\MenuIcons\menuWriteCost.png" />
@@ -148,6 +155,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\InputCostPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StatisticsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
