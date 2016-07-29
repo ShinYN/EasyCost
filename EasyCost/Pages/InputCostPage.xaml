@@ -9,46 +9,47 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <RelativePanel Grid.Column="0">
-            <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="83,168,0,0" TextWrapping="Wrap" Text="카테고리" VerticalAlignment="Top" FontSize="20" Grid.Column="1">
-                <TextBlock.Foreground>
-                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-                </TextBlock.Foreground>
-            </TextBlock>
-            <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="211,164,0,0" VerticalAlignment="Top" Width="372" FontSize="20" Grid.Column="1">
-                <x:String>핸드폰 비용</x:String>
-                <x:String>외식</x:String>
-                <x:String>대출</x:String>
-            </ComboBox>
-            <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="83,357,0,0" TextWrapping="Wrap" Text="타입" VerticalAlignment="Top" FontSize="20" Grid.Column="1">
-                <TextBlock.Foreground>
-                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-                </TextBlock.Foreground>
-            </TextBlock>
-            <RadioButton x:Name="radioButton" Content="현금" HorizontalAlignment="Left" Margin="211,351,0,0" VerticalAlignment="Top" FontSize="20" Width="164" Grid.Column="1"/>
-            <RadioButton x:Name="radioButton_Copy" Content="카드" HorizontalAlignment="Left" Margin="336,351,0,0" VerticalAlignment="Top" FontSize="20" Width="164" Grid.Column="1"/>
-            <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="83,437,0,0" TextWrapping="Wrap" Text="금액" VerticalAlignment="Top" FontSize="20" Grid.Column="1">
-                <TextBlock.Foreground>
-                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-                </TextBlock.Foreground>
-            </TextBlock>
-            <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="83,259,0,0" TextWrapping="Wrap" Text="지출 내역" VerticalAlignment="Top" FontSize="20" AutomationProperties.HelpText="세부 지출 내역을 입력해 주세요." Grid.Column="1">
-                <TextBlock.Foreground>
-                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-                </TextBlock.Foreground>
-            </TextBlock>
-            <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Margin="211,254,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="41" Width="372" FontSize="20" PlaceholderText="예: " Grid.Column="1"/>
-            <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Margin="211,432,0,0" TextWrapping="Wrap" Text="234234" VerticalAlignment="Top" Height="41" Width="372" FontSize="20" InputScope="Number" Grid.Column="1"/>
-            <Button x:Name="button" Content="입력" HorizontalAlignment="Left" Margin="491,510,0,0" VerticalAlignment="Top" Height="38" Width="92" Background="White" BorderBrush="#FF1D5D89" BorderThickness="3" FontSize="20" FontWeight="Bold" Grid.Column="1">
-                <Button.Foreground>
-                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
-                </Button.Foreground>
-            </Button>
-            <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="83,83,0,0" TextWrapping="Wrap" Text="지출 내역 입력" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="#99FF5100" Grid.Column="1"/>
-
+            <RelativePanel RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True">
+                <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="83,168,0,0" TextWrapping="Wrap" Text="카테고리" VerticalAlignment="Top" FontSize="20" Grid.Column="1">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="211,164,0,0" VerticalAlignment="Top" Width="372" FontSize="20" Grid.Column="1">
+                    <x:String>핸드폰 비용</x:String>
+                    <x:String>외식</x:String>
+                    <x:String>대출</x:String>
+                </ComboBox>
+                <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="83,357,0,0" TextWrapping="Wrap" Text="타입" VerticalAlignment="Top" FontSize="20" Grid.Column="1">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <RadioButton x:Name="radioButton" Content="현금" HorizontalAlignment="Left" Margin="211,351,0,0" VerticalAlignment="Top" FontSize="20" Width="164" Grid.Column="1"/>
+                <RadioButton x:Name="radioButton_Copy" Content="카드" HorizontalAlignment="Left" Margin="336,351,0,0" VerticalAlignment="Top" FontSize="20" Width="164" Grid.Column="1"/>
+                <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="83,437,0,0" TextWrapping="Wrap" Text="금액" VerticalAlignment="Top" FontSize="20" Grid.Column="1">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="83,259,0,0" TextWrapping="Wrap" Text="지출 내역" VerticalAlignment="Top" FontSize="20" AutomationProperties.HelpText="세부 지출 내역을 입력해 주세요." Grid.Column="1">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Margin="211,254,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="41" Width="372" FontSize="20" PlaceholderText="예: " Grid.Column="1"/>
+                <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Margin="211,432,0,0" TextWrapping="Wrap" Text="234234" VerticalAlignment="Top" Height="41" Width="372" FontSize="20" InputScope="Number" Grid.Column="1"/>
+                <Button x:Name="button" Content="입력" HorizontalAlignment="Left" Margin="491,510,0,0" VerticalAlignment="Top" Height="38" Width="92" Background="White" BorderBrush="#FF1D5D89" BorderThickness="3" FontSize="20" FontWeight="Bold" Grid.Column="1">
+                    <Button.Foreground>
+                        <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                    </Button.Foreground>
+                </Button>
+                <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="83,83,0,0" TextWrapping="Wrap" Text="지출 내역 입력" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="#99FF5100" Grid.Column="1"/>
+            </RelativePanel>
         </RelativePanel>
         <RelativePanel Grid.Column="1">
             <Button></Button>

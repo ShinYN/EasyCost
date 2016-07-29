@@ -26,31 +26,31 @@ namespace EasyCost
         public MainPage()
         {
             this.InitializeComponent();
-            mainFrame.Navigate(typeof(homePage));
+            mainFrame.Navigate(typeof(InputCostPage));
         }
 
-        private void btnHome_Click(object sender, RoutedEventArgs e)
-        {
-            if (mainFrame.CurrentSourcePageType != typeof(homePage))
-            {
-                mainFrame.Navigate(typeof(homePage));
-            }
-        }
+        //private void btnHome_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (mainFrame.CurrentSourcePageType != typeof(homePage))
+        //    {
+        //        mainFrame.Navigate(typeof(homePage));
+        //    }
+        //}
 
-        private void btnBackward_Click(object sender, RoutedEventArgs e)
-        {
-            if (mainFrame.CanGoBack)
-            {
-                mainFrame.GoBack();
-            }
-        }
+        //private void btnBackward_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (mainFrame.CanGoBack)
+        //    {
+        //        mainFrame.GoBack();
+        //    }
+        //}
 
-        private void btnForward_Click(object sender, RoutedEventArgs e)
-        {
-            if (mainFrame.CanGoForward)
-            {
-                mainFrame.GoForward();
-            }
-        }
+        //private void btnForward_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (mainFrame.CanGoForward)
+        //    {
+        //        mainFrame.GoForward();
+        //    }
+        //}
     }
 }
