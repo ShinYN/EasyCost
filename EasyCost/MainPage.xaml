@@ -26,22 +26,22 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Background="#FFB2B2B2">
-            
+        <StackPanel Grid.Row="0" Background="White">
+
         </StackPanel>
         <Frame Grid.Row="1" x:Name="mainFrame" />
-        <RelativePanel Grid.Row ="2">
-            <Button x:Name="btnSetting" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True">
+        <RelativePanel Grid.Row ="2" Background="#FFA6A6A6">
+            <Button x:Name="btnSetting" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnSetting_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/menuSetting.png"/>
             </Button>
-            <Button x:Name="btnInquiry" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.LeftOf="btnSetting">
+            <Button x:Name="btnInquiry" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.LeftOf="btnSetting" Click="btnInquiry_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/menuStatistics.png"/>
             </Button>
-            <Button x:Name="btnWrite" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.LeftOf="btnInquiry">
+            <Button x:Name="btnWrite" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.LeftOf="btnInquiry" Click="btnWrite_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/menuWriteCost.png"/>
             </Button>
         </RelativePanel>

@@ -7,7 +7,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="120" Grid.Column="1" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
+            <Button Name="btnSearchWeek" Content="주" BorderThickness="1"  Width="120" Grid.Column="2" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
+            <Button Name="btnSearchMonth" Content="월" BorderThickness="1"  Width="120" Grid.Column="3" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
+            <Button Name="btnSearchYear" Content="년" BorderThickness="1"  Width="120" Grid.Column="4" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
+        </Grid>
     </Grid>
 </Page>

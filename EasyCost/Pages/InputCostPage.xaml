@@ -14,7 +14,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <RelativePanel Grid.Column="0" Margin=" 0,0,0,0" >
-            <RelativePanel RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True">
+            <RelativePanel RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True">
                 <TextBlock x:Name="lblTitle" RelativePanel.AlignLeftWithPanel="True" TextWrapping="Wrap" Text="지출 내역 입력" FontSize="20" FontWeight="Bold" Foreground="#99FF0000"/>
                 <TextBlock x:Name="lblCategory" RelativePanel.AlignLeftWith="lblTitle" RelativePanel.Below="lblTitle" TextWrapping="Wrap" Text="지출 분류" FontSize="15" Foreground="Gray" Margin="0,20,0,0" />
                 <ComboBox x:Name="cboCategory" RelativePanel.AlignVerticalCenterWith="lblCategory" RelativePanel.RightOf="lblCategory" Width="300" FontSize="15" Margin="30,20,0,0" BorderThickness="1">
@@ -35,7 +35,7 @@
                 <RadioButton x:Name="rbTypeCard" Content="카드"  FontSize="15" RelativePanel.RightOf="rbTypeCash" RelativePanel.AlignVerticalCenterWith="rbTypeCash" Margin="0,20,0,0"/>
                 <TextBlock x:Name="lblCost" Text="금액" FontSize="15" RelativePanel.AlignLeftWith="lblTitle" RelativePanel.Below="lblType" Margin="0,20,0,0" Foreground="Gray"/>
                 <TextBox x:Name="txtCost" Text="" FontSize="15" InputScope="Number" RelativePanel.RightOf="lblCost" RelativePanel.AlignVerticalCenterWith="lblCost" Width="300" Margin="66,20,0,0" BorderThickness="1" />
-                <Button x:Name="btnInputCost" Content="입력" FontSize="15" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="lblCost" Margin="0,40,0,0" Background="#33FFFFFF" BorderBrush="Red" BorderThickness="2" Foreground="Gray"/>
+                <Button x:Name="btnInputCost" Content="입력" FontSize="15" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="lblCost" Margin="0,40,0,0" Background="#33FFFFFF" BorderBrush="Red" BorderThickness="2" Foreground="Gray" Click="btnInputCost_Click"/>
             </RelativePanel>
         </RelativePanel>
         <!--<RelativePanel Grid.Column="1">

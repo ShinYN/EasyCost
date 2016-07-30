@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EasyCost.Databases;
+using EasyCost.Databases.TableModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +27,21 @@ namespace EasyCost.Pages
         public InputCostPage()
         {
             this.InitializeComponent();
+        }
+
+        private void btnInputCost_Click(object sender, RoutedEventArgs e)
+        {
+            var a = DBConnectionHandler.DbConnection;
+
+            a.CreateTable<CategoryMaster>();
+            
+            var b = a.GetMapping<CategoryMaster>();
+            
+            CategoryMaster master = new CategoryMaster { Category = "1", Description = "222" };
+            CategoryMaster master1 = new CategoryMaster { Category = "2", Description = "222" };
+
+            a.Insert(master);
+            a.Insert(master1);
         }
     }
 }
