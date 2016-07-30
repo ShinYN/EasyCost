@@ -1,0 +1,66 @@
+﻿<UserControl
+    x:Class="EasyCost.Controls.ViewCostHistoryControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EasyCost.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="100"
+    d:DesignWidth="300">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <ListView x:Name="lsvHistory" Grid.Row="0" ItemsSource="{Binding SomeCollection}" >
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid Height="20" Background="LightGray">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Uid="tbTime" Text="사용 날짜" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
+                        <TextBlock x:Uid="tbCategory" Text="지출 분류" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
+                        <TextBlock x:Uid="tbSubCategory" Text="세부 분류" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
+                        <TextBlock x:Uid="tbCost" Text="금액" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="30" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  Width="200" />
+                            <ColumnDefinition  Width="*" />
+                            <ColumnDefinition  Width="0" />
+                            <ColumnDefinition  Width="0" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding ScanType}" />
+                        <TextBlock Grid.Column="1" Text="{Binding ScanValue}" />
+                        <TextBlock Grid.Column="2" Text="{Binding AttrGroup}" />
+                        <TextBlock Grid.Column="3" Text="{Binding OperationCode}" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        <Line
+             X1="1" Y1="3"
+             X2="3000" Y2="3"
+             Stroke="Blue"
+             StrokeThickness="1" Grid.Row="1"/>
+
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <TextBlock Name="lblCou" Text="최종 사용 금액: 0000000원" Grid.Row="1"></TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>
