@@ -21,11 +21,11 @@
                     <Grid Height="20" Background="LightGray">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="0"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Uid="tbTime" Text="사용 날짜" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
@@ -41,11 +41,11 @@
                     <Grid Height="30" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="0"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Id}" />
