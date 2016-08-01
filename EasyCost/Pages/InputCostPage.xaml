@@ -22,15 +22,16 @@
                 </TextBlock>
                 <TextBlock x:Name="lblCategory" RelativePanel.AlignLeftWith="lblTitle" RelativePanel.Below="lblTitle" TextWrapping="Wrap" Text="지출 분류" FontSize="15" Foreground="Gray" Margin="0,20,0,0" />
                 <ComboBox x:Name="cboCategory" RelativePanel.AlignVerticalCenterWith="lblCategory" RelativePanel.RightOf="lblCategory" Width="300" FontSize="15" Margin="30,20,0,0" BorderThickness="1">
-                    <x:String>핸드폰 비용</x:String>
-                    <x:String>외식</x:String>
-                    <x:String>대출</x:String>
+                    <x:String>교통비</x:String>
+                    <x:String>식비</x:String>
+                    <x:String>통신비</x:String>
                 </ComboBox>
                 <TextBlock x:Name="lblSubCategory" RelativePanel.AlignLeftWith="lblTitle" RelativePanel.Below="lblCategory" TextWrapping="Wrap" Text="세부 분류" FontSize="15" Foreground="Gray" Margin="0,20,0,0" />
                 <ComboBox x:Name="cboSubCategory" RelativePanel.AlignVerticalCenterWith="lblSubCategory" RelativePanel.RightOf="lblSubCategory" Width="300" FontSize="15" Margin="30,20,0,0" BorderThickness="1">
                     <x:String>핸드폰 비용</x:String>
                     <x:String>외식</x:String>
-                    <x:String>대출</x:String>
+                    <x:String>버스</x:String>
+                    <x:String>지하철</x:String>
                 </ComboBox>
                 <TextBlock x:Name="lblDetail" Text="지출 내역" RelativePanel.AlignLeftWith="lblTitle" RelativePanel.Below="lblSubCategory" FontSize="15" Foreground="Gray" Margin="0,20,0,0" />
                 <TextBox x:Name="txtDetail"  Width="300" RelativePanel.AlignVerticalCenterWith="lblDetail" RelativePanel.RightOf="lblDetail" FontSize="15" Margin="30,20,0,0" Height="32" VerticalAlignment="Top" BorderThickness="1" />
@@ -57,7 +58,7 @@
                     <SolidColorBrush Color="{ThemeResource SystemBaseHighColor}"/>
                 </TextBlock.Foreground>
             </TextBlock>
-            <Controls:ViewCostHistoryControl />
+            <Controls:ViewCostHistoryControl x:Name="costHistory" />
         </StackPanel>
     </Grid>
 </Page>

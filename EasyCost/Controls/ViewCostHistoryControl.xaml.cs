@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyCost.Databases;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,26 @@ namespace EasyCost.Controls
         public ViewCostHistoryControl()
         {
             this.InitializeComponent();
+        }
+
+        public void Display()
+        {
+            lsvHistory.Items.Clear();
+
+            DBConnHandler.Cost.GetCostInfo().ForEach(elem =>
+                {
+                    lsvHistory.Items.Add(new
+                    {
+                        Id = elem.Id,
+                        CostDate = elem.CostDate,
+                        Category = elem.Category,
+                        SubCategory = elem.SubCategory,
+                        CostType = elem.CostType,
+                        Cost = elem.Cost,
+                        Description = elem.Description
+                    });
+                }
+            );
         }
     }
 }

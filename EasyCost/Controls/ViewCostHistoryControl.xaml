@@ -20,15 +20,19 @@
                 <DataTemplate>
                     <Grid Height="20" Background="LightGray">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0"/>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="0"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Uid="tbTime" Text="사용 날짜" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
-                        <TextBlock x:Uid="tbCategory" Text="지출 분류" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
-                        <TextBlock x:Uid="tbSubCategory" Text="세부 분류" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
-                        <TextBlock x:Uid="tbCost" Text="금액" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
+                        <TextBlock x:Uid="tbTime" Text="사용 날짜" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
+                        <TextBlock x:Uid="tbCategory" Text="지출 분류" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
+                        <TextBlock x:Uid="tbSubCategory" Text="세부 분류" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
+                        <TextBlock x:Uid="tbCostType" Text="타입" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
+                        <TextBlock x:Uid="tbCost" Text="금액" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
                     </Grid>
                 </DataTemplate>
             </ListView.HeaderTemplate>
@@ -36,15 +40,21 @@
                 <DataTemplate>
                     <Grid Height="30" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition  Width="200" />
-                            <ColumnDefinition  Width="*" />
-                            <ColumnDefinition  Width="0" />
-                            <ColumnDefinition  Width="0" />
+                            <ColumnDefinition Width="0"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="0"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding ScanType}" />
-                        <TextBlock Grid.Column="1" Text="{Binding ScanValue}" />
-                        <TextBlock Grid.Column="2" Text="{Binding AttrGroup}" />
-                        <TextBlock Grid.Column="3" Text="{Binding OperationCode}" />
+                        <TextBlock Grid.Column="0" Text="{Binding Id}" />
+                        <TextBlock Grid.Column="1" Text="{Binding CostDate}" />
+                        <TextBlock Grid.Column="2" Text="{Binding Category}" />
+                        <TextBlock Grid.Column="3" Text="{Binding SubCategory}" />
+                        <TextBlock Grid.Column="4" Text="{Binding CostType}" />
+                        <TextBlock Grid.Column="5" Text="{Binding Cost}" />
+                        <TextBlock Grid.Column="6" Text="{Binding Description}" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

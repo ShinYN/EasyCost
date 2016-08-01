@@ -27,6 +27,42 @@ namespace EasyCost.Pages
         public InputCostPage()
         {
             this.InitializeComponent();
+            InitControls();
+            DisplayCostHistory();
+        }
+
+        private void InitControls()
+        {
+            InitInputCostControls();
+            InitViewCostHistoryControls();            
+        }
+        private void InitInputCostControls()
+        {
+            InitCategoryCombo();
+            InitSubCategoryCombo();
+
+            rbTypeCard.IsChecked = true;
+            txtDetail.Text = string.Empty;
+            txtCost.Text = string.Empty;
+        }
+        private void InitCategoryCombo()
+        {
+
+        }
+        private void InitSubCategoryCombo()
+        {
+
+        }
+
+
+        private void InitViewCostHistoryControls()
+        {
+
+        }
+
+        private void DisplayCostHistory()
+        {
+            costHistory.Display();
         }
 
         private void btnInputCost_Click(object sender, RoutedEventArgs e)
@@ -36,11 +72,12 @@ namespace EasyCost.Pages
             costInfo.Category = cboCategory.SelectedValue.ToString();
             costInfo.SubCategory = cboSubCategory.SelectedValue.ToString();
             costInfo.CostType = (rbTypeCard.IsChecked == true) ? "Card" : "Cash";
+            costInfo.Cost = int.Parse(txtCost.Text.Trim());
             costInfo.Description = txtDetail.Text;
 
-            DBConnectionHandler.Cost.SaveConstInfo(costInfo);
+            DBConnHandler.Cost.SaveConstInfo(costInfo);
 
-            var costData = DBConnectionHandler.Cost.GetCostInfo();
+            DisplayCostHistory();
         }
     }
 }

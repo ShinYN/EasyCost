@@ -13,7 +13,7 @@ namespace EasyCost.Databases.TableModels
         public int Id { get; set; }
 
         /// <summary>
-        /// 지출 날짜. YYYYMMDD형식
+        /// 지출 날짜. YYYY-MM-DD형식
         /// </summary>
         public string CostDate { get; set; }
         /// <summary>

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EasyCost.Databases
 {
-    public static class DBConnectionHandler
+    public static class DBConnHandler
     {
         public static void Initialize()
         {
