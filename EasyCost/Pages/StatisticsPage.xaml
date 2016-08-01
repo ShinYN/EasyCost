@@ -22,10 +22,10 @@
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="120" Grid.Column="1" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
-            <Button Name="btnSearchWeek" Content="주" BorderThickness="1"  Width="120" Grid.Column="2" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
-            <Button Name="btnSearchMonth" Content="월" BorderThickness="1"  Width="120" Grid.Column="3" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
-            <Button Name="btnSearchYear" Content="년" BorderThickness="1"  Width="120" Grid.Column="4" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
+            <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="120" Grid.Column="1" Foreground="Red" Background="{x:Null}" BorderBrush="Red" PointerEntered="btnSearchDay_PointerEntered" />
+            <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="120" Grid.Column="2" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
+            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Grid.Column="3" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
+            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Grid.Column="4" Foreground="Red" Background="{x:Null}" BorderBrush="Red" />
         </Grid>
     </Grid>
 </Page>
