@@ -31,17 +31,16 @@ namespace EasyCost.Pages
 
         private void btnInputCost_Click(object sender, RoutedEventArgs e)
         {
-            var a = DBConnectionHandler.DbConnection;
+            CostInfo costInfo = new CostInfo();
+            costInfo.CostDate = DateTime.Now.ToString("yyyyMMdd");
+            costInfo.Category = cboCategory.SelectedValue.ToString();
+            costInfo.SubCategory = cboSubCategory.SelectedValue.ToString();
+            costInfo.CostType = (rbTypeCard.IsChecked == true) ? "Card" : "Cash";
+            costInfo.Description = txtDetail.Text;
 
-            a.CreateTable<CategoryMaster>();
-            
-            var b = a.GetMapping<CategoryMaster>();
-            
-            CategoryMaster master = new CategoryMaster { Category = "1", Description = "222" };
-            CategoryMaster master1 = new CategoryMaster { Category = "2", Description = "222" };
+            DBConnectionHandler.Cost.SaveConstInfo(costInfo);
 
-            a.Insert(master);
-            a.Insert(master1);
+            var costData = DBConnectionHandler.Cost.GetCostInfo();
         }
     }
 }

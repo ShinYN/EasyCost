@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="Databases\DBConnectionHandler.cs" />
     <Compile Include="Databases\TableModels\CategoryMaster.cs" />
+    <Compile Include="Databases\TableModels\CostInfo.cs" />
     <Compile Include="Databases\TableModels\SubCategoryMaster.cs" />
     <Compile Include="Helpers\MyColorHelper.cs" />
     <Compile Include="MainPage.xaml.cs">

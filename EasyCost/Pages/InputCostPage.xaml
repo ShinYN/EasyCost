@@ -39,7 +39,7 @@
                 <RadioButton x:Name="rbTypeCard" Content="카드"  FontSize="15" RelativePanel.RightOf="rbTypeCash" RelativePanel.AlignVerticalCenterWith="rbTypeCash" Margin="0,20,0,0"/>
                 <TextBlock x:Name="lblCost" Text="금액" FontSize="15" RelativePanel.AlignLeftWith="lblTitle" RelativePanel.Below="lblType" Margin="0,20,0,0" Foreground="Gray"/>
                 <TextBox x:Name="txtCost" Text="" FontSize="15" InputScope="Number" RelativePanel.RightOf="lblCost" RelativePanel.AlignVerticalCenterWith="lblCost" Width="300" Margin="66,20,0,0" BorderThickness="1" />
-                <Button x:Name="btnInputCost" Content="입력" FontSize="15" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="lblCost" Margin="-25,40,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Click="btnInputCost_Click" Width="71"/>
+                <Button x:Name="btnInputCost" Content="입력" FontSize="15" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="lblCost" Margin="-25,40,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Click="btnInputCost_Click" Width="71" HorizontalAlignment="Right"/>
             </RelativePanel>
         </RelativePanel>
         <!--<RelativePanel Grid.Column="1">

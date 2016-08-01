@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyCost.Databases;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace EasyCost
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            DBConnectionHandler.Initialize();
         }
 
         /// <summary>
