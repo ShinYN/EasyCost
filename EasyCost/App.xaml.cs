@@ -32,6 +32,7 @@ namespace EasyCost
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
+            //DBConnHandler.InitDB();
             DBConnHandler.Initialize();
         }
 

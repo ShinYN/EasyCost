@@ -47,14 +47,16 @@ namespace EasyCost.Pages
         }
         private void InitCategoryCombo()
         {
-
+            cboCategory.Items.Clear();
+            cboCategory.Items.Add(string.Empty);
+            DBConnHandler.Setting.GetCategoryList().ForEach(elem => cboCategory.Items.Add(elem.Category));
+            cboCategory.SelectedIndex = 0;
         }
         private void InitSubCategoryCombo()
         {
-
+            cboSubCategory.Items.Clear();
         }
-
-
+        
         private void InitViewCostHistoryControls()
         {
 
@@ -64,6 +66,13 @@ namespace EasyCost.Pages
         {
             costHistory.Display();
         }
+        private void DisplaySubCategory(string aCategory)
+        {
+            cboSubCategory.Items.Clear();
+            cboSubCategory.Items.Add(string.Empty);
+            DBConnHandler.Setting.GetSubCategoryList(aCategory).ForEach(elem => cboSubCategory.Items.Add(elem.SubCategory));
+            cboSubCategory.SelectedIndex = 0;
+        }
 
         private void btnInputCost_Click(object sender, RoutedEventArgs e)
         {
@@ -71,13 +80,25 @@ namespace EasyCost.Pages
             costInfo.CostDate = DateTime.Now.ToString("yyyyMMdd");
             costInfo.Category = cboCategory.SelectedValue.ToString();
             costInfo.SubCategory = cboSubCategory.SelectedValue.ToString();
-            costInfo.CostType = (rbTypeCard.IsChecked == true) ? "Card" : "Cash";
+            costInfo.CostType = (rbTypeCard.IsChecked == true) ? "카드" : "현금";
             costInfo.Cost = int.Parse(txtCost.Text.Trim());
             costInfo.Description = txtDetail.Text;
 
             DBConnHandler.Cost.SaveConstInfo(costInfo);
 
             DisplayCostHistory();
+        }
+
+        private void cboCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((string)cboCategory.SelectedValue == string.Empty)
+            {
+                InitSubCategoryCombo();
+            }
+            else
+            {
+                DisplaySubCategory((string)cboCategory.SelectedValue);
+            }
         }
     }
 }

@@ -26,6 +26,12 @@ namespace EasyCost.Databases
                 return new SQLiteConnection(dbPath);
             }
         }
+        public static void InitDB()
+        {
+            DbConnection.DropTable<CategoryMaster>();
+            DbConnection.DropTable<SubCategoryMaster>();
+            DbConnection.DropTable<CostInfo>();
+        }
 
         public static class Cost
         {
@@ -48,7 +54,42 @@ namespace EasyCost.Databases
 
         public static class Setting
         {
-            
+            public static List<CategoryMaster> GetCategoryList()
+            {
+                return (from category in DbConnection.Table<CategoryMaster>()
+                        select category).ToList();
+            }
+            public static void SaveCategory(CategoryMaster aCategoryMaster)
+            {
+                DbConnection.Insert(aCategoryMaster);
+            }
+            public static void DeleteCategory(CategoryMaster aCategoryMaster)
+            {
+                DbConnection.Delete(aCategoryMaster);
+            }
+            public static void DeleteCategory(string aCategory)
+            {
+                DbConnection.Execute(string.Format("DELETE FROM CategoryMaster WHERE Category = '{0}'", aCategory));
+            }
+
+            public static List<SubCategoryMaster> GetSubCategoryList(string aCategory)
+            {
+                return (from subCategory in DbConnection.Table<SubCategoryMaster>()
+                        where subCategory.Category == aCategory
+                        select subCategory).ToList();
+            }
+            public static void SaveSubCategory(SubCategoryMaster aSubCategoryMaster)
+            {
+                DbConnection.Insert(aSubCategoryMaster);
+            }
+            public static void DeleteSubCategory(SubCategoryMaster aSubCategoryMaster)
+            {
+                DbConnection.Delete(aSubCategoryMaster);
+            }
+            public static void DeleteSubCategory(string aCategory, string aSubCategory)
+            {
+                DbConnection.Execute(string.Format("DELETE FROM SubCategoryMaster WHERE Category ='{0}' AND SubCategory = '{1}'", aCategory, aSubCategory));
+            }
         }
     }
 }

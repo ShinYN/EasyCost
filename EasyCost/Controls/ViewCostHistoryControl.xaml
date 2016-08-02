@@ -67,10 +67,10 @@
              Stroke="Blue"
              StrokeThickness="1" Grid.Row="1"/>
 
-
-
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <TextBlock Name="lblCou" Text="최종 사용 금액: 0000000원" Grid.Row="1"></TextBlock>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,10,0">
+            <TextBlock Text="최종 사용 금액:" Grid.Row="1" />
+            <TextBlock Name="lblTotalCost" Text="" Grid.Row="1" Margin="5,0,0,0"/>
+            <TextBlock Text="원" Grid.Row="1" />
         </StackPanel>
     </Grid>
 </UserControl>

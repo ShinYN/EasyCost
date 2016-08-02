@@ -29,6 +29,7 @@ namespace EasyCost.Controls
         {
             lsvHistory.Items.Clear();
 
+            int totalCost = 0;
             DBConnHandler.Cost.GetCostInfo().ForEach(elem =>
                 {
                     lsvHistory.Items.Add(new
@@ -41,8 +42,12 @@ namespace EasyCost.Controls
                         Cost = elem.Cost,
                         Description = elem.Description
                     });
+
+                    totalCost += elem.Cost;
                 }
             );
+
+            lblTotalCost.Text = totalCost.ToString();
         }
     }
 }
