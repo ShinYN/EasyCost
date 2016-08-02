@@ -86,6 +86,10 @@ namespace EasyCost.Databases
             {
                 DbConnection.Delete(aSubCategoryMaster);
             }
+            public static void DeleteSubCategory(string aCategory)
+            {
+                DbConnection.Execute(string.Format("DELETE FROM SubCategoryMaster WHERE Category ='{0}'", aCategory));
+            }
             public static void DeleteSubCategory(string aCategory, string aSubCategory)
             {
                 DbConnection.Execute(string.Format("DELETE FROM SubCategoryMaster WHERE Category ='{0}' AND SubCategory = '{1}'", aCategory, aSubCategory));

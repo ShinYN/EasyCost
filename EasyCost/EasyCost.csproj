@@ -118,6 +118,9 @@
     <Compile Include="Pages\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Settings\CategorySettingPage.xaml.cs">
+      <DependentUpon>CategorySettingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
@@ -131,7 +134,9 @@
     <None Include="EasyCost_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\MenuIcons\addItem.png" />
     <Content Include="Assets\MenuIcons\backwardArrow.png" />
+    <Content Include="Assets\MenuIcons\deleteItem.png" />
     <Content Include="Assets\MenuIcons\forwardArrow.png" />
     <Content Include="Assets\MenuIcons\home.png" />
     <Content Include="Assets\MenuIcons\menuSetting.png" />
@@ -172,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\CategorySettingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

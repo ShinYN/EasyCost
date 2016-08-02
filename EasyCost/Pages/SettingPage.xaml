@@ -13,7 +13,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Background="#FFC3C3C3" BorderBrush="Black">
-            <Button Name="btnCategorySetting" Content="카테고리 설정" Width="300" Background="White" BorderBrush="#FF5D5C5C" BorderThickness="1"/>
+            <Button Name="btnCategorySetting" Content="카테고리 설정" Width="300" Background="White" BorderBrush="#FF5D5C5C" BorderThickness="1" Click="btnCategorySetting_Click"/>
         </StackPanel>
         <Frame Name="settingFrame" Grid.Column="1" />
     </Grid>

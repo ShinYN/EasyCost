@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyCost.Pages.Settings;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,15 @@ namespace EasyCost.Pages
         public SettingPage()
         {
             this.InitializeComponent();
+            settingFrame.Navigate(typeof(CategorySettingPage));
+        }
+
+        private void btnCategorySetting_Click(object sender, RoutedEventArgs e)
+        {
+            if (settingFrame.CurrentSourcePageType != typeof(CategorySettingPage))
+            {
+                settingFrame.Navigate(typeof(CategorySettingPage));
+            }
         }
     }
 }
