@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0">
             <TextBlock Text="대 분류 관리" FontSize="20" />
-            <ListView x:Name="lsvCategory" Height="400" ItemsSource="{Binding SomeCollection}">
+            <ListView x:Name="lsvCategory" Height="400" ItemsSource="{Binding SomeCollection}" SelectionChanged="lsvCategory_SelectionChanged">
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <Grid Height="30" Background="LightGray">
@@ -66,7 +66,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="400"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Category}" />
+                            <TextBlock Grid.Column="0" Text="{Binding SubCategory}" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

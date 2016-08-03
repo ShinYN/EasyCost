@@ -98,5 +98,13 @@ namespace EasyCost.Pages.Settings
 
             DisplaySubCategoryList();
         }
+
+        private void lsvCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lsvCategory.SelectedItems.Count != 0)
+            {
+                DisplaySubCategoryList();
+            }
+        }
     }
 }
