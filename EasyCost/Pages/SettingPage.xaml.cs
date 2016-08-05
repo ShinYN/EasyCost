@@ -26,7 +26,17 @@ namespace EasyCost.Pages
         public SettingPage()
         {
             this.InitializeComponent();
+            InitSettingItems();
             settingFrame.Navigate(typeof(CategorySettingPage));
+        }
+
+        private void InitSettingItems()
+        {
+            lsvSettingItem.Items.Clear();
+            lsvSettingItem.Items.Add(new { Item = "카테고리 관리" });
+            lsvSettingItem.Items.Add(new { Item = "업데이트 정보" });
+            lsvSettingItem.Items.Add(new { Item = "프로그램 정보" });
+            lsvSettingItem.SelectedIndex = 0;
         }
 
         private void btnCategorySetting_Click(object sender, RoutedEventArgs e)

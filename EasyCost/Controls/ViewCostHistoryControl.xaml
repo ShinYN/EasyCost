@@ -18,7 +18,7 @@
         <ListView x:Name="lsvHistory" Grid.Row="0" ItemsSource="{Binding SomeCollection}" >
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <Grid Height="20" Background="LightGray">
+                    <Grid Height="30" Background="#99D9EA">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0"/>
                             <ColumnDefinition Width="100"/>
@@ -28,11 +28,11 @@
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="0"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Uid="tbTime" Text="사용 날짜" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
-                        <TextBlock x:Uid="tbCategory" Text="지출 분류" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
-                        <TextBlock x:Uid="tbSubCategory" Text="세부 분류" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
-                        <TextBlock x:Uid="tbCostType" Text="타입" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
-                        <TextBlock x:Uid="tbCost" Text="금액" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="Gray"/>
+                        <TextBlock x:Uid="tbTime" Text="사용 날짜" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" Foreground="Black"/>
+                        <TextBlock x:Uid="tbCategory" Text="지출 분류" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" Foreground="Black"/>
+                        <TextBlock x:Uid="tbSubCategory" Text="세부 분류" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" Foreground="Black"/>
+                        <TextBlock x:Uid="tbCostType" Text="타입" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" Foreground="Black"/>
+                        <TextBlock x:Uid="tbCost" Text="금액" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" Foreground="Black"/>
                     </Grid>
                 </DataTemplate>
             </ListView.HeaderTemplate>
@@ -59,7 +59,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
 
         <Line
              X1="1" Y1="3"

@@ -81,9 +81,10 @@ namespace EasyCost.Pages.Settings
         {
             if (lsvSubCategory.SelectedItems.Count() != 0)
             {
+                dynamic category = lsvCategory.SelectedValue;
                 dynamic subCategory = lsvSubCategory.SelectedValue;
 
-                DBConnHandler.Setting.DeleteSubCategory(subCategory.Category);
+                DBConnHandler.Setting.DeleteSubCategory(new SubCategoryMaster { Category = category.Category, SubCategory = subCategory.SubCategory });
                 DisplaySubCategoryList();
             }
         }
