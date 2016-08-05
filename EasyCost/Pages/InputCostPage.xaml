@@ -49,7 +49,7 @@
                     <SolidColorBrush Color="{ThemeResource SystemBaseHighColor}"/>
                 </TextBlock.Foreground>
             </TextBlock>
-            <Controls:ViewCostHistoryControl x:Name="costHistory" />
+            <Controls:ViewCostHistoryControl x:Name="costHistory" Margin="0,14,0,0"/>
         </StackPanel>
     </Grid>
 </Page>
