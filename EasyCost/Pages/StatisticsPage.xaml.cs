@@ -1,4 +1,5 @@
 ﻿using EasyCost.Helpers;
+using EasyCost.Pages.Statistics;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,14 @@ namespace EasyCost.Pages
         public StatisticsPage()
         {
             this.InitializeComponent();
+        }
+
+        private void btnSearchDay_Click(object sender, RoutedEventArgs e)
+        {
+            if (statisticsFrame.CurrentSourcePageType != typeof(DailyStatisticsPage))
+            {
+                statisticsFrame.Navigate(typeof(DailyStatisticsPage));
+            }
         }
 
         //private void btnSearchDay_PointerEntered(object sender, PointerRoutedEventArgs e)
