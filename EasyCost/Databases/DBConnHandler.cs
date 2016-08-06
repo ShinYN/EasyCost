@@ -1,4 +1,5 @@
-﻿using EasyCost.Databases.TableModels;
+﻿using EasyCost.Bases.Login;
+using EasyCost.Databases.TableModels;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace EasyCost.Databases
     {
         public static void Initialize()
         {
+            DbConnection.CreateTable<UserMaster>();
             DbConnection.CreateTable<CostInfo>();
             DbConnection.CreateTable<CategoryMaster>();
             DbConnection.Execute(@"CREATE TABLE IF NOT EXISTS SubCategoryMaster (Category VARCHAR(50), SubCategory VARCHAR(50), Description VARCHAR(100), PRIMARY KEY (Category, SubCategory))");
@@ -38,6 +40,14 @@ namespace EasyCost.Databases
             public static List<CostInfo> GetCostInfo()
             {
                 return (from c in DbConnection.Table<CostInfo>()
+                        where c.UserID == LoginInfo.UserID
+                        select c).ToList();
+            }
+
+            public static List<CostInfo> GetCostInfoByToday()
+            {
+                return (from c in DbConnection.Table<CostInfo>()
+                        where c.UserID == LoginInfo.UserID
                         select c).ToList();
             }
 

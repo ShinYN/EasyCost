@@ -1,4 +1,6 @@
 ﻿using EasyCost.Databases;
+using EasyCost.Databases.TableModels;
+using EasyCost.Types;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,9 +27,38 @@ namespace EasyCost.Controls
             this.InitializeComponent();
         }
 
-        public void Display()
+        public void Display(InquiryType aInquiryType)
         {
             lsvHistory.Items.Clear();
+
+            List<CostInfo> costHistory;
+            if (aInquiryType == InquiryType.Today)
+            {
+                costHistory = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).ToList();
+            }
+            else if (aInquiryType == InquiryType.Week)
+            {
+                //costHistory = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate.ToString("yyyyMMdd") > DateTime.Now.AddDays(-7).ToString("yyyyMMdd")).ToList();
+            }
+            else if (aInquiryType == InquiryType.Month)
+            {
+
+            }
+            else if (aInquiryType == InquiryType.Year)
+            {
+
+            }
+            else if (aInquiryType == InquiryType.All)
+            {
+
+            }
+            else
+            {
+
+            }
+
+
+
 
             int totalCost = 0;
             DBConnHandler.Cost.GetCostInfo().ForEach(elem =>

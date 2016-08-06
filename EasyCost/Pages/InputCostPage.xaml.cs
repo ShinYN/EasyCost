@@ -1,4 +1,5 @@
-﻿using EasyCost.Databases;
+﻿using EasyCost.Bases.Login;
+using EasyCost.Databases;
 using EasyCost.Databases.TableModels;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,7 @@ namespace EasyCost.Pages
 
         private void DisplayCostHistory()
         {
-            costHistory.Display();
+            costHistory.Display(Types.InquiryType.Today);
         }
         private void DisplaySubCategory(string aCategory)
         {
@@ -77,6 +78,7 @@ namespace EasyCost.Pages
         private void btnInputCost_Click(object sender, RoutedEventArgs e)
         {
             CostInfo costInfo = new CostInfo();
+            costInfo.UserID = LoginInfo.UserID;
             costInfo.CostDate = DateTime.Now;
             costInfo.Category = cboCategory.SelectedValue.ToString();
             costInfo.SubCategory = cboSubCategory.SelectedValue.ToString();
