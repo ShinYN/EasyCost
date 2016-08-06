@@ -31,37 +31,30 @@ namespace EasyCost.Controls
         {
             lsvHistory.Items.Clear();
 
-            List<CostInfo> costHistory;
+            List<CostInfo> costInfo = null;
             if (aInquiryType == InquiryType.Today)
             {
-                costHistory = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).ToList();
+                costInfo = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).ToList();
             }
             else if (aInquiryType == InquiryType.Week)
             {
-                //costHistory = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate.ToString("yyyyMMdd") > DateTime.Now.AddDays(-7).ToString("yyyyMMdd")).ToList();
+                costInfo = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate > DateTime.Now.AddDays(-7)).ToList();
             }
             else if (aInquiryType == InquiryType.Month)
             {
-
+                costInfo = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate > DateTime.Now.AddMonths(-1)).ToList();
             }
             else if (aInquiryType == InquiryType.Year)
             {
-
+                costInfo = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate > DateTime.Now.AddYears(-1)).ToList();
             }
-            else if (aInquiryType == InquiryType.All)
+            else   // Case of all
             {
-
+                costInfo = DBConnHandler.Cost.GetCostInfo();
             }
-            else
-            {
-
-            }
-
-
-
 
             int totalCost = 0;
-            DBConnHandler.Cost.GetCostInfo().ForEach(elem =>
+            costInfo.ForEach(elem =>
                 {
                     lsvHistory.Items.Add(new
                     {

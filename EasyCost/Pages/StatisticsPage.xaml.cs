@@ -24,14 +24,17 @@ namespace EasyCost.Pages
     /// </summary>
     public sealed partial class StatisticsPage : Page
     {
+        const string COLOR_BACK_ENTER = "#FF0000";
+
         public StatisticsPage()
         {
             this.InitializeComponent();
         }
 
-        private void btnSearchDay_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            btnSearchDay.Background = new SolidColorBrush(MyColorHelper.GetSolidColor("#FF0000"));
-        }
+        //private void btnSearchDay_PointerEntered(object sender, PointerRoutedEventArgs e)
+        //{
+        //    btnSearchDay.Background = new SolidColorBrush(Colors.Red);
+        //    btnSearchDay.Foreground = new SolidColorBrush(Colors.White);
+        //}
     }
 }

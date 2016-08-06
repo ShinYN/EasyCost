@@ -1,5 +1,6 @@
 ﻿using EasyCost.Bases.Login;
 using EasyCost.Databases.TableModels;
+using EasyCost.Types;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -38,13 +39,6 @@ namespace EasyCost.Databases
         public static class Cost
         {
             public static List<CostInfo> GetCostInfo()
-            {
-                return (from c in DbConnection.Table<CostInfo>()
-                        where c.UserID == LoginInfo.UserID
-                        select c).ToList();
-            }
-
-            public static List<CostInfo> GetCostInfoByToday()
             {
                 return (from c in DbConnection.Table<CostInfo>()
                         where c.UserID == LoginInfo.UserID

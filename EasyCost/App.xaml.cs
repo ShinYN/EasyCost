@@ -33,7 +33,7 @@ namespace EasyCost
             this.Suspending += OnSuspending;
 
             //DB초기화 함수. 프로그램 리셋이 필요할 때 호출
-            DBConnHandler.InitDB();
+            //DBConnHandler.InitDB();
             DBConnHandler.Initialize();
         }
 
