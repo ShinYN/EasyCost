@@ -12,14 +12,7 @@
             <ColumnDefinition Width="300" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <!--<StackPanel Orientation="Vertical" Background="#F2F2F2" BorderBrush="Black">
-            
-                
-                
-            </ListView>
-            --><!--<Button Name="btnCategorySetting" Content="카테고리 설정" Width="300" Background="White" BorderBrush="#FF5D5C5C" BorderThickness="1" Click="btnCategorySetting_Click"/>--><!--
-        </StackPanel>-->
-        <ListView x:Name="lsvSettingItem"  Grid.Column="0" Background="#F2F2F2">
+        <ListView x:Name="lsvSettingItem"  Grid.Column="0" Background="#F2F2F2" Tapped="lsvSettingItem_Tapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="30" >

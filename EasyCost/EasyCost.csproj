@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Bases\Login\LoginInfo.cs" />
     <Compile Include="Controls\MainMenuItemControl.xaml.cs">
       <DependentUpon>MainMenuItemControl.xaml</DependentUpon>
     </Compile>
@@ -105,6 +106,7 @@
     <Compile Include="Databases\TableModels\CategoryMaster.cs" />
     <Compile Include="Databases\TableModels\CostInfo.cs" />
     <Compile Include="Databases\TableModels\SubCategoryMaster.cs" />
+    <Compile Include="Databases\TableModels\UserMaster.cs" />
     <Compile Include="Helpers\MyColorHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -120,6 +122,9 @@
     </Compile>
     <Compile Include="Pages\Settings\CategorySettingPage.xaml.cs">
       <DependentUpon>CategorySettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\ProgramInfoPage.xaml.cs">
+      <DependentUpon>ProgramInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
@@ -181,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Settings\CategorySettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\ProgramInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

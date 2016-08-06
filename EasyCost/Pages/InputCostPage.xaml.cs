@@ -77,7 +77,7 @@ namespace EasyCost.Pages
         private void btnInputCost_Click(object sender, RoutedEventArgs e)
         {
             CostInfo costInfo = new CostInfo();
-            costInfo.CostDate = DateTime.Now.ToString("yyyyMMdd");
+            costInfo.CostDate = DateTime.Now;
             costInfo.Category = cboCategory.SelectedValue.ToString();
             costInfo.SubCategory = cboSubCategory.SelectedValue.ToString();
             costInfo.CostType = (rbTypeCard.IsChecked == true) ? "카드" : "현금";

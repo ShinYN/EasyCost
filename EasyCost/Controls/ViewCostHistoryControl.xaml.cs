@@ -35,11 +35,11 @@ namespace EasyCost.Controls
                     lsvHistory.Items.Add(new
                     {
                         Id = elem.Id,
-                        CostDate = elem.CostDate,
+                        CostDate = elem.CostDate.ToString("yyyy-MM-dd"),
                         Category = elem.Category,
                         SubCategory = elem.SubCategory,
                         CostType = elem.CostType,
-                        Cost = elem.Cost,
+                        Cost = elem.Cost.ToString("#,##0") + "원",
                         Description = elem.Description
                     });
 
@@ -47,7 +47,7 @@ namespace EasyCost.Controls
                 }
             );
 
-            lblTotalCost.Text = totalCost.ToString();
+            lblTotalCost.Text = totalCost.ToString("#,##0");
         }
     }
 }

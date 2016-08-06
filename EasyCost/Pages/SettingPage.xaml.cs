@@ -23,6 +23,8 @@ namespace EasyCost.Pages
     /// </summary>
     public sealed partial class SettingPage : Page
     {
+        private const string MENU_CATEGORY = "카테고리 관리";
+        private const string MENU_PROGRAMINFO = "프로그램 정보";
         public SettingPage()
         {
             this.InitializeComponent();
@@ -33,18 +35,37 @@ namespace EasyCost.Pages
         private void InitSettingItems()
         {
             lsvSettingItem.Items.Clear();
-            lsvSettingItem.Items.Add(new { Item = "카테고리 관리" });
-            lsvSettingItem.Items.Add(new { Item = "업데이트 정보" });
-            lsvSettingItem.Items.Add(new { Item = "프로그램 정보" });
+            lsvSettingItem.Items.Add(new { Item = MENU_CATEGORY });
+            lsvSettingItem.Items.Add(new { Item = MENU_PROGRAMINFO });
             lsvSettingItem.SelectedIndex = 0;
         }
 
-        private void btnCategorySetting_Click(object sender, RoutedEventArgs e)
+        private void DisplaySettingPage(string aSelectedItemString)
         {
-            if (settingFrame.CurrentSourcePageType != typeof(CategorySettingPage))
+            if (aSelectedItemString == MENU_CATEGORY)
             {
-                settingFrame.Navigate(typeof(CategorySettingPage));
+                if (settingFrame.CurrentSourcePageType != typeof(CategorySettingPage))
+                {
+                    settingFrame.Navigate(typeof(CategorySettingPage));
+                }
             }
+            else if (aSelectedItemString == MENU_PROGRAMINFO)
+            {
+                if (settingFrame.CurrentSourcePageType != typeof(ProgramInfoPage))
+                {
+                    settingFrame.Navigate(typeof(ProgramInfoPage));
+                }
+            }
+        }
+
+        private void lsvSettingItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (e.OriginalSource.GetType() != typeof(TextBlock))
+            {
+                return;
+            }
+
+            DisplaySettingPage(((TextBlock)e.OriginalSource).Text);
         }
     }
 }
