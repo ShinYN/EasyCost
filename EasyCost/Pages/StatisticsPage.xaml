@@ -35,11 +35,11 @@
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Red" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Red" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
@@ -48,11 +48,11 @@
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
                                                      Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Red" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Red" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="Foreground">
@@ -65,11 +65,11 @@
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
                                                      Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Red" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Red" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="Foreground">
@@ -115,10 +115,10 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Background="#F2F2F2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="120" />
@@ -127,11 +127,20 @@
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Button x:Name="btnCalendar" Background="Transparent" Foreground="Transparent" BorderThickness="0" Grid.Column="0" Click="btnCalendar_Click">
+                <Image Source="ms-appx:///Assets/MenuIcons/calendar.png" Height="40" VerticalAlignment="Center"/>
+            </Button>
             <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="120" Height="30" Grid.Column="1" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchDay_Click"/>
-            <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" />
-            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" />
-            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="4" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" />
+            <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchWeek_Click"/>
+            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchMonth_Click"/>
+            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="4" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchYear_Click"/>
         </Grid>
-        <Frame Grid.Row="1" Name="statisticsFrame" />
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <StackPanel Name="filterPanel" Width="250" Visibility="Collapsed" Background="#F2F2F2">
+                <Button Content="A" />
+                <Button Content="B" />
+            </StackPanel>
+            <Frame Grid.Row="1" Name="statisticsFrame" />
+        </StackPanel>
     </Grid>
 </Page>

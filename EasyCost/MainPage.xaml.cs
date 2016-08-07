@@ -52,29 +52,5 @@ namespace EasyCost
                 mainFrame.Navigate(typeof(SettingPage));
             }
         }
-
-        //private void btnHome_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (mainFrame.CurrentSourcePageType != typeof(homePage))
-        //    {
-        //        mainFrame.Navigate(typeof(homePage));
-        //    }
-        //}
-
-        //private void btnBackward_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (mainFrame.CanGoBack)
-        //    {
-        //        mainFrame.GoBack();
-        //    }
-        //}
-
-        //private void btnForward_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (mainFrame.CanGoForward)
-        //    {
-        //        mainFrame.GoForward();
-        //    }
-        //}
     }
 }

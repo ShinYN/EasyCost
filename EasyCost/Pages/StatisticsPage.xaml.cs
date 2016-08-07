@@ -1,5 +1,6 @@
 ﻿using EasyCost.Helpers;
 using EasyCost.Pages.Statistics;
+using Syncfusion.UI.Xaml.Controls.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,13 +38,47 @@ namespace EasyCost.Pages
             if (statisticsFrame.CurrentSourcePageType != typeof(DailyStatisticsPage))
             {
                 statisticsFrame.Navigate(typeof(DailyStatisticsPage));
+                DisplayDailyFilterPanel();
             }
         }
 
-        //private void btnSearchDay_PointerEntered(object sender, PointerRoutedEventArgs e)
-        //{
-        //    btnSearchDay.Background = new SolidColorBrush(Colors.Red);
-        //    btnSearchDay.Foreground = new SolidColorBrush(Colors.White);
-        //}
+        private void btnCalendar_Click(object sender, RoutedEventArgs e)
+        {
+            if (filterPanel.Visibility == Visibility.Collapsed)
+            {
+                filterPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                filterPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSearchMonth_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSearchYear_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DisplayDailyFilterPanel()
+        {
+            filterPanel.Children.Clear();
+            SfCalendar calendar = new SfCalendar();
+            calendar.SelectionMode = Syncfusion.UI.Xaml.Controls.Input.SelectionMode.Single;
+            calendar.ShowNavigationButton = true;
+            calendar.Width = double.NaN;
+            calendar.Height = double.NaN;
+
+            filterPanel.Children.Add(calendar);
+        }
     }
 }
