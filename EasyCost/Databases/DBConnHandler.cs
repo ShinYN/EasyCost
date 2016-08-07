@@ -38,11 +38,29 @@ namespace EasyCost.Databases
 
         public static class Cost
         {
-            public static List<CostInfo> GetCostInfo()
+            public static List<CostInfo> GetCostInfo(bool aSelectGroupBy = false)
             {
-                return (from c in DbConnection.Table<CostInfo>()
-                        where c.UserID == LoginInfo.UserID
-                        select c).ToList();
+                if (aSelectGroupBy)
+                {
+                    return (from c in DbConnection.Table<CostInfo>()
+                            where c.UserID == LoginInfo.UserID
+                            group c by new { c.CostDate, c.Category, c.SubCategory, c.CostType }
+                            into result
+                            select new CostInfo
+                            {
+                                CostDate = result.Key.CostDate,
+                                Category = result.Key.Category,
+                                SubCategory = result.Key.SubCategory,
+                                CostType = result.Key.CostType,
+                                Cost = result.Sum(t => t.Cost)
+                            }).ToList();
+                }
+                else
+                {
+                    return (from c in DbConnection.Table<CostInfo>()
+                            where c.UserID == LoginInfo.UserID
+                            select c).ToList();
+                }
             }
 
             public static void SaveConstInfo(CostInfo aCostInfo)

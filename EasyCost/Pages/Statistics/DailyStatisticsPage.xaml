@@ -6,21 +6,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:input="using:Syncfusion.UI.Xaml.Controls.Input"
+    xmlns:Controls="using:EasyCost.Controls"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Charts"
     mc:Ignorable="d">
 
     <Grid Margin="10,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
             <RowDefinition Height="280" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230" />
                 <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <input:SfCalendar x:Name="calendar" Grid.Column="0" Width="auto" Height="auto" SelectionMode="Single" ShowNavigationButton="True" SelectionChanged="calendar_SelectionChanged"/>
+            <Controls:ViewCostHistoryControl x:Name="costHistory" Margin="20,65,0,0" Grid.Column="1"/>
+        </Grid>
+        <Grid Grid.Row ="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <input:SfCalendar x:Name="calendar" Grid.Column="0" Width="auto" Height="auto"/>
+            <syncfusion:SfChart HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Column="0">
+                <syncfusion:PieSeries x:Name="pieSeries" XBindingPath="Category" ItemsSource="{Binding chartData}" Palette="Metro" YBindingPath="Cost"/>
+            </syncfusion:SfChart>
+            
         </Grid>
     </Grid>
 </Page>

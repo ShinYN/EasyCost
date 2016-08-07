@@ -27,48 +27,64 @@ namespace EasyCost.Controls
             this.InitializeComponent();
         }
 
-        public void Display(InquiryType aInquiryType)
+        /// <summary>
+        /// 지출 내역을 표시하는 함수
+        /// </summary>
+        /// <param name="aDisplayData">YYYYMMDD 형식</param>
+        public void Display(DateTime aDisplayDate, bool aSelectGroupBy = false)
+        {
+            lsvHistory.Items.Clear();
+
+            List<CostInfo> costInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMMdd") == aDisplayDate.ToString("yyyyMMdd")).ToList();
+            DisplayCostInfoToListView(costInfo);
+        }
+        public void Display(InquiryType aInquiryType, bool aSelectGroupBy = false)
         {
             lsvHistory.Items.Clear();
 
             List<CostInfo> costInfo = null;
             if (aInquiryType == InquiryType.Today)
             {
-                costInfo = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).ToList();
+                costInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).ToList();
             }
             else if (aInquiryType == InquiryType.Week)
             {
-                costInfo = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate > DateTime.Now.AddDays(-7)).ToList();
+                costInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate > DateTime.Now.AddDays(-7)).ToList();
             }
             else if (aInquiryType == InquiryType.Month)
             {
-                costInfo = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate > DateTime.Now.AddMonths(-1)).ToList();
+                costInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate > DateTime.Now.AddMonths(-1)).ToList();
             }
             else if (aInquiryType == InquiryType.Year)
             {
-                costInfo = DBConnHandler.Cost.GetCostInfo().Where(elem => elem.CostDate > DateTime.Now.AddYears(-1)).ToList();
+                costInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate > DateTime.Now.AddYears(-1)).ToList();
             }
             else   // Case of all
             {
-                costInfo = DBConnHandler.Cost.GetCostInfo();
+                costInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy);
             }
 
-            int totalCost = 0;
-            costInfo.ForEach(elem =>
-                {
-                    lsvHistory.Items.Add(new
-                    {
-                        Id = elem.Id,
-                        CostDate = elem.CostDate.ToString("yyyy-MM-dd"),
-                        Category = elem.Category,
-                        SubCategory = elem.SubCategory,
-                        CostType = elem.CostType,
-                        Cost = elem.Cost.ToString("#,##0") + "원",
-                        Description = elem.Description
-                    });
+            DisplayCostInfoToListView(costInfo);
+        }
 
-                    totalCost += elem.Cost;
-                }
+        private void DisplayCostInfoToListView(List<CostInfo> aCostInfo)
+        {
+            int totalCost = 0;
+            aCostInfo.ForEach(elem =>
+            {
+                lsvHistory.Items.Add(new
+                {
+                    Id = elem.Id,
+                    CostDate = elem.CostDate.ToString("yyyy-MM-dd"),
+                    Category = elem.Category,
+                    SubCategory = elem.SubCategory,
+                    CostType = elem.CostType,
+                    Cost = elem.Cost.ToString("#,##0") + "원",
+                    Description = elem.Description
+                });
+
+                totalCost += elem.Cost;
+            }
             );
 
             lblTotalCost.Text = totalCost.ToString("#,##0");
