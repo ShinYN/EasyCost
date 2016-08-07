@@ -13,7 +13,7 @@
     <Grid Margin="10,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
-            <RowDefinition Height="400" />
+            <RowDefinition Height="450" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
@@ -27,61 +27,75 @@
                 <ColumnDefinition Width="500" />
                 <ColumnDefinition Width="500" />
             </Grid.ColumnDefinitions>
-            <syncfusion:SfChart x:Name="CategoryChart" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Column="0" BorderThickness="0" AreaBorderBrush="{x:Null}" SelectionChanged="SfChart_SelectionChanged">
-                <syncfusion:DoughnutSeries x:Name="categoryChart" XBindingPath="Category" YBindingPath="Cost" ItemsSource="{Binding chartData}" Palette="Metro" >
-                    <syncfusion:DoughnutSeries.AdornmentsInfo>
-                        <syncfusion:ChartAdornmentInfo ShowLabel="True" Foreground="White" FontSize="15" UseSeriesPalette="True" ShowConnectorLine="True" ConnectorHeight="10">
-                        </syncfusion:ChartAdornmentInfo>
-                    </syncfusion:DoughnutSeries.AdornmentsInfo>
-                </syncfusion:DoughnutSeries>
-                <syncfusion:SfChart.Behaviors>
-                    <syncfusion:ChartSelectionBehavior EnableSegmentSelection="True" SelectionMode="MouseClick" SelectionStyle="Single"  />
-                </syncfusion:SfChart.Behaviors>
-                <syncfusion:SfChart.Legend>
-                    <syncfusion:ChartLegend DockPosition="Left">
-                        <syncfusion:ChartLegend.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Grid Margin="10,0,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <Ellipse Width="15" Height="15" Fill="{Binding Interior}" />
-                                        <TextBlock Margin="5,0,0,0" FontSize="15" Grid.Column="1" Foreground="Black" Text="{Binding Label}"></TextBlock>
-                                    </Grid>
-                                </StackPanel>
-                            </DataTemplate>
-                        </syncfusion:ChartLegend.ItemTemplate>
-                    </syncfusion:ChartLegend>
-                </syncfusion:SfChart.Legend>
-            </syncfusion:SfChart>
-            <syncfusion:SfChart x:Name="SubCategoryChart" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Column="1" BorderThickness="0" AreaBorderBrush="{x:Null}">
-                <syncfusion:DoughnutSeries x:Name="subCategoryChart" XBindingPath="SubCategory" YBindingPath="Cost" ItemsSource="{Binding chartData}" Palette="Metro" >
-                    <syncfusion:DoughnutSeries.AdornmentsInfo>
-                        <syncfusion:ChartAdornmentInfo ShowLabel="True" Foreground="White" FontSize="15" UseSeriesPalette="True" ShowConnectorLine="True" ConnectorHeight="10">
-                        </syncfusion:ChartAdornmentInfo>
-                    </syncfusion:DoughnutSeries.AdornmentsInfo>
-                </syncfusion:DoughnutSeries>
-                <syncfusion:SfChart.Legend>
-                    <syncfusion:ChartLegend DockPosition="Left">
-                        <syncfusion:ChartLegend.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Grid Margin="10,0,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <Ellipse Width="15" Height="15" Fill="{Binding Interior}" />
-                                        <TextBlock Margin="5,0,0,0" FontSize="15" Grid.Column="1" Foreground="Black" Text="{Binding Label}"></TextBlock>
-                                    </Grid>
-                                </StackPanel>
-                            </DataTemplate>
-                        </syncfusion:ChartLegend.ItemTemplate>
-                    </syncfusion:ChartLegend>
-                </syncfusion:SfChart.Legend>
-            </syncfusion:SfChart>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="지출 분류 별 내역" Foreground="Gray" HorizontalAlignment="Center" Grid.Row="0"/>
+                <syncfusion:SfChart x:Name="CategoryChart" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" BorderThickness="0" AreaBorderBrush="{x:Null}" SelectionChanged="SfChart_SelectionChanged" Grid.Row="1">
+                    <syncfusion:DoughnutSeries x:Name="categoryChart" XBindingPath="Category" YBindingPath="Cost" ItemsSource="{Binding chartData}" Palette="Metro" >
+                        <syncfusion:DoughnutSeries.AdornmentsInfo>
+                            <syncfusion:ChartAdornmentInfo ShowLabel="True" Foreground="White" FontSize="15" UseSeriesPalette="True" ShowConnectorLine="True" ConnectorHeight="10">
+                            </syncfusion:ChartAdornmentInfo>
+                        </syncfusion:DoughnutSeries.AdornmentsInfo>
+                    </syncfusion:DoughnutSeries>
+                    <syncfusion:SfChart.Behaviors>
+                        <syncfusion:ChartSelectionBehavior EnableSegmentSelection="True" SelectionMode="MouseClick" SelectionStyle="Single"  />
+                    </syncfusion:SfChart.Behaviors>
+                    <syncfusion:SfChart.Legend>
+                        <syncfusion:ChartLegend DockPosition="Left">
+                            <syncfusion:ChartLegend.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Grid Margin="10,0,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Width="15" Height="15" Fill="{Binding Interior}" />
+                                            <TextBlock Margin="5,0,0,0" FontSize="15" Grid.Column="1" Foreground="Black" Text="{Binding Label}"></TextBlock>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </syncfusion:ChartLegend.ItemTemplate>
+                        </syncfusion:ChartLegend>
+                    </syncfusion:SfChart.Legend>
+                </syncfusion:SfChart>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="txtSubCategoryTitle" Text="세부 분류 별 내역" Foreground="Gray" HorizontalAlignment="Center" Grid.Row="0"/>
+                <syncfusion:SfChart x:Name="SubCategoryChart" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Row="1" BorderThickness="0" AreaBorderBrush="{x:Null}">
+                    <syncfusion:DoughnutSeries x:Name="subCategoryChart" XBindingPath="SubCategory" YBindingPath="Cost" ItemsSource="{Binding chartData}" Palette="Metro" >
+                        <syncfusion:DoughnutSeries.AdornmentsInfo>
+                            <syncfusion:ChartAdornmentInfo ShowLabel="True" Foreground="White" FontSize="15" UseSeriesPalette="True" ShowConnectorLine="True" ConnectorHeight="10">
+                            </syncfusion:ChartAdornmentInfo>
+                        </syncfusion:DoughnutSeries.AdornmentsInfo>
+                    </syncfusion:DoughnutSeries>
+                    <syncfusion:SfChart.Legend>
+                        <syncfusion:ChartLegend DockPosition="Left">
+                            <syncfusion:ChartLegend.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Grid Margin="10,0,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Width="15" Height="15" Fill="{Binding Interior}" />
+                                            <TextBlock Margin="5,0,0,0" FontSize="15" Grid.Column="1" Foreground="Black" Text="{Binding Label}"></TextBlock>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </syncfusion:ChartLegend.ItemTemplate>
+                        </syncfusion:ChartLegend>
+                    </syncfusion:SfChart.Legend>
+                </syncfusion:SfChart>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

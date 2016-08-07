@@ -48,9 +48,19 @@ namespace EasyCost.Pages.Statistics
             categoryChart.ItemsSource = costHistory.CostInfo.GroupBy(elem => new { elem.Category })
                                                             .Select(x => new CategoryChartModel { Category = x.Key.Category, Cost = x.Sum(y => y.Cost) })
                                                             .ToList();
+
+            if (costHistory.CostInfo.Count() == 0)
+            {
+                DisplaySubCategoryChart(string.Empty);
+            }
+            else
+            {
+                DisplaySubCategoryChart(costHistory.CostInfo[0].Category);
+            }
         }
         private void DisplaySubCategoryChart(string aSubCategory)
         {
+            txtSubCategoryTitle.Text = "세부 분류 별 내역: " + aSubCategory;
             subCategoryChart.ItemsSource = costHistory.CostInfo.Where(elem => elem.Category == aSubCategory)
                                                                .GroupBy(elem => new { elem.SubCategory })
                                                                .Select(x => new SubCategoryChartModel { SubCategory = x.Key.SubCategory, Cost = x.Sum(y => y.Cost) })
@@ -59,8 +69,13 @@ namespace EasyCost.Pages.Statistics
 
         private void SfChart_SelectionChanged(object sender, Syncfusion.UI.Xaml.Charts.ChartSelectionChangedEventArgs e)
         {
+            if (e.SelectedSegment == null)
+            {
+                return;
+            }
 
-            var aaa = e.SelectedSegment;
+            dynamic category = e.SelectedSegment.Item;
+            DisplaySubCategoryChart(category.Category);
         }
     }
 }

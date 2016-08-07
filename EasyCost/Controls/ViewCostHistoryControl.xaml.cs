@@ -75,8 +75,8 @@ namespace EasyCost.Controls
                 return;
             }
 
-            int totalCost = 0;
-            CostInfo.ForEach(elem =>
+            int totalCost = CostInfo.Sum(elem => elem.Cost);
+            CostInfo.OrderByDescending(elem => elem.Cost).ToList().ForEach(elem =>
             {
                 lsvHistory.Items.Add(new
                 {
@@ -85,11 +85,9 @@ namespace EasyCost.Controls
                     Category = elem.Category,
                     SubCategory = elem.SubCategory,
                     CostType = elem.CostType,
-                    Cost = elem.Cost.ToString("#,##0") + "원",
+                    Cost = elem.Cost.ToString("#,##0").PadLeft(10, ' ') + "원" + " (" + ((double)elem.Cost * 100 / (double)totalCost).ToString("#0.#") + "%)",
                     Description = elem.Description
                 });
-
-                totalCost += elem.Cost;
             }
             );
 
