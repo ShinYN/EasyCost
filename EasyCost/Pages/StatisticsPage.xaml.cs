@@ -27,10 +27,31 @@ namespace EasyCost.Pages
     public sealed partial class StatisticsPage : Page
     {
         const string COLOR_BACK_ENTER = "#FF0000";
+        SfCalendar mCalendar;
 
         public StatisticsPage()
         {
             this.InitializeComponent();
+
+            MakeFilterControls();
+        }
+
+        private void MakeFilterControls()
+        {
+            mCalendar = new SfCalendar();
+            mCalendar.SelectionMode = Syncfusion.UI.Xaml.Controls.Input.SelectionMode.Single;
+            mCalendar.ShowNavigationButton = true;
+            mCalendar.Width = double.NaN;
+            mCalendar.Height = double.NaN;
+            mCalendar.SelectionChanged += MCalendar_SelectionChanged;
+        }
+
+        private void MCalendar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (statisticsFrame.CurrentSourcePageType == typeof(DailyStatisticsPage))
+            {
+                ((DailyStatisticsPage)statisticsFrame.Content).Display((DateTime)mCalendar.SelectedDate);
+            }
         }
 
         private void btnSearchDay_Click(object sender, RoutedEventArgs e)
@@ -72,13 +93,7 @@ namespace EasyCost.Pages
         private void DisplayDailyFilterPanel()
         {
             filterPanel.Children.Clear();
-            SfCalendar calendar = new SfCalendar();
-            calendar.SelectionMode = Syncfusion.UI.Xaml.Controls.Input.SelectionMode.Single;
-            calendar.ShowNavigationButton = true;
-            calendar.Width = double.NaN;
-            calendar.Height = double.NaN;
-
-            filterPanel.Children.Add(calendar);
+            filterPanel.Children.Add(mCalendar);
         }
     }
 }

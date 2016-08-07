@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Syncfusion.SfChart;
 using System.Collections.ObjectModel;
 using EasyCost.DataModels;
+using EasyCost.Databases.TableModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,29 +31,36 @@ namespace EasyCost.Pages.Statistics
         public DailyStatisticsPage()
         {
             this.InitializeComponent();
-
-            InitControls();
-
-            pieSeries.ItemsSource = CategoryCharts;
         }
 
-        private void InitControls()
+        public void Display(DateTime aDate)
         {
-            CategoryCharts = new ObservableCollection<CategoryChartModel>()
-            {
-                new CategoryChartModel {Category = "교통비", Cost= 1000 },
-                new CategoryChartModel {Category = "식비", Cost= 1000 },
-                new CategoryChartModel {Category = "여행비", Cost= 1000 },
-                new CategoryChartModel {Category = "의류비", Cost= 1000 }
-            };
+            costHistory.Display(aDate, true);
+            DisplayCategoryChart();
         }
 
-        private void calendar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DisplayCategoryChart()
         {
-            if (calendar.SelectedDate != null)
+            if (costHistory.CostInfo == null)
             {
-                costHistory.Display((DateTime)calendar.SelectedDate, true);
+                return;
             }
+            categoryChart.ItemsSource = costHistory.CostInfo.GroupBy(elem => new { elem.Category })
+                                                            .Select(x => new CategoryChartModel { Category = x.Key.Category, Cost = x.Sum(y => y.Cost) })
+                                                            .ToList();
+        }
+        private void DisplaySubCategoryChart(string aSubCategory)
+        {
+            subCategoryChart.ItemsSource = costHistory.CostInfo.Where(elem => elem.Category == aSubCategory)
+                                                               .GroupBy(elem => new { elem.SubCategory })
+                                                               .Select(x => new SubCategoryChartModel { SubCategory = x.Key.SubCategory, Cost = x.Sum(y => y.Cost) })
+                                                               .ToList();
+        }
+
+        private void SfChart_SelectionChanged(object sender, Syncfusion.UI.Xaml.Charts.ChartSelectionChangedEventArgs e)
+        {
+
+            var aaa = e.SelectedSegment;
         }
     }
 }
