@@ -27,6 +27,16 @@ namespace EasyCost
         {
             this.InitializeComponent();
             mainFrame.Navigate(typeof(InputCostPage));
+
+            InitMenu();
+        }
+
+
+        private void InitMenu()
+        {
+            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuWriteCost.png", menuText = "지출 내역 관리" });
+            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuStatistics.png", menuText = "지출 통계 보기" });
+            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuSetting.png", menuText = "프로그램 설정" });
         }
 
         private void btnWrite_Click(object sender, RoutedEventArgs e)
@@ -51,6 +61,11 @@ namespace EasyCost
             {
                 mainFrame.Navigate(typeof(SettingPage));
             }
+        }
+
+        private void btnMenuFolder_Click(object sender, RoutedEventArgs e)
+        {
+            menuSplitView.IsPaneOpen = !menuSplitView.IsPaneOpen;
         }
     }
 }

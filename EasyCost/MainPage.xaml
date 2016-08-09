@@ -27,15 +27,43 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="0" />
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Background="Olive" Orientation="Horizontal">
-            <TextBlock Text="쉽게 쓰는 지출 통장" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="20,0,0,0" FontSize="20"/>
+        <StackPanel Grid.Row="0" Background="#FFFFBB00" Orientation="Horizontal">
+            <Button x:Name="btnMenuFolder" BorderThickness="0" Background="Transparent" Foreground="Transparent" Click="btnMenuFolder_Click">
+                <Image Source="ms-appx:///Assets/MenuIcons/menuFolder.png" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
+            <TextBlock Text="쉽게 쓰는 지출 통장" Foreground="Black" VerticalAlignment="Center" Margin="10,10,0,11" FontSize="20"/>
         </StackPanel>
-        <Frame Grid.Row="2" x:Name="mainFrame" />
-        <RelativePanel Grid.Row ="3" Background="#FFE5E5E5">
+        <SplitView x:Name="menuSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False" CompactPaneLength="60" OpenPaneLength="250" Grid.Row="1">
+            <SplitView.Pane>
+                <ListView x:Name="menuList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="50" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Width="35" Height="40" BorderThickness="0" Grid.Column="0" Padding="10,10,10,10">
+                                    <Image Stretch="UniformToFill" VerticalAlignment="Center" Margin="-20,0,0,0">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="{Binding ImagePath}"/>
+                                        </Image.Source>
+                                    </Image>
+                                </Border>
+                                <TextBlock Text="{Binding menuText}" FontSize="15" VerticalAlignment="Center" Grid.Column="1" Foreground="#FF515151"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Frame x:Name="mainFrame" />
+            </SplitView.Content>
+        </SplitView>
+        <RelativePanel Grid.Row ="2" Background="#FFE5E5E5">
             <Button x:Name="btnSetting" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnSetting_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/menuSetting.png"/>
             </Button>

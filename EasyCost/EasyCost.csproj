@@ -108,6 +108,7 @@
     <Compile Include="Databases\TableModels\SubCategoryMaster.cs" />
     <Compile Include="Databases\TableModels\UserMaster.cs" />
     <Compile Include="DataModels\CategoryChartModel.cs" />
+    <Compile Include="DataModels\MenuItemModel.cs" />
     <Compile Include="DataModels\SubCategoryChartModel.cs" />
     <Compile Include="Helpers\MyColorHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -148,12 +149,17 @@
     <Content Include="Assets\MenuIcons\backwardArrow.png" />
     <Content Include="Assets\MenuIcons\calendar.png" />
     <Content Include="Assets\MenuIcons\deleteItem.png" />
+    <Content Include="Assets\MenuIcons\menuFolder.png" />
     <Content Include="Assets\MenuIcons\menuFilter.png" />
     <Content Include="Assets\MenuIcons\forwardArrow.png" />
     <Content Include="Assets\MenuIcons\home.png" />
     <Content Include="Assets\MenuIcons\menuSetting.png" />
     <Content Include="Assets\MenuIcons\menuStatistics.png" />
     <Content Include="Assets\MenuIcons\menuWriteCost.png" />
+    <Content Include="Assets\MenuIcons\menuWriteCost_Dark.png" />
+    <Content Include="Assets\MenuIcons\menuSetting_Dark.png" />
+    <Content Include="Assets\MenuIcons\menuStatistics_Dark.png" />
+    <Content Include="Assets\MenuIcons\Pencil-04.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
