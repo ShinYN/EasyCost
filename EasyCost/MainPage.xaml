@@ -28,17 +28,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Background="#FFFFBB00" Orientation="Horizontal">
-            <Button x:Name="btnMenuFolder" BorderThickness="0" Background="Transparent" Foreground="Transparent" Click="btnMenuFolder_Click">
+            <Button x:Name="btnMenuFolder" BorderThickness="0" Background="Transparent" Foreground="Transparent" Margin="5,0,0,0" Click="btnMenuFolder_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/menuFolder.png" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Button>
             <TextBlock Text="쉽게 쓰는 지출 통장" Foreground="Black" VerticalAlignment="Center" Margin="10,10,0,11" FontSize="20"/>
         </StackPanel>
         <SplitView x:Name="menuSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False" CompactPaneLength="60" OpenPaneLength="250" Grid.Row="1">
             <SplitView.Pane>
-                <ListView x:Name="menuList">
+                <ListView x:Name="menuList" Tapped="menuList_Tapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Height="50" HorizontalAlignment="Stretch">
@@ -63,7 +62,7 @@
                 <Frame x:Name="mainFrame" />
             </SplitView.Content>
         </SplitView>
-        <RelativePanel Grid.Row ="2" Background="#FFE5E5E5">
+        <!--<RelativePanel Grid.Row ="2" Background="#FFE5E5E5">
             <Button x:Name="btnSetting" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnSetting_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/menuSetting.png"/>
             </Button>
@@ -73,6 +72,6 @@
             <Button x:Name="btnWrite" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.LeftOf="btnInquiry" Click="btnWrite_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/menuWriteCost.png"/>
             </Button>
-        </RelativePanel>
+        </RelativePanel>-->
     </Grid>
 </Page>

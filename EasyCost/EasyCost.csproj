@@ -146,6 +146,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\MenuIcons\addItem.png" />
+    <Content Include="Assets\MenuIcons\addItem_Y.png" />
+    <Content Include="Assets\MenuIcons\addItem_G.png" />
     <Content Include="Assets\MenuIcons\backwardArrow.png" />
     <Content Include="Assets\MenuIcons\calendar.png" />
     <Content Include="Assets\MenuIcons\deleteItem.png" />
@@ -153,6 +155,7 @@
     <Content Include="Assets\MenuIcons\menuFilter.png" />
     <Content Include="Assets\MenuIcons\forwardArrow.png" />
     <Content Include="Assets\MenuIcons\home.png" />
+    <Content Include="Assets\MenuIcons\menuPrograminfo.png" />
     <Content Include="Assets\MenuIcons\menuSetting.png" />
     <Content Include="Assets\MenuIcons\menuStatistics.png" />
     <Content Include="Assets\MenuIcons\menuWriteCost.png" />
@@ -160,6 +163,9 @@
     <Content Include="Assets\MenuIcons\menuSetting_Dark.png" />
     <Content Include="Assets\MenuIcons\menuStatistics_Dark.png" />
     <Content Include="Assets\MenuIcons\Pencil-04.png" />
+    <Content Include="Assets\MenuIcons\menuWriteCost_Gray.png" />
+    <Content Include="Assets\MenuIcons\menuWriteCost_Yellow.png" />
+    <Content Include="Assets\MenuIcons\menuProgramInfo_dark.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

@@ -18,7 +18,7 @@
         <ListView x:Name="lsvHistory" Grid.Row="0" ItemsSource="{Binding SomeCollection}" >
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <Grid Height="30" Background="#FF09B1CE" HorizontalAlignment="Stretch">
+                    <Grid Height="30" Background="#FF535353" HorizontalAlignment="Stretch">
                         <Grid.Resources>
                             <SolidColorBrush x:Key="brush" Color="White"/>
                         </Grid.Resources>
@@ -99,7 +99,7 @@
         <Line
              X1="1" Y1="3"
              X2="3000" Y2="3"
-             Stroke="#FF424242"
+             Stroke="Black"
              StrokeThickness="1" Grid.Row="1"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,10,0">

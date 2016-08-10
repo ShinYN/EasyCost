@@ -1,4 +1,5 @@
-﻿using EasyCost.Pages;
+﻿using EasyCost.DataModels;
+using EasyCost.Pages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,49 +24,102 @@ namespace EasyCost
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private const string MENU_WRITECOST = "지출 내역 관리";
+        private const string MENU_STATISTICS = "지출 통계 보기";
+        private const string MENU_PROGRAMINFO = "프로그램 정보";
+        private const string MENU_SETTINGS = "프로그램 설정";
+
         public MainPage()
         {
             this.InitializeComponent();
             mainFrame.Navigate(typeof(InputCostPage));
 
-            InitMenu();
+            InitializeMenu();
         }
 
-
-        private void InitMenu()
+        private void InitializeMenu()
         {
             menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuWriteCost.png", menuText = "지출 내역 관리" });
             menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuStatistics.png", menuText = "지출 통계 보기" });
             menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuSetting.png", menuText = "프로그램 설정" });
+            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuProgramInfo.png", menuText = "프로그램 정보" });
         }
 
-        private void btnWrite_Click(object sender, RoutedEventArgs e)
+        private void DisplayMenuFromText(string aMenuText)
         {
-            if (mainFrame.CurrentSourcePageType != typeof(InputCostPage))
+            if (aMenuText == MENU_WRITECOST)
             {
-                mainFrame.Navigate(typeof(InputCostPage));
+                if (mainFrame.CurrentSourcePageType != typeof(InputCostPage))
+                {
+                    mainFrame.Navigate(typeof(InputCostPage));
+                }
+            }
+            else if (aMenuText == MENU_STATISTICS)
+            {
+                if (mainFrame.CurrentSourcePageType != typeof(StatisticsPage))
+                {
+                    mainFrame.Navigate(typeof(StatisticsPage));
+                }
+            }
+            else if (aMenuText == MENU_SETTINGS)
+            {
+                if (mainFrame.CurrentSourcePageType != typeof(SettingPage))
+                {
+                    mainFrame.Navigate(typeof(SettingPage));
+                }
+            }
+            else if (aMenuText == MENU_PROGRAMINFO)
+            {
+
             }
         }
-
-        private void btnInquiry_Click(object sender, RoutedEventArgs e)
+        private void DisplayMenuFromImage(Image aMenuImage)
         {
-            if (mainFrame.CurrentSourcePageType != typeof(StatisticsPage))
-            {
-                mainFrame.Navigate(typeof(StatisticsPage));
-            }
-        }
+            //if (aMenuImage)
+            //{
+            //    if (mainFrame.CurrentSourcePageType != typeof(InputCostPage))
+            //    {
+            //        mainFrame.Navigate(typeof(InputCostPage));
+            //    }
+            //}
+            //else if (aMenuText == MENU_STATISTICS)
+            //{
+            //    if (mainFrame.CurrentSourcePageType != typeof(StatisticsPage))
+            //    {
+            //        mainFrame.Navigate(typeof(StatisticsPage));
+            //    }
+            //}
+            //else if (aMenuText == MENU_SETTINGS)
+            //{
+            //    if (mainFrame.CurrentSourcePageType != typeof(SettingPage))
+            //    {
+            //        mainFrame.Navigate(typeof(SettingPage));
+            //    }
+            //}
+            //else if (aMenuText == MENU_PROGRAMINFO)
+            //{
 
-        private void btnSetting_Click(object sender, RoutedEventArgs e)
-        {
-            if (mainFrame.CurrentSourcePageType != typeof(SettingPage))
-            {
-                mainFrame.Navigate(typeof(SettingPage));
-            }
+            //}
         }
 
         private void btnMenuFolder_Click(object sender, RoutedEventArgs e)
         {
             menuSplitView.IsPaneOpen = !menuSplitView.IsPaneOpen;
+        }
+        private void menuList_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (e.OriginalSource.GetType() == typeof(TextBlock))
+            {
+                DisplayMenuFromText(((TextBlock)e.OriginalSource).Text);
+            }
+            else if (e.OriginalSource.GetType() == typeof(Image))
+            {
+               // DisplayMenuByImage()
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
