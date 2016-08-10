@@ -10,33 +10,51 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="180"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <RelativePanel Grid.Row="1" Margin="0,0,0,0" >
-            <TextBlock x:Name="lblTitle" RelativePanel.AlignLeftWithPanel="True" TextWrapping="Wrap" Text="지출 내역 입력" FontSize="20" FontWeight="Bold"/>
-            <TextBlock x:Name="lblCategory" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" TextWrapping="Wrap" Text="지출 분류" FontSize="15" Foreground="Gray" Margin="0,40,0,0" />
-            <ComboBox x:Name="cboCategory" RelativePanel.AlignVerticalCenterWith="lblCategory" RelativePanel.RightOf="lblCategory" Width="300" FontSize="15" Margin="30,35,0,-5" BorderThickness="1" SelectionChanged="cboCategory_SelectionChanged" />
-            <TextBlock x:Name="lblSubCategory" RelativePanel.AlignLeftWith="lblTitle" RelativePanel.Below="lblCategory" TextWrapping="Wrap" Text="세부 분류" FontSize="15" Foreground="Gray" Margin="0,20,0,0" />
-            <ComboBox x:Name="cboSubCategory" RelativePanel.AlignVerticalCenterWith="lblSubCategory" RelativePanel.RightOf="lblSubCategory" Width="300" FontSize="15" Margin="30,20,0,0" BorderThickness="1" />
-            <TextBlock x:Name="lblDetail" Text="지출 내역" RelativePanel.AlignLeftWith="lblTitle" RelativePanel.Below="lblSubCategory" FontSize="15" Foreground="Gray" Margin="0,20,0,0" />
-            <TextBox x:Name="txtDetail"  Width="300" RelativePanel.AlignVerticalCenterWith="lblDetail" RelativePanel.RightOf="lblDetail" FontSize="15" Margin="30,20,0,0" Height="32" VerticalAlignment="Top" BorderThickness="1" />
-            <TextBlock x:Name="lblType"  Margin="30,40,0,0" Text="타입" FontSize="15" Foreground="Gray" RelativePanel.AlignTopWith="lblTitle" RelativePanel.RightOf="cboCategory"/>
-            <RadioButton x:Name="rbTypeCash" Content="현금"  FontSize="15" RelativePanel.RightOf="lblType" RelativePanel.AlignTopWith="lblType" Margin="50,34,0,0"/>
-            <RadioButton x:Name="rbTypeCard" Content="카드"  FontSize="15" RelativePanel.RightOf="rbTypeCash" RelativePanel.AlignTopWith="rbTypeCash" Margin="-20,34,0,0"/>
-            <TextBlock x:Name="lblCost" Text="금액" FontSize="15" RelativePanel.RightOf="cboSubCategory" RelativePanel.AlignTopWith="lblSubCategory" Margin="30,20,0,0" Foreground="Gray"/>
-            <TextBox x:Name="txtCost" Text="" FontSize="15" InputScope="Number" RelativePanel.RightOf="lblCost" RelativePanel.AlignVerticalCenterWith="lblCost" Width="300" Margin="53,20,0,0" BorderThickness="1" />
-            <Button x:Name="btnInputCost" Content="입력" FontSize="15" RelativePanel.AlignRightWith="txtCost" RelativePanel.Below="txtCost"  Margin="0,10,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Click="btnInputCost_Click" Width="71"/>
-        </RelativePanel>
-        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10,10,0,0">
-            <!--<TextBlock x:Name="lblHistoryTitle" Text="오늘 지출 내역" FontSize="16" Foreground="Black" />-->
-            <Controls:ViewCostHistoryControl x:Name="costHistory" Margin="0,5,0,0"/>
-        </StackPanel>
-        <RelativePanel Grid.Row ="2" Background="#FFF3F3F3">
-            <Button x:Name="btnAdd3" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True">
+        <RelativePanel Grid.Row ="1" Background="#FFF3F3F3">
+            <Button x:Name="btnAddCost" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnAddCost_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/addItem_G.png"/>
             </Button>
         </RelativePanel>
+        <SplitView x:Name="inputCostMainSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"  CompactPaneLength="0" OpenPaneLength="250" PanePlacement="Right" Grid.Row="0">
+            <SplitView.Pane>
+                <RelativePanel>
+                    <TextBlock x:Name="lblTitle" RelativePanel.AlignLeftWithPanel="True" TextWrapping="Wrap" Text="지출 내역 입력" FontSize="20" FontWeight="Bold"/>
+                </RelativePanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Controls:ViewCostHistoryControl x:Name="costHistory" Margin="0,0,0,0"/>
+            </SplitView.Content>
+        </SplitView>
+        
+        
+        <!--<Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="180"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <RelativePanel Grid.Row="1" Margin="0,0,0,0" >
+                <TextBlock x:Name="lblTitle" RelativePanel.AlignLeftWithPanel="True" TextWrapping="Wrap" Text="지출 내역 입력" FontSize="20" FontWeight="Bold"/>
+                <TextBlock x:Name="lblCategory" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" TextWrapping="Wrap" Text="지출 분류" FontSize="15" Foreground="Gray" Margin="0,40,0,0" />
+                <ComboBox x:Name="cboCategory" RelativePanel.AlignVerticalCenterWith="lblCategory" RelativePanel.RightOf="lblCategory" Width="300" FontSize="15" Margin="30,35,0,-5" BorderThickness="1" SelectionChanged="cboCategory_SelectionChanged" />
+                <TextBlock x:Name="lblSubCategory" RelativePanel.AlignLeftWith="lblTitle" RelativePanel.Below="lblCategory" TextWrapping="Wrap" Text="세부 분류" FontSize="15" Foreground="Gray" Margin="0,20,0,0" />
+                <ComboBox x:Name="cboSubCategory" RelativePanel.AlignVerticalCenterWith="lblSubCategory" RelativePanel.RightOf="lblSubCategory" Width="300" FontSize="15" Margin="30,20,0,0" BorderThickness="1" />
+                <TextBlock x:Name="lblDetail" Text="지출 내역" RelativePanel.AlignLeftWith="lblTitle" RelativePanel.Below="lblSubCategory" FontSize="15" Foreground="Gray" Margin="0,20,0,0" />
+                <TextBox x:Name="txtDetail"  Width="300" RelativePanel.AlignVerticalCenterWith="lblDetail" RelativePanel.RightOf="lblDetail" FontSize="15" Margin="30,20,0,0" Height="32" VerticalAlignment="Top" BorderThickness="1" />
+                <TextBlock x:Name="lblType"  Margin="30,40,0,0" Text="타입" FontSize="15" Foreground="Gray" RelativePanel.AlignTopWith="lblTitle" RelativePanel.RightOf="cboCategory"/>
+                <RadioButton x:Name="rbTypeCash" Content="현금"  FontSize="15" RelativePanel.RightOf="lblType" RelativePanel.AlignTopWith="lblType" Margin="50,34,0,0"/>
+                <RadioButton x:Name="rbTypeCard" Content="카드"  FontSize="15" RelativePanel.RightOf="rbTypeCash" RelativePanel.AlignTopWith="rbTypeCash" Margin="-20,34,0,0"/>
+                <TextBlock x:Name="lblCost" Text="금액" FontSize="15" RelativePanel.RightOf="cboSubCategory" RelativePanel.AlignTopWith="lblSubCategory" Margin="30,20,0,0" Foreground="Gray"/>
+                <TextBox x:Name="txtCost" Text="" FontSize="15" InputScope="Number" RelativePanel.RightOf="lblCost" RelativePanel.AlignVerticalCenterWith="lblCost" Width="300" Margin="53,20,0,0" BorderThickness="1" />
+                <Button x:Name="btnInputCost" Content="입력" FontSize="15" RelativePanel.AlignRightWith="txtCost" RelativePanel.Below="txtCost"  Margin="0,10,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Click="btnInputCost_Click" Width="71"/>
+            </RelativePanel>
+            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10,10,0,0">
+                --><!--<TextBlock x:Name="lblHistoryTitle" Text="오늘 지출 내역" FontSize="16" Foreground="Black" />--><!--
+                <Controls:ViewCostHistoryControl x:Name="costHistory" Margin="0,5,0,0"/>
+            </StackPanel>
+    </Grid>-->
     </Grid>
 </Page>

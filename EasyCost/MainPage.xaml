@@ -8,22 +8,6 @@
     x:Class="EasyCost.MainPage"
     mc:Ignorable="d">
 
-    <!--<StackPanel  Orientation="Vertical">
-        <RelativePanel MaxHeight="50">
-            <Button x:Name="btnHome" Background="Transparent" Foreground="Transparent" BorderThickness="0" Margin="0" RelativePanel.AlignLeftWithPanel="True" Click="btnHome_Click">
-                <Image x:Name="homeImage" Source="ms-appx:///Assets/MenuIcons/home.png"/>
-            </Button>
-            <Button x:Name="btnBackward" Background="Transparent" Foreground="Transparent" BorderThickness="0" Margin="0" RelativePanel.RightOf="btnHome" Click="btnBackward_Click">
-                <Image x:Name="backwardImage" Source="ms-appx:///Assets/MenuIcons/backwardArrow.png"/>
-            </Button>
-            <Button x:Name="btnForward" Background="Transparent" Foreground="Transparent" BorderThickness="0" Margin="0" RelativePanel.RightOf="btnBackward" Click="btnForward_Click">
-                <Image x:Name="forwardImage"  Source="ms-appx:///Assets/MenuIcons/forwardArrow.png"/>
-            </Button>
-            <TextBlock x:Name="currentDate" Text="2016.07.23" RelativePanel.AlignRightWithPanel="True" />
-        </RelativePanel>
-        <Frame x:Name="mainFrame" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1280" />
-    </StackPanel>-->
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -62,16 +46,5 @@
                 <Frame x:Name="mainFrame" />
             </SplitView.Content>
         </SplitView>
-        <!--<RelativePanel Grid.Row ="2" Background="#FFE5E5E5">
-            <Button x:Name="btnSetting" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnSetting_Click">
-                <Image Source="ms-appx:///Assets/MenuIcons/menuSetting.png"/>
-            </Button>
-            <Button x:Name="btnInquiry" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.LeftOf="btnSetting" Click="btnInquiry_Click">
-                <Image Source="ms-appx:///Assets/MenuIcons/menuStatistics.png"/>
-            </Button>
-            <Button x:Name="btnWrite" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.LeftOf="btnInquiry" Click="btnWrite_Click">
-                <Image Source="ms-appx:///Assets/MenuIcons/menuWriteCost.png"/>
-            </Button>
-        </RelativePanel>-->
     </Grid>
 </Page>
