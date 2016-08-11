@@ -13,23 +13,28 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="5" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <ListView x:Name="lsvHistory" Grid.Row="0" ItemsSource="{Binding SomeCollection}" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <Grid Height="30" Background="#FF535353" HorizontalAlignment="Stretch">
+                    <Grid Height="30" Background="#FF535353">
                         <Grid.Resources>
                             <SolidColorBrush x:Key="brush" Color="White"/>
                         </Grid.Resources>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="130"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="160"/>
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock x:Uid="tbIndex" Text=""  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
@@ -57,23 +62,23 @@
             </ListView.HeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="30" HorizontalAlignment="Stretch">
+                    <Grid Height="30">
                         <Grid.Resources>
                             <SolidColorBrush x:Key="brush" Color="White"/>
                         </Grid.Resources>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="130"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0" Width="0">
+                        <Border Grid.Column="0" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock Text="{Binding Id}" FontSize="15"/>
                         </Border>
-                        <Border Grid.Column="1" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0" Width="130">
+                        <Border Grid.Column="1" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock Text="{Binding CostDate}" FontSize="15" />
                         </Border>
                         <Border Grid.Column="2" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
@@ -88,7 +93,7 @@
                         <Border Grid.Column="5" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock  Text="{Binding Description}" />
                         </Border>
-                        <Border Grid.Column="6" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
+                        <Border Grid.Column="6" BorderBrush="{StaticResource brush}" BorderThickness="0">
                             <TextBlock  Text="{Binding Cost}" />
                         </Border>
                     </Grid>

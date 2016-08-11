@@ -13,15 +13,15 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <RelativePanel Grid.Row ="1" Background="#FFF3F3F3">
+        <RelativePanel Grid.Row ="1">
             <Button x:Name="btnAddCost" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnAddCost_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/addItem_G.png"/>
             </Button>
         </RelativePanel>
         <SplitView x:Name="inputCostMainSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"  CompactPaneLength="0" OpenPaneLength="350" PanePlacement="Right" Grid.Row="0">
             <SplitView.Pane>
-                <RelativePanel>
-                    <TextBlock x:Name="lblTitle" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" Foreground="Gray" TextWrapping="Wrap" Text="지출 내역 입력" FontSize="15" FontWeight="Bold" Margin="10,10,0,0"/>
+                <RelativePanel Background="LightGray">
+                    <TextBlock x:Name="lblTitle" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" Foreground="#FF404040" TextWrapping="Wrap" Text="지출 내역 입력" FontSize="15" FontWeight="Bold" Margin="10,10,0,0"/>
                     <Line X1="10" Y1="6" X2="335" Y2="6" Stroke="#FF535353" StrokeThickness="1" RelativePanel.Below="lblTitle"/>
 
                     <TextBlock x:Name="lblCategory" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" TextWrapping="Wrap" Text="지출 분류" FontSize="15" Foreground="Gray" Margin="10,50,0,0" />
