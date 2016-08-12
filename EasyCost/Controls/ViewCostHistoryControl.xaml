@@ -83,28 +83,6 @@
                         <TextBlock Text="{Binding CostType}" FontSize="15" Grid.Column="4"/>
                         <TextBlock  Text="{Binding Description}" FontSize="15" Grid.Column="5"/>
                         <TextBlock  Text="{Binding Cost}" FontSize="15" Grid.Column="6"/>
-
-                        <!--<Border Grid.Column="0" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock Text="{Binding Id}" FontSize="15"/>
-                        </Border>
-                        <Border Grid.Column="1" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock Text="{Binding CostDate}" FontSize="15" />
-                        </Border>
-                        <Border Grid.Column="2" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock Text="{Binding Category}" FontSize="15" />
-                        </Border>
-                        <Border Grid.Column="3" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock Text="{Binding SubCategory}" />
-                        </Border>
-                        <Border Grid.Column="4" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock Text="{Binding CostType}" />
-                        </Border>
-                        <Border Grid.Column="5" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock  Text="{Binding Description}" />
-                        </Border>
-                        <Border Grid.Column="6" BorderBrush="{StaticResource brush}" BorderThickness="0">
-                            <TextBlock  Text="{Binding Cost}" />
-                        </Border>-->
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

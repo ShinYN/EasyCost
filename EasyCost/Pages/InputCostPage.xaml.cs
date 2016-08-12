@@ -45,6 +45,8 @@ namespace EasyCost.Pages
             rbTypeCard.IsChecked = true;
             txtDetail.Text = string.Empty;
             txtCost.Text = string.Empty;
+
+            btnCalendar.Flyout.ShowAt(btnCalendar);
         }
         private void InitCategoryCombo()
         {
@@ -79,7 +81,7 @@ namespace EasyCost.Pages
         {
             CostInfo costInfo = new CostInfo();
             costInfo.UserID = LoginInfo.UserID;
-            costInfo.CostDate = DateTime.Now;
+            costInfo.CostDate = DateTime.Parse(txtCostDate.Text);
             costInfo.Category = cboCategory.SelectedValue.ToString();
             costInfo.SubCategory = cboSubCategory.SelectedValue.ToString();
             costInfo.CostType = (rbTypeCard.IsChecked == true) ? "카드" : "현금";
@@ -106,7 +108,12 @@ namespace EasyCost.Pages
         private void btnAddCost_Click(object sender, RoutedEventArgs e)
         {
             inputCostMainSplitView.IsPaneOpen = !inputCostMainSplitView.IsPaneOpen;
-            InitInputCostControls();
+            DisplayInputCostForAdd();
+        }
+
+        private void DisplayInputCostForAdd()
+        {
+            txtCostDate.Text = DateTime.Now.ToString("yyyy/MM/dd");
         }
 
         private void btnSearchDay_Click(object sender, RoutedEventArgs e)
@@ -127,6 +134,11 @@ namespace EasyCost.Pages
         private void btnSearchYear_Click(object sender, RoutedEventArgs e)
         {
             costHistory.Display(Types.InquiryType.Year);
+        }
+
+        private void inputCostMainSplitView_PaneClosed(SplitView sender, object args)
+        {
+            InitInputCostControls();
         }
     }
 }
