@@ -60,6 +60,7 @@ namespace EasyCost.Databases
                 {
                     return (from c in DbConnection.Table<CostInfo>()
                             where c.UserID == LoginInfo.UserID
+                            orderby c.CostDate descending
                             select c).ToList();
                 }
             }

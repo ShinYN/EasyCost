@@ -23,7 +23,7 @@
             </ListView.ItemContainerStyle>
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <Grid Height="30" Background="#FF535353">
+                    <Grid Height="30" Background="#006FB6">
                         <Grid.Resources>
                             <SolidColorBrush x:Key="brush" Color="White"/>
                         </Grid.Resources>

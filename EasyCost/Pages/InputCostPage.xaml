@@ -36,11 +36,11 @@
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FF535353" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FF535353" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
@@ -49,11 +49,11 @@
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
                                                      Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FF535353" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FF535353" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="Foreground">
@@ -66,11 +66,11 @@
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
                                                      Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FF535353" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FF535353" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="Foreground">
@@ -130,10 +130,10 @@
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="120" Height="30" Grid.Column="1" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" />
-            <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" />
-            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" />
-            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="4" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" />
+            <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="120" Height="30" Grid.Column="1" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchDay_Click" />
+            <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchWeek_Click" />
+            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchMonth_Click"/>
+            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="4" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchYear_Click"/>
             <Button Name="btnSearchCustom" Content="특정 기간" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="5" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" />
         </Grid>
         <SplitView x:Name="inputCostMainSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"  CompactPaneLength="0" OpenPaneLength="350" PanePlacement="Right" Grid.Row="1">

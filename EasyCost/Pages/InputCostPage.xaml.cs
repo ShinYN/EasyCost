@@ -106,6 +106,27 @@ namespace EasyCost.Pages
         private void btnAddCost_Click(object sender, RoutedEventArgs e)
         {
             inputCostMainSplitView.IsPaneOpen = !inputCostMainSplitView.IsPaneOpen;
+            InitInputCostControls();
+        }
+
+        private void btnSearchDay_Click(object sender, RoutedEventArgs e)
+        {
+            costHistory.Display(Types.InquiryType.Today);
+        }
+
+        private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
+        {
+            costHistory.Display(Types.InquiryType.Week);
+        }
+
+        private void btnSearchMonth_Click(object sender, RoutedEventArgs e)
+        {
+            costHistory.Display(Types.InquiryType.Month);
+        }
+
+        private void btnSearchYear_Click(object sender, RoutedEventArgs e)
+        {
+            costHistory.Display(Types.InquiryType.Year);
         }
     }
 }
