@@ -75,7 +75,16 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
+
+                        <TextBlock Text="{Binding Id}" FontSize="15" Grid.Column="0"/>
+                        <TextBlock Text="{Binding CostDate}" FontSize="15" Grid.Column="1"/>
+                        <TextBlock Text="{Binding Category}" FontSize="15" Grid.Column="2"/>
+                        <TextBlock Text="{Binding SubCategory}" FontSize="15" Grid.Column="3" />
+                        <TextBlock Text="{Binding CostType}" FontSize="15" Grid.Column="4"/>
+                        <TextBlock  Text="{Binding Description}" FontSize="15" Grid.Column="5"/>
+                        <TextBlock  Text="{Binding Cost}" FontSize="15" Grid.Column="6"/>
+
+                        <!--<Border Grid.Column="0" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock Text="{Binding Id}" FontSize="15"/>
                         </Border>
                         <Border Grid.Column="1" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
@@ -95,7 +104,7 @@
                         </Border>
                         <Border Grid.Column="6" BorderBrush="{StaticResource brush}" BorderThickness="0">
                             <TextBlock  Text="{Binding Cost}" />
-                        </Border>
+                        </Border>-->
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -108,9 +117,9 @@
              StrokeThickness="1" Grid.Row="1"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,10,0">
-            <TextBlock Text="최종 사용 금액:" Grid.Row="1" />
-            <TextBlock Name="lblTotalCost" Text="" Grid.Row="1" Margin="5,0,0,0"/>
-            <TextBlock Text="원" Grid.Row="1" />
+            <TextBlock Text="최종 사용 금액:" FontSize="20" Grid.Row="1"/>
+            <TextBlock Name="lblTotalCost" FontSize="20" Text="" Grid.Row="1" Margin="5,0,0,0"/>
+            <TextBlock Text="원" FontSize="20" Grid.Row="1" />
         </StackPanel>
     </Grid>
 </UserControl>

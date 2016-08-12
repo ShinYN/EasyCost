@@ -40,8 +40,8 @@ namespace EasyCost
         private void InitializeMenu()
         {
             menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuWriteCost_Dark.png", menuText = "지출 내역 관리" });
-            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuStatistics.png", menuText = "지출 통계 보기" });
-            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuSetting.png", menuText = "프로그램 설정" });
+            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuStatistics_Dark.png", menuText = "지출 통계 보기" });
+            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuSetting_Dark.png", menuText = "프로그램 설정" });
             menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuProgramInfo.png", menuText = "프로그램 정보" });
         }
 
