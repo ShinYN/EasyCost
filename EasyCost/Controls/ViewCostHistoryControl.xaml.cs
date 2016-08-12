@@ -76,19 +76,22 @@ namespace EasyCost.Controls
             }
 
             int totalCost = CostInfo.Sum(elem => elem.Cost);
+            int index = 1;
             CostInfo.OrderByDescending(elem => elem.Cost).ToList().ForEach(elem =>
-            {
-                lsvHistory.Items.Add(new
                 {
-                    Id = elem.Id,
-                    CostDate = elem.CostDate.ToString("yyyy-MM-dd"),
-                    Category = elem.Category,
-                    SubCategory = elem.SubCategory,
-                    CostType = elem.CostType,
-                    Cost = elem.Cost.ToString("#,##0").PadLeft(10, ' ') + "원" + " (" + ((double)elem.Cost * 100 / (double)totalCost).ToString("#0.#") + "%)",
-                    Description = elem.Description
-                });
-            }
+                    lsvHistory.Items.Add(new
+                    {
+                        Id = index,
+                        CostDate = elem.CostDate.ToString("yyyy-MM-dd"),
+                        Category = elem.Category,
+                        SubCategory = elem.SubCategory,
+                        CostType = elem.CostType,
+                        Cost = elem.Cost.ToString("#,##0").PadLeft(10, ' ') + "원" + " (" + ((double)elem.Cost * 100 / (double)totalCost).ToString("#0.#") + "%)",
+                        Description = elem.Description
+                    });
+
+                    index++;
+                }
             );
 
             lblTotalCost.Text = totalCost.ToString("#,##0");

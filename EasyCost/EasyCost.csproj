@@ -146,8 +146,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\MenuIcons\addItem.png" />
-    <Content Include="Assets\MenuIcons\addItem_Y.png" />
     <Content Include="Assets\MenuIcons\addItem_G.png" />
+    <Content Include="Assets\MenuIcons\addItem_Y.png" />
+    <Content Include="Assets\MenuIcons\removeItem_G.png" />
     <Content Include="Assets\MenuIcons\backwardArrow.png" />
     <Content Include="Assets\MenuIcons\calendar.png" />
     <Content Include="Assets\MenuIcons\deleteItem.png" />
