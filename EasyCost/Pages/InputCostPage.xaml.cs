@@ -45,8 +45,6 @@ namespace EasyCost.Pages
             rbTypeCard.IsChecked = true;
             txtDetail.Text = string.Empty;
             txtCost.Text = string.Empty;
-
-            btnCalendar.Flyout.ShowAt(btnCalendar);
         }
         private void InitCategoryCombo()
         {
@@ -114,6 +112,10 @@ namespace EasyCost.Pages
         private void DisplayInputCostForAdd()
         {
             txtCostDate.Text = DateTime.Now.ToString("yyyy/MM/dd");
+        }
+        private void DisplayInputCostForUpdate()
+        {
+
         }
 
         private void btnSearchDay_Click(object sender, RoutedEventArgs e)

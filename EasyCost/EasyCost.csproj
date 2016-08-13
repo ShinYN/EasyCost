@@ -108,6 +108,7 @@
     <Compile Include="Databases\TableModels\SubCategoryMaster.cs" />
     <Compile Include="Databases\TableModels\UserMaster.cs" />
     <Compile Include="DataModels\CategoryChartModel.cs" />
+    <Compile Include="DataModels\CostHistosyModel.cs" />
     <Compile Include="DataModels\MenuItemModel.cs" />
     <Compile Include="DataModels\SubCategoryChartModel.cs" />
     <Compile Include="Helpers\MyColorHelper.cs" />

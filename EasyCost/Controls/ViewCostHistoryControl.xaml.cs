@@ -1,5 +1,6 @@
 ﻿using EasyCost.Databases;
 using EasyCost.Databases.TableModels;
+using EasyCost.DataModels;
 using EasyCost.Types;
 using System;
 using System.Collections.Generic;
@@ -87,14 +88,16 @@ namespace EasyCost.Controls
 
             orderedCostInfo.ToList().ForEach(elem =>
                 {
-                    lsvHistory.Items.Add(new
+                    lsvHistory.Items.Add(new CostHistoryModel
                     {
-                        Id = index,
+                        Index = index,
+                        Id = elem.Id,
                         CostDate = elem.CostDate.ToString("yyyy-MM-dd"),
                         Category = elem.Category,
                         SubCategory = elem.SubCategory,
                         CostType = elem.CostType,
-                        Cost = elem.Cost.ToString("#,##0").PadLeft(10, ' ') + "원" + " (" + ((double)elem.Cost * 100 / (double)totalCost).ToString("#0.#") + "%)",
+                        Cost = elem.Cost.ToString("#,##0").PadLeft(10, ' ') + "원",
+                        Percentage = ((double)elem.Cost * 100 / (double)totalCost).ToString("#0.#") + "%",
                         Description = elem.Description
                     });
 
@@ -104,5 +107,6 @@ namespace EasyCost.Controls
 
             lblTotalCost.Text = totalCost.ToString("#,##0");
         }
+
     }
 }

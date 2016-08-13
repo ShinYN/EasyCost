@@ -15,7 +15,7 @@
             <RowDefinition Height="5" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <ListView x:Name="lsvHistory" Grid.Row="0" ItemsSource="{Binding SomeCollection}" >
+        <ListView x:Name="lsvHistory" Grid.Row="0" ItemsSource="{Binding SomeCollection}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -34,7 +34,8 @@
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock x:Uid="tbIndex" Text=""  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
@@ -54,8 +55,11 @@
                         <Border Grid.Column="5" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock x:Uid="tbDescription" Text="지출 내역" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                         </Border>
-                        <Border Grid.Column="6" BorderBrush="{StaticResource brush}" BorderThickness="0,0,0,0">
-                            <TextBlock x:Uid="tbCost" Text="금액" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" />
+                        <Border Grid.Column="6" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
+                            <TextBlock x:Uid="tbCost" Text="금액"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" />
+                        </Border>
+                        <Border Grid.Column="7" BorderBrush="{StaticResource brush}" BorderThickness="0,0,0,0">
+                            <TextBlock x:Uid="tbPercentage" Text="비율" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" />
                         </Border>
                     </Grid>
                 </DataTemplate>
@@ -73,16 +77,18 @@
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="{Binding Id}" FontSize="15" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Index}" FontSize="15" Grid.Column="0"/>
                         <TextBlock Text="{Binding CostDate}" FontSize="15" Grid.Column="1"/>
                         <TextBlock Text="{Binding Category}" FontSize="15" Grid.Column="2"/>
                         <TextBlock Text="{Binding SubCategory}" FontSize="15" Grid.Column="3" />
                         <TextBlock Text="{Binding CostType}" FontSize="15" Grid.Column="4"/>
-                        <TextBlock  Text="{Binding Description}" FontSize="15" Grid.Column="5"/>
-                        <TextBlock  Text="{Binding Cost}" FontSize="15" Grid.Column="6"/>
+                        <TextBlock Text="{Binding Description}" FontSize="15" Grid.Column="5" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding Cost}" FontSize="15" Grid.Column="6" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding Percentage}" FontSize="15" Grid.Column="7" HorizontalAlignment="Right"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
