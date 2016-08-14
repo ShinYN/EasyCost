@@ -39,10 +39,9 @@ namespace EasyCost
 
         private void InitializeMenu()
         {
-            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuWriteCost.png", menuText = "지출 내역 관리" });
-            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuStatistics.png", menuText = "지출 통계 보기" });
-            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuSetting.png", menuText = "프로그램 설정" });
-            menuList.Items.Add(new { ImagePath = "ms-appx:///Assets/MenuIcons/menuProgramInfo.png", menuText = "프로그램 정보" });
+            menuList.Items.Add(new MenuItemModel { ImagePath = "ms-appx:///Assets/MenuIcons/menuWriteCost_D.png", menuText = "지출 내역 관리" });
+            menuList.Items.Add(new MenuItemModel { ImagePath = "ms-appx:///Assets/MenuIcons/menuStatistics_D.png", menuText = "지출 통계 보기" });
+            menuList.Items.Add(new MenuItemModel { ImagePath = "ms-appx:///Assets/MenuIcons/menuSetting_D.png", menuText = "프로그램 설정" });
         }
 
         private void DisplayMenuFromText(string aMenuText)
@@ -68,40 +67,7 @@ namespace EasyCost
                     mainFrame.Navigate(typeof(SettingPage));
                 }
             }
-            else if (aMenuText == MENU_PROGRAMINFO)
-            {
-
-            }
         }
-        private void DisplayMenuFromImage(Image aMenuImage)
-        {
-            //if (aMenuImage)
-            //{
-            //    if (mainFrame.CurrentSourcePageType != typeof(InputCostPage))
-            //    {
-            //        mainFrame.Navigate(typeof(InputCostPage));
-            //    }
-            //}
-            //else if (aMenuText == MENU_STATISTICS)
-            //{
-            //    if (mainFrame.CurrentSourcePageType != typeof(StatisticsPage))
-            //    {
-            //        mainFrame.Navigate(typeof(StatisticsPage));
-            //    }
-            //}
-            //else if (aMenuText == MENU_SETTINGS)
-            //{
-            //    if (mainFrame.CurrentSourcePageType != typeof(SettingPage))
-            //    {
-            //        mainFrame.Navigate(typeof(SettingPage));
-            //    }
-            //}
-            //else if (aMenuText == MENU_PROGRAMINFO)
-            //{
-
-            //}
-        }
-
         private void btnMenuFolder_Click(object sender, RoutedEventArgs e)
         {
             menuSplitView.IsPaneOpen = !menuSplitView.IsPaneOpen;
@@ -119,6 +85,14 @@ namespace EasyCost
             else
             {
                 return;
+            }
+        }
+
+        private void menuList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem != null)
+            {
+                DisplayMenuFromText(((MenuItemModel)e.ClickedItem).menuText);
             }
         }
     }

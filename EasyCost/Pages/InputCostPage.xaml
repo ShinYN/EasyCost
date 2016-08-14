@@ -165,7 +165,9 @@
                     <RadioButton x:Name="rbTypeCard" Content="카드"  FontSize="15" RelativePanel.RightOf="rbTypeCash" RelativePanel.AlignTopWith="rbTypeCash" Margin="-20,15,0,0"/>
                     <TextBlock x:Name="lblCost" Text="금액" FontSize="15" RelativePanel.AlignLeftWith="lblCategory" RelativePanel.Below="lblType" Margin="10,20,0,0" Foreground="Gray"/>
                     <TextBox x:Name="txtCost" Text="" FontSize="15" InputScope="Number" RelativePanel.RightOf="lblCost" RelativePanel.AlignVerticalCenterWith="lblCost" Width="230" Margin="66,18,0,0" BorderThickness="1" />
-                    <Button x:Name="btnInputCost" Content="입력" FontSize="15" RelativePanel.AlignRightWith="txtCost" RelativePanel.Below="txtCost"  Margin="0,10,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Click="btnInputCost_Click" Width="71"/>
+                    <Button x:Name="btnInputCost" Content="입력" FontSize="15" RelativePanel.AlignRightWith="txtCost" RelativePanel.Below="txtCost"  Margin="0,10,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="71" Click="btnInputCost_Click"/>
+                    <Button x:Name="btnDeleteCost" Content="삭제" FontSize="15" RelativePanel.LeftOf="btnInputCost" RelativePanel.Below="txtCost"  Margin="0,10,10,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="71" Click="btnDeleteCost_Click"/>
+                    <Button x:Name="btnUpdateCost" Content="수정" FontSize="15" RelativePanel.LeftOf="btnDeleteCost" RelativePanel.Below="txtCost"  Margin="0,10,10,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="71" Click="btnUpdateCost_Click"/>
                 </RelativePanel>
             </SplitView.Pane>
             <SplitView.Content>
@@ -173,7 +175,7 @@
             </SplitView.Content>
         </SplitView>
         <RelativePanel Grid.Row ="2" Margin="-25,0,25,0">
-            <Button x:Name="btnAddCost" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnAddCost_Click">
+            <Button x:Name="btnViewAddCostPanel" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnViewAddCostPanel_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/addItem_G.png"/>
             </Button>
         </RelativePanel>

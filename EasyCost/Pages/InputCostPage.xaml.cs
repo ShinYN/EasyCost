@@ -1,6 +1,8 @@
 ﻿using EasyCost.Bases.Login;
 using EasyCost.Databases;
 using EasyCost.Databases.TableModels;
+using EasyCost.DataModels;
+using EasyCost.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,6 +30,9 @@ namespace EasyCost.Pages
         public InputCostPage()
         {
             this.InitializeComponent();
+
+            costHistory.CostItemSelectedEvent += new Controls.ViewCostHistoryControl.CostItemSelected(DisplayInputCostForUpdate);
+
             InitControls();
             DisplayCostHistory();
         }
@@ -35,7 +40,6 @@ namespace EasyCost.Pages
         private void InitControls()
         {
             InitInputCostControls();
-            InitViewCostHistoryControls();
         }
         private void InitInputCostControls()
         {
@@ -50,17 +54,12 @@ namespace EasyCost.Pages
         {
             cboCategory.Items.Clear();
             cboCategory.Items.Add(string.Empty);
-            DBConnHandler.Setting.GetCategoryList().ForEach(elem => cboCategory.Items.Add(elem.Category));
+            SettingManager.GetCategoryList().ForEach(elem => cboCategory.Items.Add(elem.Category));
             cboCategory.SelectedIndex = 0;
         }
         private void InitSubCategoryCombo()
         {
             cboSubCategory.Items.Clear();
-        }
-
-        private void InitViewCostHistoryControls()
-        {
-
         }
 
         private void DisplayCostHistory()
@@ -71,11 +70,59 @@ namespace EasyCost.Pages
         {
             cboSubCategory.Items.Clear();
             cboSubCategory.Items.Add(string.Empty);
-            DBConnHandler.Setting.GetSubCategoryList(aCategory).ForEach(elem => cboSubCategory.Items.Add(elem.SubCategory));
+            SettingManager.GetSubCategoryList(aCategory).ForEach(elem => cboSubCategory.Items.Add(elem.SubCategory));
             cboSubCategory.SelectedIndex = 0;
         }
 
-        private void btnInputCost_Click(object sender, RoutedEventArgs e)
+        private void DisplayInputCostForAdd()
+        {
+            lblTitle.Text = "지출 내역 입력";
+            txtCostDate.Text = DateTime.Now.ToString("yyyy/MM/dd");
+
+            btnInputCost.Visibility = Visibility.Visible;
+            btnDeleteCost.Visibility = Visibility.Collapsed;
+            btnUpdateCost.Visibility = Visibility.Collapsed;
+        }
+        private void DisplayInputCostForUpdate(CostHistoryModel aCostHistoryModel)
+        {
+            lblTitle.Text = "지출 내역 수정";
+            txtCostDate.Text = aCostHistoryModel.CostDate;
+            cboCategory.SelectedValue = aCostHistoryModel.Category;
+            cboSubCategory.SelectedValue = aCostHistoryModel.SubCategory;
+            txtDetail.Text = aCostHistoryModel.Description;
+            rbTypeCard.IsChecked = (aCostHistoryModel.CostType == "카드") ? true : false;
+            rbTypeCash.IsChecked = !rbTypeCard.IsChecked;
+            txtCost.Text = aCostHistoryModel.Cost.ToString();
+
+            btnInputCost.Visibility = Visibility.Collapsed;
+            btnDeleteCost.Visibility = Visibility.Visible;
+            btnUpdateCost.Visibility = Visibility.Visible;
+
+            if (inputCostMainSplitView.IsPaneOpen == false)
+            {
+                inputCostMainSplitView.IsPaneOpen = true;
+            }
+        }
+
+        private void SaveCostInfo()
+        {
+            CostManager.SaveConstInfo(MakeCostInfoViaInputCostControls());
+        }
+        private void UpdateCostInfo()
+        {
+            CostInfo costInfo = MakeCostInfoViaInputCostControls();
+            costInfo.Id = costHistory.SelectedItem.Id;
+
+            CostManager.UpdateCostInfo(costInfo);
+        }
+        private void DeleteCostInfo()
+        {
+            if (costHistory.SelectedItem != null)
+            {
+                CostManager.DeleteCostInfo(costHistory.SelectedItem.Id);
+            }
+        }
+        private CostInfo MakeCostInfoViaInputCostControls()
         {
             CostInfo costInfo = new CostInfo();
             costInfo.UserID = LoginInfo.UserID;
@@ -86,8 +133,35 @@ namespace EasyCost.Pages
             costInfo.Cost = int.Parse(txtCost.Text.Trim());
             costInfo.Description = txtDetail.Text;
 
-            DBConnHandler.Cost.SaveConstInfo(costInfo);
+            return costInfo;
+        }
 
+        private void btnViewAddCostPanel_Click(object sender, RoutedEventArgs e)
+        {
+            InitInputCostControls();
+            DisplayInputCostForAdd();
+
+            if (inputCostMainSplitView.IsPaneOpen == false)
+            {
+                inputCostMainSplitView.IsPaneOpen = true;
+            }
+        }
+        private void btnInputCost_Click(object sender, RoutedEventArgs e)
+        {
+            SaveCostInfo();
+            inputCostMainSplitView.IsPaneOpen = false;
+            DisplayCostHistory();
+        }
+        private void btnDeleteCost_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteCostInfo();
+            inputCostMainSplitView.IsPaneOpen = false;
+            DisplayCostHistory();
+        }
+        private void btnUpdateCost_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateCostInfo();
+            inputCostMainSplitView.IsPaneOpen = false;
             DisplayCostHistory();
         }
 
@@ -103,39 +177,24 @@ namespace EasyCost.Pages
             }
         }
 
-        private void btnAddCost_Click(object sender, RoutedEventArgs e)
-        {
-            inputCostMainSplitView.IsPaneOpen = !inputCostMainSplitView.IsPaneOpen;
-            DisplayInputCostForAdd();
-        }
-
-        private void DisplayInputCostForAdd()
-        {
-            txtCostDate.Text = DateTime.Now.ToString("yyyy/MM/dd");
-        }
-        private void DisplayInputCostForUpdate()
-        {
-
-        }
-
         private void btnSearchDay_Click(object sender, RoutedEventArgs e)
         {
             costHistory.Display(Types.InquiryType.Today);
         }
-
         private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
         {
             costHistory.Display(Types.InquiryType.Week);
         }
-
         private void btnSearchMonth_Click(object sender, RoutedEventArgs e)
         {
             costHistory.Display(Types.InquiryType.Month);
         }
-
         private void btnSearchYear_Click(object sender, RoutedEventArgs e)
         {
             costHistory.Display(Types.InquiryType.Year);
+        }
+        private void btnModifyCost_Click(object sender, RoutedEventArgs e)
+        {
         }
 
         private void inputCostMainSplitView_PaneClosed(SplitView sender, object args)

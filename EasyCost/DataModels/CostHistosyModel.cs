@@ -34,9 +34,13 @@ namespace EasyCost.DataModels
         /// </summary>
         public string UserID { get; set; }
         /// <summary>
-        /// 지출 날짜. DAteTime형식
+        /// 지출 날짜.(yyyy/MM/dd)
         /// </summary>
         public string CostDate { get; set; }
+        /// <summary>
+        /// 지출 날짜. Datetime
+        /// </summary>
+        public DateTime CostDateTime { get; set; }
         /// <summary>
         /// 소비 대 분류
         /// </summary>
@@ -52,7 +56,10 @@ namespace EasyCost.DataModels
         /// <summary>
         /// 지출 금액
         /// </summary>
-        public string Cost { get; set; }
+        public int Cost { get; set; }
+        /// 지출 금액 (표기용)
+        /// </summary>
+        public string CostString { get; set; }
         /// <summary>
         /// 세부 설명
         /// </summary>

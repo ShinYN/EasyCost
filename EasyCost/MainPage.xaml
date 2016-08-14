@@ -21,7 +21,7 @@
         </StackPanel>
         <SplitView x:Name="menuSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False" CompactPaneLength="60" OpenPaneLength="250" Grid.Row="1">
             <SplitView.Pane>
-                <ListView x:Name="menuList" Tapped="menuList_Tapped">
+                <ListView x:Name="menuList" Background="#FFF7F7F7" IsItemClickEnabled="True" ItemClick="menuList_ItemClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Height="50" HorizontalAlignment="Stretch">

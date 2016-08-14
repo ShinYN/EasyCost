@@ -1,5 +1,6 @@
 ﻿using EasyCost.Databases;
 using EasyCost.Databases.TableModels;
+using EasyCost.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,7 +35,7 @@ namespace EasyCost.Pages.Settings
         private void DisplayCategoryList()
         {
             lsvCategory.Items.Clear();
-            DBConnHandler.Setting.GetCategoryList().ForEach(elem => lsvCategory.Items.Add(new { Category = elem.Category }));
+            SettingManager.GetCategoryList().ForEach(elem => lsvCategory.Items.Add(new { Category = elem.Category }));
 
             if (lsvCategory.Items.Count() == 0)
             {
@@ -52,7 +53,7 @@ namespace EasyCost.Pages.Settings
             lsvSubCategory.Items.Clear();
             dynamic category = lsvCategory.SelectedValue;
             string categorystring = category.Category;
-            DBConnHandler.Setting.GetSubCategoryList(categorystring).ForEach(elem => lsvSubCategory.Items.Add(new { SubCategory = elem.SubCategory }));
+            SettingManager.GetSubCategoryList(categorystring).ForEach(elem => lsvSubCategory.Items.Add(new { SubCategory = elem.SubCategory }));
         }
 
         private void btnRemoveCategory_Click(object sender, RoutedEventArgs e)
@@ -61,15 +62,15 @@ namespace EasyCost.Pages.Settings
             {
                 dynamic category = lsvCategory.SelectedValue;
 
-                DBConnHandler.Setting.DeleteCategory(category.Category);
-                DBConnHandler.Setting.DeleteSubCategory(category.Category);
+                SettingManager.DeleteCategory(category.Category);
+                SettingManager.DeleteSubCategory(category.Category);
                 DisplayCategoryList();
             }
         }
 
         private void btnAddCategory_Click(object sender, RoutedEventArgs e)
         {
-            DBConnHandler.Setting.SaveCategory(new Databases.TableModels.CategoryMaster
+            SettingManager.SaveCategory(new Databases.TableModels.CategoryMaster
             {
                 Category = txtCategory.Text.Trim(), Description = string.Empty
             });
@@ -84,7 +85,7 @@ namespace EasyCost.Pages.Settings
                 dynamic category = lsvCategory.SelectedValue;
                 dynamic subCategory = lsvSubCategory.SelectedValue;
 
-                DBConnHandler.Setting.DeleteSubCategory(new SubCategoryMaster { Category = category.Category, SubCategory = subCategory.SubCategory });
+                SettingManager.DeleteSubCategory(new SubCategoryMaster { Category = category.Category, SubCategory = subCategory.SubCategory });
                 DisplaySubCategoryList();
             }
         }
@@ -92,7 +93,7 @@ namespace EasyCost.Pages.Settings
         private void btnAddSubCategory_Click(object sender, RoutedEventArgs e)
         {
             dynamic category = lsvCategory.SelectedValue;
-            DBConnHandler.Setting.SaveSubCategory(new Databases.TableModels.SubCategoryMaster
+            SettingManager.SaveSubCategory(new Databases.TableModels.SubCategoryMaster
             {
                 Category = category.Category, SubCategory = txtSubCategory.Text.Trim(), Description = string.Empty
             });

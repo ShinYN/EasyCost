@@ -15,7 +15,7 @@
             <RowDefinition Height="5" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <ListView x:Name="lsvHistory" Grid.Row="0" ItemsSource="{Binding SomeCollection}">
+        <ListView x:Name="lsvHistory" Grid.Row="0" ItemsSource="{Binding SomeCollection}" IsItemClickEnabled="True" ItemClick="lsvHistory_ItemClick">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -35,7 +35,7 @@
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="70"/>
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock x:Uid="tbIndex" Text=""  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
@@ -65,7 +65,7 @@
                 </DataTemplate>
             </ListView.HeaderTemplate>
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:Name="gridData">
                     <Grid Height="30">
                         <Grid.Resources>
                             <SolidColorBrush x:Key="brush" Color="White"/>
@@ -78,7 +78,7 @@
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="130"/>
-                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="70"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="{Binding Index}" FontSize="15" Grid.Column="0"/>
@@ -87,7 +87,7 @@
                         <TextBlock Text="{Binding SubCategory}" FontSize="15" Grid.Column="3" />
                         <TextBlock Text="{Binding CostType}" FontSize="15" Grid.Column="4"/>
                         <TextBlock Text="{Binding Description}" FontSize="15" Grid.Column="5" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{Binding Cost}" FontSize="15" Grid.Column="6" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding CostString}" FontSize="15" Grid.Column="6" HorizontalAlignment="Right"/>
                         <TextBlock Text="{Binding Percentage}" FontSize="15" Grid.Column="7" HorizontalAlignment="Right"/>
                     </Grid>
                 </DataTemplate>

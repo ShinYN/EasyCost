@@ -1,9 +1,11 @@
 ﻿using EasyCost.Databases;
 using EasyCost.Databases.TableModels;
 using EasyCost.DataModels;
+using EasyCost.Helpers;
 using EasyCost.Types;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -24,22 +26,35 @@ namespace EasyCost.Controls
 {
     public sealed partial class ViewCostHistoryControl : UserControl
     {
+        public delegate void CostItemSelected(CostHistoryModel costInfo);
+        public event CostItemSelected CostItemSelectedEvent;
+
         public ViewCostHistoryControl()
         {
             this.InitializeComponent();
         }
 
         public List<CostInfo> CostInfo { get; private set; }
+        public CostHistoryModel SelectedItem
+        {
+            get
+            {
+                if (lsvHistory.SelectedItem == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return (CostHistoryModel)lsvHistory.SelectedItem;
+                }
+            }
+        }
 
-        /// <summary>
-        /// 지출 내역을 표시하는 함수
-        /// </summary>
-        /// <param name="aDisplayData">YYYYMMDD 형식</param>
         public void Display(DateTime aDisplayDate, bool aSelectGroupBy = false)
         {
             lsvHistory.Items.Clear();
 
-            CostInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMMdd") == aDisplayDate.ToString("yyyyMMdd")).ToList();
+            CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMMdd") == aDisplayDate.ToString("yyyyMMdd")).ToList();
             DisplayCostInfoToListView(aSelectGroupBy);
         }
         public void Display(InquiryType aInquiryType, bool aSelectGroupBy = false)
@@ -47,28 +62,28 @@ namespace EasyCost.Controls
             lsvHistory.Items.Clear();
 
             var cal = System.Globalization.DateTimeFormatInfo.CurrentInfo.Calendar;
-           
+
             if (aInquiryType == InquiryType.Today)
             {
-                CostInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).ToList();
+                CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).ToList();
             }
             else if (aInquiryType == InquiryType.Week)
             {
-                CostInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy).Where(elem =>
+                CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem =>
                     cal.GetWeekOfYear(elem.CostDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday) ==
                     cal.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday)).ToList();
             }
             else if (aInquiryType == InquiryType.Month)
             {
-                CostInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMM") == DateTime.Now.ToString("yyyyMM")).ToList();
+                CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMM") == DateTime.Now.ToString("yyyyMM")).ToList();
             }
             else if (aInquiryType == InquiryType.Year)
             {
-                CostInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.Year > DateTime.Now.Year).ToList();
+                CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.Year == DateTime.Now.Year).ToList();
             }
             else   // Case of all
             {
-                CostInfo = DBConnHandler.Cost.GetCostInfo(aSelectGroupBy);
+                CostInfo = CostManager.GetCostInfo(aSelectGroupBy);
             }
 
             DisplayCostInfoToListView(aSelectGroupBy);
@@ -93,10 +108,12 @@ namespace EasyCost.Controls
                         Index = index,
                         Id = elem.Id,
                         CostDate = elem.CostDate.ToString("yyyy-MM-dd"),
+                        CostDateTime = elem.CostDate,
                         Category = elem.Category,
                         SubCategory = elem.SubCategory,
                         CostType = elem.CostType,
-                        Cost = elem.Cost.ToString("#,##0").PadLeft(10, ' ') + "원",
+                        Cost = elem.Cost,
+                        CostString = elem.Cost.ToString("#,##0").PadLeft(10, ' ') + "원",
                         Percentage = ((double)elem.Cost * 100 / (double)totalCost).ToString("#0.#") + "%",
                         Description = elem.Description
                     });
@@ -108,5 +125,12 @@ namespace EasyCost.Controls
             lblTotalCost.Text = totalCost.ToString("#,##0");
         }
 
+        private void lsvHistory_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem != null && e.ClickedItem.GetType() == typeof(CostHistoryModel))
+            {
+                CostItemSelectedEvent((CostHistoryModel)e.ClickedItem);
+            }
+        }
     }
 }
