@@ -88,6 +88,15 @@ namespace EasyCost.Controls
 
             DisplayCostInfoToListView(aSelectGroupBy);
         }
+        public void Display(DateTime aFromDate, DateTime aToDate, bool aSelectGroupBy = false)
+        {
+            lsvHistory.Items.Clear();
+
+            CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate >= aFromDate)
+                                                              .Where(elem => elem.CostDate <= aToDate)
+                                                              .ToList();
+            DisplayCostInfoToListView(aSelectGroupBy);
+        }
 
         private void DisplayCostInfoToListView(bool aSelectGroupBy)
         {

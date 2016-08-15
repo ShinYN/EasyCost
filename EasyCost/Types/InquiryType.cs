@@ -12,6 +12,7 @@ namespace EasyCost.Types
         Week = 1,
         Month = 2,
         Year = 3,
-        All = 4
+        All = 4,
+        Custom = 5
     }
 }

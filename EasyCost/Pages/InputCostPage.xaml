@@ -135,10 +135,16 @@
             <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchWeek_Click" />
             <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3"  Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchMonth_Click"/>
             <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="4" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchYear_Click"/>
-            <Button Name="btnSearchCustom" Content="특정 기간" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="5" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}">
+            <Button Name="btnSearchCustom" Content="기간" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="5" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}">
                 <Button.Flyout>
-                    <Flyout x:Name="searchCustomFlyout">
-                        <Controls:DateSearchControl x:Name="dateSearchControl" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Flyout x:Name="searchCustomFlyout" >
+                        <Controls:DateSearchControl x:Name="dateSearchControl" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" BorderThickness="0" Padding="0" Margin="0"/>
+                        <Flyout.FlyoutPresenterStyle >
+                            <Style TargetType= "FlyoutPresenter" >
+                                <Setter Property = "Padding" Value = "0" />
+                                <Setter Property = "Margin" Value= "0" />
+                            </Style>
+                        </Flyout.FlyoutPresenterStyle >
                     </Flyout>
                 </Button.Flyout>
             </Button>

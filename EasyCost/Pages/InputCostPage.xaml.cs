@@ -4,6 +4,7 @@ using EasyCost.Databases;
 using EasyCost.Databases.TableModels;
 using EasyCost.DataModels;
 using EasyCost.Helpers;
+using EasyCost.Types;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,11 +29,15 @@ namespace EasyCost.Pages
     /// </summary>
     public sealed partial class InputCostPage : Page
     {
+        InquiryType lastInquiryType;
         public InputCostPage()
         {
             this.InitializeComponent();
 
             costHistory.CostItemSelectedEvent += new Controls.ViewCostHistoryControl.CostItemSelected(DisplayInputCostForUpdate);
+            dateSearchControl.DateSelectedEvent += () => Flyout.ShowAttachedFlyout(btnSearchCustom);
+            dateSearchControl.DisplayDateEvent += (x, y) => costHistory.Display(x, y, false);
+            Flyout.SetAttachedFlyout(btnSearchCustom, searchCustomFlyout);
 
             InitControls();
             DisplayCostHistory();
@@ -40,6 +45,7 @@ namespace EasyCost.Pages
 
         private void InitControls()
         {
+            lastInquiryType = InquiryType.Today;
             InitInputCostControls();
         }
         private void InitInputCostControls()
@@ -65,7 +71,7 @@ namespace EasyCost.Pages
 
         private void DisplayCostHistory()
         {
-            costHistory.Display(Types.InquiryType.Today);
+            costHistory.Display(lastInquiryType);
         }
         private void DisplaySubCategory(string aCategory)
         {
@@ -180,19 +186,23 @@ namespace EasyCost.Pages
 
         private void btnSearchDay_Click(object sender, RoutedEventArgs e)
         {
-            costHistory.Display(Types.InquiryType.Today);
+            lastInquiryType = InquiryType.Today;
+            costHistory.Display(lastInquiryType);
         }
         private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
         {
-            costHistory.Display(Types.InquiryType.Week);
+            lastInquiryType = InquiryType.Week;
+            costHistory.Display(lastInquiryType);
         }
         private void btnSearchMonth_Click(object sender, RoutedEventArgs e)
         {
-            costHistory.Display(Types.InquiryType.Month);
+            lastInquiryType = InquiryType.Month;
+            costHistory.Display(lastInquiryType);
         }
         private void btnSearchYear_Click(object sender, RoutedEventArgs e)
         {
-            costHistory.Display(Types.InquiryType.Year);
+            lastInquiryType = InquiryType.Year;
+            costHistory.Display(lastInquiryType);
         }
         private void btnModifyCost_Click(object sender, RoutedEventArgs e)
         {

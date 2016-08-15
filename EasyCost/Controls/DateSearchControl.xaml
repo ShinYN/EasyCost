@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="100"
+    d:DesignHeight="130"
     d:DesignWidth="370">
 
     <!--<Grid>
@@ -16,16 +16,16 @@
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <TextBlock Text="시작" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
-            <CalendarDatePicker Width="auto" HorizontalAlignment="Center"/>
-            <TextBlock Text="시작" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
-            <CalendarDatePicker Width="auto" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
+            <TextBlock Text="시작" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <CalendarDatePicker Name="fromDatePicker" Width="auto" HorizontalAlignment="Center" BorderThickness="1" Closed="fromDatePicker_Closed"/>
+            <TextBlock Text="끝" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            <CalendarDatePicker Name="toDatePicker" Width="auto" HorizontalAlignment="Center" BorderThickness="1" Closed="toDatePicker_Closed"/>
         </StackPanel>
         <RelativePanel Grid.Row="3">
-            <Button Name="btnOK" Content="선택" RelativePanel.AlignRightWithPanel="True" Margin="0,5,10,5"/>
+            <Button Name="btnOK" Content="선택" RelativePanel.AlignRightWithPanel="True" Margin="0,5,10,5"  Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Click="btnOK_Click"/>
         </RelativePanel>
     </Grid>
 </UserControl>
