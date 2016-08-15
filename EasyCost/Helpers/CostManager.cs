@@ -1,9 +1,11 @@
 ﻿using EasyCost.Bases.Login;
 using EasyCost.Databases;
 using EasyCost.Databases.TableModels;
+using EasyCost.Types;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +39,46 @@ namespace EasyCost.Helpers
                         orderby c.CostDate descending
                         select c).ToList();
             }
+        }
+        public static List<CostInfo> GetCostInfo(InquiryType aInquiryType, bool aSelectGroupBy = false)
+        {
+            List<CostInfo> costInfo = new List<CostInfo>();
+            var cal = System.Globalization.DateTimeFormatInfo.CurrentInfo.Calendar;
+
+            if (aInquiryType == InquiryType.Today)
+            {
+                costInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).ToList();
+            }
+            else if (aInquiryType == InquiryType.Week)
+            {
+                costInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem =>
+                    cal.GetWeekOfYear(elem.CostDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday) ==
+                    cal.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday)).ToList();
+            }
+            else if (aInquiryType == InquiryType.Month)
+            {
+                costInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMM") == DateTime.Now.ToString("yyyyMM")).ToList();
+            }
+            else if (aInquiryType == InquiryType.Year)
+            {
+                costInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.Year == DateTime.Now.Year).ToList();
+            }
+            else if (aInquiryType == InquiryType.All)
+            {
+                costInfo = CostManager.GetCostInfo(aSelectGroupBy);
+            }
+
+            return costInfo;
+        }
+        public static List<CostInfo> GetCostInfo(DateTime aFromDate, DateTime aToDate, bool aSelectGroupBy = false)
+        {
+            return CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate >= aFromDate)
+                                                          .Where(elem => elem.CostDate <= aToDate)
+                                                          .ToList();
+        }
+        public static List<CostInfo> GetCostInfo(DateTime aSpecificDate, bool aSelectGroupBy = false)
+        {
+            return CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMMdd") == aSpecificDate.ToString("yyyyMMdd")).ToList();
         }
 
         public static void SaveConstInfo(CostInfo aCostInfo)

@@ -54,47 +54,21 @@ namespace EasyCost.Controls
         {
             lsvHistory.Items.Clear();
 
-            CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMMdd") == aDisplayDate.ToString("yyyyMMdd")).ToList();
+            CostInfo = CostManager.GetCostInfo(aDisplayDate, aSelectGroupBy);
             DisplayCostInfoToListView(aSelectGroupBy);
         }
         public void Display(InquiryType aInquiryType, bool aSelectGroupBy = false)
         {
             lsvHistory.Items.Clear();
 
-            var cal = System.Globalization.DateTimeFormatInfo.CurrentInfo.Calendar;
-
-            if (aInquiryType == InquiryType.Today)
-            {
-                CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd")).ToList();
-            }
-            else if (aInquiryType == InquiryType.Week)
-            {
-                CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem =>
-                    cal.GetWeekOfYear(elem.CostDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday) ==
-                    cal.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday)).ToList();
-            }
-            else if (aInquiryType == InquiryType.Month)
-            {
-                CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.ToString("yyyyMM") == DateTime.Now.ToString("yyyyMM")).ToList();
-            }
-            else if (aInquiryType == InquiryType.Year)
-            {
-                CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate.Year == DateTime.Now.Year).ToList();
-            }
-            else   // Case of all
-            {
-                CostInfo = CostManager.GetCostInfo(aSelectGroupBy);
-            }
-
+            CostInfo = CostManager.GetCostInfo(aInquiryType, aSelectGroupBy);
             DisplayCostInfoToListView(aSelectGroupBy);
         }
         public void Display(DateTime aFromDate, DateTime aToDate, bool aSelectGroupBy = false)
         {
             lsvHistory.Items.Clear();
 
-            CostInfo = CostManager.GetCostInfo(aSelectGroupBy).Where(elem => elem.CostDate >= aFromDate)
-                                                              .Where(elem => elem.CostDate <= aToDate)
-                                                              .ToList();
+            CostInfo = CostManager.GetCostInfo(aFromDate, aToDate, aSelectGroupBy);
             DisplayCostInfoToListView(aSelectGroupBy);
         }
 

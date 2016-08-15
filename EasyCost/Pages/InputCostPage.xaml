@@ -156,16 +156,7 @@
                     <Line X1="10" Y1="6" X2="335" Y2="6" Stroke="#FF535353" StrokeThickness="1" RelativePanel.Below="lblTitle"/>
 
                     <TextBlock x:Name="lblCostDate" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" TextWrapping="Wrap" Text="지출 날짜" FontSize="15" Foreground="Gray" Margin="10,50,0,0" />
-                    <TextBox x:Name="txtCostDate"  Width="180" IsReadOnly="True" RelativePanel.AlignVerticalCenterWith="lblCostDate" RelativePanel.RightOf="lblCostDate" FontSize="15" Margin="30,48,0,-10" Height="20" BorderThickness="1" />
-                    <Button x:Name="btnCalendar" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.RightOf="txtCostDate" RelativePanel.AlignVerticalCenterWith="txtCostDate" Margin="15,48,0,-8" Height="30" Width="35" Padding="0">
-                        <Image Source="ms-appx:///Assets/MenuIcons/calendar.png" Margin="0,0,0,0" Stretch="UniformToFill" VerticalAlignment="Center" />
-                        <Button.Flyout>
-                            <Flyout>
-                                <input:SfCalendar x:Name="costDateCalendar" Width="300" Height="300" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-
+                    <CalendarDatePicker x:Name="costDatePicker" RelativePanel.AlignVerticalCenterWith="lblCostDate" RelativePanel.RightOf="lblCostDate" Margin="30,48,-120,-10" Height="32" Width="230" BorderThickness="1" DateFormat="{}{year.full}/{month.integer}/{day.integer}"/>
                     <TextBlock x:Name="lblCategory" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" TextWrapping="Wrap" Text="지출 분류" FontSize="15" Foreground="Gray" Margin="10,90,0,0" />
                     <ComboBox x:Name="cboCategory" RelativePanel.AlignVerticalCenterWith="lblCategory" RelativePanel.RightOf="lblCategory" Width="230" FontSize="15" Margin="30,85,-79,-7" BorderThickness="1" SelectionChanged="cboCategory_SelectionChanged" Height="32" />
                     <TextBlock x:Name="lblSubCategory" RelativePanel.AlignLeftWith="lblCategory" RelativePanel.Below="lblCategory" TextWrapping="Wrap" Text="세부 분류" FontSize="15" Foreground="Gray" Margin="10,20,0,0" />

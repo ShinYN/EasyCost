@@ -5,6 +5,7 @@
     xmlns:local="using:EasyCost.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:syncfusion="using:Syncfusion.UI.Xaml.Charts"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -35,11 +36,11 @@
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#767676" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#767676" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
@@ -48,11 +49,11 @@
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
                                                      Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#767676" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#767676" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="Foreground">
@@ -65,11 +66,11 @@
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
                                                      Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#767676" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#767676  " />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                      Storyboard.TargetProperty="Foreground">
@@ -117,8 +118,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="#F2F2F2">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="120" />
@@ -127,20 +129,35 @@
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnCalendar" Background="Transparent" Foreground="Transparent" BorderThickness="0" Grid.Column="0" Click="btnCalendar_Click">
-                <Image Source="ms-appx:///Assets/MenuIcons/calendar.png" Height="40" VerticalAlignment="Center"/>
-            </Button>
-            <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="120" Height="30" Grid.Column="1" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchDay_Click"/>
-            <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchWeek_Click"/>
-            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchMonth_Click"/>
-            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="4" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchYear_Click"/>
+            <Button Name="btnSearchWeek" Content="주" BorderThickness="1,1,1,1"  Width="120" Height="30" Grid.Column="1" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchWeek_Click"/>
+            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchMonth_Click"/>
+            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchYear_Click"/>
+            <Button Name="btnSearchCustom" Content="기간" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="4" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchCustom_Click"/>
         </Grid>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <StackPanel Name="filterPanel" Width="250" Visibility="Collapsed" Background="#F2F2F2">
-                <Button Content="A" />
-                <Button Content="B" />
-            </StackPanel>
-            <Frame Grid.Row="1" Name="statisticsFrame" />
-        </StackPanel>
+        <SplitView x:Name="inputCostMainSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"  CompactPaneLength="0" OpenPaneLength="350" PanePlacement="Right" Grid.Row="1">
+            <SplitView.Pane>
+                <TextBlock Text="aaa"/>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <syncfusion:SfChart x:Name="costChart" Header="Demands Comparison" Grid.Column="0" RequestedTheme="Light">
+                        <syncfusion:SfChart.PrimaryAxis>
+                            <syncfusion:CategoryAxis Header="기간" FontSize="14"/>
+                        </syncfusion:SfChart.PrimaryAxis>
+                        <syncfusion:SfChart.SecondaryAxis>
+                            <syncfusion:NumericalAxis Header="비용" FontSize="14"/>
+                        </syncfusion:SfChart.SecondaryAxis>
+                        <syncfusion:SfChart.Legend>
+                            <syncfusion:ChartLegend Visibility="Visible"/>
+                        </syncfusion:SfChart.Legend>
+                        <syncfusion:ColumnSeries x:Name="chartColumn" Label="Week" ItemsSource="{Binding mStatisticsModel}" XBindingPath="DisplayString" YBindingPath="Cost" />
+                    </syncfusion:SfChart>
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
     </Grid>
 </Page>

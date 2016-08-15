@@ -1,21 +1,12 @@
-﻿using EasyCost.Helpers;
-using EasyCost.Pages.Statistics;
-using Syncfusion.UI.Xaml.Controls.Input;
+﻿using EasyCost.Databases.TableModels;
+using EasyCost.DataModels;
+using EasyCost.Helpers;
+using EasyCost.Types;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI;
+using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // 빈 페이지 항목 템플릿에 대한 설명은 http://go.microsoft.com/fwlink/?LinkId=234238에 나와 있습니다.
 
@@ -26,74 +17,56 @@ namespace EasyCost.Pages
     /// </summary>
     public sealed partial class StatisticsPage : Page
     {
-        const string COLOR_BACK_ENTER = "#FF0000";
-        SfCalendar mCalendar;
+        public ObservableCollection<CostStatisticsModel> mStatisticsModel = new ObservableCollection<CostStatisticsModel>();
 
         public StatisticsPage()
         {
             this.InitializeComponent();
-
-            MakeFilterControls();
+            InitializeControls();
         }
 
-        private void MakeFilterControls()
+        private void InitializeControls()
         {
-            mCalendar = new SfCalendar();
-            mCalendar.SelectionMode = Syncfusion.UI.Xaml.Controls.Input.SelectionMode.Single;
-            mCalendar.ShowNavigationButton = true;
-            mCalendar.Width = double.NaN;
-            mCalendar.Height = double.NaN;
-            mCalendar.SelectionChanged += MCalendar_SelectionChanged;
+            
         }
 
-        private void MCalendar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void MakeStatisticsDataByWeek()
         {
-            if (statisticsFrame.CurrentSourcePageType == typeof(DailyStatisticsPage))
+            mStatisticsModel.Clear();
+            DateTime currentDateTime = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
+            for (int i = 0; i < 7; i++)
             {
-                ((DailyStatisticsPage)statisticsFrame.Content).Display((DateTime)mCalendar.SelectedDate);
-            }
-        }
+                mStatisticsModel.Add(new CostStatisticsModel()
+                {
+                    InquiryType = InquiryType.Today,
+                    FromDate = currentDateTime,
+                    ToDate = currentDateTime,
+                    CostInfo = CostManager.GetCostInfo(currentDateTime),
+                    DisplayString = currentDateTime.ToString("yyyy/MM/dd")
+                });
 
-        private void btnSearchDay_Click(object sender, RoutedEventArgs e)
-        {
-            if (statisticsFrame.CurrentSourcePageType != typeof(DailyStatisticsPage))
-            {
-                statisticsFrame.Navigate(typeof(DailyStatisticsPage));
-                DisplayDailyFilterPanel();
+                currentDateTime = currentDateTime.AddDays(1);
             }
-        }
 
-        private void btnCalendar_Click(object sender, RoutedEventArgs e)
-        {
-            if (filterPanel.Visibility == Visibility.Collapsed)
-            {
-                filterPanel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                filterPanel.Visibility = Visibility.Collapsed;
-            }
+            chartColumn.ItemsSource = mStatisticsModel;
         }
 
         private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeStatisticsDataByWeek();
+            // Get Date
         }
-
         private void btnSearchMonth_Click(object sender, RoutedEventArgs e)
         {
-
+            List<CostInfo> costInfo = CostManager.GetCostInfo(InquiryType.Month, true);
         }
-
         private void btnSearchYear_Click(object sender, RoutedEventArgs e)
         {
-
+            List<CostInfo> costInfo = CostManager.GetCostInfo(InquiryType.Year, true);
         }
-
-        private void DisplayDailyFilterPanel()
+        private void btnSearchCustom_Click(object sender, RoutedEventArgs e)
         {
-            filterPanel.Children.Clear();
-            filterPanel.Children.Add(mCalendar);
+            
         }
     }
 }

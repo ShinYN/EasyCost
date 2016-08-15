@@ -112,9 +112,11 @@
     <Compile Include="Databases\TableModels\UserMaster.cs" />
     <Compile Include="DataModels\CategoryChartModel.cs" />
     <Compile Include="DataModels\CostHistosyModel.cs" />
+    <Compile Include="DataModels\CostStatisticsModel.cs" />
     <Compile Include="DataModels\MenuItemModel.cs" />
     <Compile Include="DataModels\SubCategoryChartModel.cs" />
     <Compile Include="Helpers\CostManager.cs" />
+    <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\MyColorHelper.cs" />
     <Compile Include="Helpers\SettingManager.cs" />
     <Compile Include="MainPage.xaml.cs">
