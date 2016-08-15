@@ -146,7 +146,7 @@
                     </Grid.ColumnDefinitions>
                     <syncfusion:SfChart x:Name="costChart" Header="Demands Comparison" Grid.Column="0" RequestedTheme="Light">
                         <syncfusion:SfChart.PrimaryAxis>
-                            <syncfusion:CategoryAxis Header="기간" FontSize="14"/>
+                            <syncfusion:CategoryAxis Header="기간" FontSize="14" LabelsIntersectAction="MultipleRows"/>
                         </syncfusion:SfChart.PrimaryAxis>
                         <syncfusion:SfChart.SecondaryAxis>
                             <syncfusion:NumericalAxis Header="비용" FontSize="14"/>
@@ -154,7 +154,12 @@
                         <syncfusion:SfChart.Legend>
                             <syncfusion:ChartLegend Visibility="Visible"/>
                         </syncfusion:SfChart.Legend>
-                        <syncfusion:ColumnSeries x:Name="chartColumn" Label="Week" ItemsSource="{Binding mStatisticsModel}" XBindingPath="DisplayString" YBindingPath="Cost" />
+                        <syncfusion:ColumnSeries x:Name="chartColumn" Label="Week" ItemsSource="{Binding mStatisticsModel}" XBindingPath="DisplayString" YBindingPath="Cost">
+                            <syncfusion:ColumnSeries.AdornmentsInfo>
+                                <syncfusion:ChartAdornmentInfo  ShowLabel="True" LabelPosition="Outer" LabelRotationAngle="45" >
+                                </syncfusion:ChartAdornmentInfo>
+                            </syncfusion:ColumnSeries.AdornmentsInfo>
+                        </syncfusion:ColumnSeries>
                     </syncfusion:SfChart>
                 </Grid>
             </SplitView.Content>

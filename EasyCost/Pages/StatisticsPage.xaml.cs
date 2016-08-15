@@ -30,7 +30,7 @@ namespace EasyCost.Pages
             
         }
 
-        private void MakeStatisticsDataByWeek()
+        private void DisplayStatisticsDataByWeek()
         {
             mStatisticsModel.Clear();
             DateTime currentDateTime = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
@@ -50,15 +50,35 @@ namespace EasyCost.Pages
 
             chartColumn.ItemsSource = mStatisticsModel;
         }
+        private void DisplayStatisticsDataByMonth()
+        {
+            mStatisticsModel.Clear();
+            DateTime currentDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            //for (int i = 0; i < DateTime.day DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+            for (int i = 0; i < DateTime.Now.Day; i++)
+            {
+                mStatisticsModel.Add(new CostStatisticsModel()
+                {
+                    InquiryType = InquiryType.Today,
+                    FromDate = currentDateTime,
+                    ToDate = currentDateTime,
+                    CostInfo = CostManager.GetCostInfo(currentDateTime),
+                    DisplayString = currentDateTime.ToString("yyyy/MM/dd")
+                });
+
+                currentDateTime = currentDateTime.AddDays(1);
+            }
+
+            chartColumn.ItemsSource = mStatisticsModel;
+        }
 
         private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
         {
-            MakeStatisticsDataByWeek();
-            // Get Date
+            DisplayStatisticsDataByWeek();
         }
         private void btnSearchMonth_Click(object sender, RoutedEventArgs e)
         {
-            List<CostInfo> costInfo = CostManager.GetCostInfo(InquiryType.Month, true);
+            DisplayStatisticsDataByMonth();
         }
         private void btnSearchYear_Click(object sender, RoutedEventArgs e)
         {
