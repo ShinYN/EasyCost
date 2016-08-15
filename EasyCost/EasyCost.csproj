@@ -96,6 +96,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bases\Login\LoginInfo.cs" />
+    <Compile Include="Controls\DateSearchControl.xaml.cs">
+      <DependentUpon>DateSearchControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MainMenuItemControl.xaml.cs">
       <DependentUpon>MainMenuItemControl.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\DateSearchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MainMenuItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

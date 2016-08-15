@@ -135,7 +135,13 @@
             <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchWeek_Click" />
             <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3"  Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchMonth_Click"/>
             <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="4" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchYear_Click"/>
-            <Button Name="btnSearchCustom" Content="특정 기간" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="5" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" />
+            <Button Name="btnSearchCustom" Content="특정 기간" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="5" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}">
+                <Button.Flyout>
+                    <Flyout x:Name="searchCustomFlyout">
+                        <Controls:DateSearchControl x:Name="dateSearchControl" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
         </Grid>
         <SplitView x:Name="inputCostMainSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"  CompactPaneLength="0" OpenPaneLength="350" PanePlacement="Right" Grid.Row="1" PaneClosed="inputCostMainSplitView_PaneClosed">
             <SplitView.Pane>
