@@ -144,7 +144,7 @@
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <syncfusion:SfChart x:Name="costChart" Header="Demands Comparison" Grid.Column="0" RequestedTheme="Light">
+                    <syncfusion:SfChart x:Name="costChart" Header="" Grid.Column="0" RequestedTheme="Light">
                         <syncfusion:SfChart.PrimaryAxis>
                             <syncfusion:CategoryAxis Header="기간" FontSize="14" LabelsIntersectAction="MultipleRows"/>
                         </syncfusion:SfChart.PrimaryAxis>

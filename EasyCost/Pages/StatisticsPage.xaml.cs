@@ -48,13 +48,14 @@ namespace EasyCost.Pages
                 currentDateTime = currentDateTime.AddDays(1);
             }
 
+
+            costChart.Header = currentDateTime.AddDays(-7).ToString("yyyy-MM-dd") + " ~ " + currentDateTime.ToString("yyyy-MM-dd");
             chartColumn.ItemsSource = mStatisticsModel;
         }
         private void DisplayStatisticsDataByMonth()
         {
             mStatisticsModel.Clear();
             DateTime currentDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            //for (int i = 0; i < DateTime.day DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
             for (int i = 0; i < DateTime.Now.Day; i++)
             {
                 mStatisticsModel.Add(new CostStatisticsModel()
