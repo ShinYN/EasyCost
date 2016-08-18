@@ -42,14 +42,13 @@ namespace EasyCost.Pages
                     FromDate = currentDateTime,
                     ToDate = currentDateTime,
                     CostInfo = CostManager.GetCostInfo(currentDateTime),
-                    DisplayString = currentDateTime.ToString("yyyy/MM/dd")
+                    DisplayString = currentDateTime.ToString("MM/dd")
                 });
 
                 currentDateTime = currentDateTime.AddDays(1);
             }
-
-
-            costChart.Header = currentDateTime.AddDays(-7).ToString("yyyy-MM-dd") + " ~ " + currentDateTime.ToString("yyyy-MM-dd");
+            
+            //costChart.Header = currentDateTime.AddDays(-7).ToString("yyyy-MM-dd") + " ~ " + currentDateTime.ToString("yyyy-MM-dd");
             chartColumn.ItemsSource = mStatisticsModel;
         }
         private void DisplayStatisticsDataByMonth()
@@ -64,7 +63,7 @@ namespace EasyCost.Pages
                     FromDate = currentDateTime,
                     ToDate = currentDateTime,
                     CostInfo = CostManager.GetCostInfo(currentDateTime),
-                    DisplayString = currentDateTime.ToString("yyyy/MM/dd")
+                    DisplayString = currentDateTime.ToString("dd")
                 });
 
                 currentDateTime = currentDateTime.AddDays(1);

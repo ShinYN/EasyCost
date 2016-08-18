@@ -85,7 +85,6 @@ namespace EasyCost.Pages
         {
             lblTitle.Text = "지출 내역 입력";
             costDatePicker.Date = DateTime.Now;
-            //txtCostDate.Text = DateTime.Now.ToString("yyyy/MM/dd");
 
             btnInputCost.Visibility = Visibility.Visible;
             btnDeleteCost.Visibility = Visibility.Collapsed;
@@ -95,7 +94,6 @@ namespace EasyCost.Pages
         {
             lblTitle.Text = "지출 내역 수정";
             costDatePicker.Date = aCostHistoryModel.CostDateTime;
-            //txtCostDate.Text = aCostHistoryModel.CostDate;
             cboCategory.SelectedValue = aCostHistoryModel.Category;
             cboSubCategory.SelectedValue = aCostHistoryModel.SubCategory;
             txtDetail.Text = aCostHistoryModel.Description;
@@ -136,7 +134,6 @@ namespace EasyCost.Pages
             CostInfo costInfo = new CostInfo();
             costInfo.UserID = LoginInfo.UserID;
             costInfo.CostDate = costDatePicker.Date.Value.DateTime;
-            //costInfo.CostDate = DateTime.Parse(txtCostDate.Text);
             costInfo.Category = cboCategory.SelectedValue.ToString();
             costInfo.SubCategory = cboSubCategory.SelectedValue.ToString();
             costInfo.CostType = (rbTypeCard.IsChecked == true) ? "카드" : "현금";

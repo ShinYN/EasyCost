@@ -144,23 +144,37 @@
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <syncfusion:SfChart x:Name="costChart" Header="" Grid.Column="0" RequestedTheme="Light">
+                    <syncfusion:SfChart x:Name="costChart" Header="" Grid.Column="0" RequestedTheme="Light" Foreground="Gray">
                         <syncfusion:SfChart.PrimaryAxis>
-                            <syncfusion:CategoryAxis Header="기간" FontSize="14" LabelsIntersectAction="MultipleRows"/>
+                            <syncfusion:CategoryAxis Header="기간" FontSize="12" Foreground="Gray"  LabelsIntersectAction="Auto"  ShowGridLines="False" />
                         </syncfusion:SfChart.PrimaryAxis>
                         <syncfusion:SfChart.SecondaryAxis>
-                            <syncfusion:NumericalAxis Header="비용" FontSize="14"/>
+                            <syncfusion:NumericalAxis Header="비용" FontSize="12" Foreground="Gray"  ShowGridLines="False"/>
                         </syncfusion:SfChart.SecondaryAxis>
                         <syncfusion:SfChart.Legend>
                             <syncfusion:ChartLegend Visibility="Visible"/>
                         </syncfusion:SfChart.Legend>
-                        <syncfusion:ColumnSeries x:Name="chartColumn" Label="Week" ItemsSource="{Binding mStatisticsModel}" XBindingPath="DisplayString" YBindingPath="Cost">
+                        <syncfusion:ColumnSeries x:Name="chartColumn" ItemsSource="{Binding mStatisticsModel}" XBindingPath="DisplayString" YBindingPath="Cost">
                             <syncfusion:ColumnSeries.AdornmentsInfo>
-                                <syncfusion:ChartAdornmentInfo  ShowLabel="True" LabelPosition="Outer" LabelRotationAngle="45" >
+                                <syncfusion:ChartAdornmentInfo  ShowLabel="True" LabelPosition="Auto"  LabelRotationAngle="270" SegmentLabelFormat="#,##0">
                                 </syncfusion:ChartAdornmentInfo>
                             </syncfusion:ColumnSeries.AdornmentsInfo>
                         </syncfusion:ColumnSeries>
                     </syncfusion:SfChart>
+                    <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,25,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Height="10" Width="10" Fill="#FF009EDB" Margin="0,0,10,0"/>
+                            <TextBlock Text="총 지출 금액" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Height="10" Width="10" Fill="#FF009EDB" Margin="0,0,10,0"/>
+                            <TextBlock Text="카드" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Height="10" Width="10" Fill="#FF009EDB" Margin="0,0,10,0"/>
+                            <TextBlock Text="현금" />
+                        </StackPanel>
+                    </StackPanel>
                 </Grid>
             </SplitView.Content>
         </SplitView>
