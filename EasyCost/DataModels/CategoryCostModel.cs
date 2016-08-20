@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EasyCost.DataModels
 {
-    public class SubCategoryChartModel
+    public class CategoryCostModel
     {
-        public string SubCategory { get; set; } = string.Empty;
-        public int Cost { get; set; } = 0;
+        public string Category { get; set; }
+        public int Cost { get; set; }
     }
 }

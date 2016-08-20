@@ -26,7 +26,7 @@ namespace EasyCost.Pages.Statistics
     /// </summary>
     public sealed partial class DailyStatisticsPage : Page
     {
-        public ObservableCollection<CategoryChartModel> CategoryCharts { get; set; }
+        public ObservableCollection<CategoryCostModel> CategoryCharts { get; set; }
 
         public DailyStatisticsPage()
         {
@@ -46,7 +46,7 @@ namespace EasyCost.Pages.Statistics
                 return;
             }
             categoryChart.ItemsSource = costHistory.CostInfo.GroupBy(elem => new { elem.Category })
-                                                            .Select(x => new CategoryChartModel { Category = x.Key.Category, Cost = x.Sum(y => y.Cost) })
+                                                            .Select(x => new CategoryCostModel { Category = x.Key.Category, Cost = x.Sum(y => y.Cost) })
                                                             .ToList();
 
             if (costHistory.CostInfo.Count() == 0)
@@ -60,11 +60,7 @@ namespace EasyCost.Pages.Statistics
         }
         private void DisplaySubCategoryChart(string aSubCategory)
         {
-            txtSubCategoryTitle.Text = "세부 분류 별 내역: " + aSubCategory;
-            subCategoryChart.ItemsSource = costHistory.CostInfo.Where(elem => elem.Category == aSubCategory)
-                                                               .GroupBy(elem => new { elem.SubCategory })
-                                                               .Select(x => new SubCategoryChartModel { SubCategory = x.Key.SubCategory, Cost = x.Sum(y => y.Cost) })
-                                                               .ToList();
+
         }
 
         private void SfChart_SelectionChanged(object sender, Syncfusion.UI.Xaml.Charts.ChartSelectionChangedEventArgs e)

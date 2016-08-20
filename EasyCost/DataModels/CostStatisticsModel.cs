@@ -10,17 +10,8 @@ using System.Threading.Tasks;
 
 namespace EasyCost.DataModels
 {
-    public class CostStatisticsModel: INotifyPropertyChanged
+    public class CostStatisticsModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
         public InquiryType InquiryType { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
@@ -30,6 +21,20 @@ namespace EasyCost.DataModels
             get
             {
                 return CostInfo.Sum(elem => elem.Cost);
+            }
+        }
+        public int CardCost
+        {
+            get
+            {
+                return CostInfo.Where(elem => elem.CostType == "카드").Sum(elem => elem.Cost);
+            }
+        }
+        public int CashCost
+        {
+            get
+            {
+                return CostInfo.Where(elem => elem.CostType == "현금").Sum(elem => elem.Cost);
             }
         }
         public List<CostInfo> CostInfo { get; set; } = new List<CostInfo>();
