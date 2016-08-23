@@ -134,6 +134,9 @@
     <Compile Include="Pages\Settings\CategorySettingPage.xaml.cs">
       <DependentUpon>CategorySettingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Settings\DataSyncPage.xaml.cs">
+      <DependentUpon>DataSyncPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Settings\ProgramInfoPage.xaml.cs">
       <DependentUpon>ProgramInfoPage.xaml</DependentUpon>
     </Compile>
@@ -222,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Settings\CategorySettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\DataSyncPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

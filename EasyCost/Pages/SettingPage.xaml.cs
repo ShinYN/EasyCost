@@ -25,6 +25,7 @@ namespace EasyCost.Pages
     {
         private const string MENU_CATEGORY = "카테고리 관리";
         private const string MENU_PROGRAMINFO = "프로그램 정보";
+        private const string MENU_DATASYNC = "데이터 동기화";
         public SettingPage()
         {
             this.InitializeComponent();
@@ -36,6 +37,7 @@ namespace EasyCost.Pages
         {
             lsvSettingItem.Items.Clear();
             lsvSettingItem.Items.Add(new { Item = MENU_CATEGORY });
+            lsvSettingItem.Items.Add(new { Item = MENU_DATASYNC });
             lsvSettingItem.Items.Add(new { Item = MENU_PROGRAMINFO });
             lsvSettingItem.SelectedIndex = 0;
         }
@@ -56,6 +58,13 @@ namespace EasyCost.Pages
                     settingFrame.Navigate(typeof(ProgramInfoPage));
                 }
             }
+            else if (aSelectedItemString == MENU_DATASYNC)
+            {
+                if (settingFrame.CurrentSourcePageType != typeof(DataSyncPage))
+                {
+                    settingFrame.Navigate(typeof(DataSyncPage));
+                }
+            }
         }
 
         private void lsvSettingItem_Tapped(object sender, TappedRoutedEventArgs e)
@@ -66,6 +75,15 @@ namespace EasyCost.Pages
             }
 
             DisplaySettingPage(((TextBlock)e.OriginalSource).Text);
+        }
+
+        private void lsvSettingItem_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem != null)
+            {
+                dynamic clickedItem = e.ClickedItem;
+                DisplaySettingPage(clickedItem.Item);
+            }
         }
     }
 }

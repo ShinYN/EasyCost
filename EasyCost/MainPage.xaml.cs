@@ -26,7 +26,6 @@ namespace EasyCost
     {
         private const string MENU_WRITECOST = "지출 내역 관리";
         private const string MENU_STATISTICS = "지출 통계 보기";
-        private const string MENU_PROGRAMINFO = "프로그램 정보";
         private const string MENU_SETTINGS = "프로그램 설정";
 
         public MainPage()
@@ -72,22 +71,6 @@ namespace EasyCost
         {
             menuSplitView.IsPaneOpen = !menuSplitView.IsPaneOpen;
         }
-        private void menuList_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (e.OriginalSource.GetType() == typeof(TextBlock))
-            {
-                DisplayMenuFromText(((TextBlock)e.OriginalSource).Text);
-            }
-            else if (e.OriginalSource.GetType() == typeof(Image))
-            {
-               // DisplayMenuByImage()
-            }
-            else
-            {
-                return;
-            }
-        }
-
         private void menuList_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem != null)

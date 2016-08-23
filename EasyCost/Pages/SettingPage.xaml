@@ -9,16 +9,17 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="190" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lsvSettingItem"  Grid.Column="0" Background="#F2F2F2" Tapped="lsvSettingItem_Tapped">
+        <!--<ListView x:Name="lsvSettingItem"  Grid.Column="0" Background="#F2F2F2" Tapped="lsvSettingItem_Tapped">-->
+        <ListView x:Name="lsvSettingItem"  Grid.Column="0" Background="#F2F2F2" ItemClick="lsvSettingItem_ItemClick" IsItemClickEnabled="True">
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="30" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="300"/>
-                        </Grid.ColumnDefinitions>
+            <DataTemplate>
+                <Grid Height="30" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Item}" />
                     </Grid>
                 </DataTemplate>
