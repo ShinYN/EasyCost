@@ -64,8 +64,9 @@ namespace EasyCost.Pages
             
             cashColumn.ItemsSource = mStatisticsModel;
             cardColumn.ItemsSource = mStatisticsModel;
-            DisplayTop5CostCategory(categoryCostDic);
+            costHistoryXAxis.Header = "기간(일)";
 
+            DisplayTop5CostCategory(categoryCostDic);
             DisplayTotalCostInfo();
         }
         private void DisplayStatisticsDataByMonth()
@@ -101,9 +102,86 @@ namespace EasyCost.Pages
 
             cashColumn.ItemsSource = mStatisticsModel;
             cardColumn.ItemsSource = mStatisticsModel;
-            DisplayTop5CostCategory(categoryCostDic);
+            costHistoryXAxis.Header = "기간(일)";
 
+            DisplayTop5CostCategory(categoryCostDic);
             DisplayTotalCostInfo();
+        }
+        private void DisplayStatisticsDataByYear()
+        {
+            mStatisticsModel.Clear();
+            Dictionary<string, int> categoryCostDic = new Dictionary<string, int>();
+            DateTime fromDateTime = new DateTime(DateTime.Now.Year, 1, 1);
+            DateTime toDateTime;
+            for (int i = 0; i < DateTime.Now.Month; i++)
+            {
+                toDateTime = new DateTime(fromDateTime.Year, fromDateTime.Month, DateTime.DaysInMonth(fromDateTime.Year, fromDateTime.Month));
+                mStatisticsModel.Add(new CostStatisticsModel()
+                {
+                    InquiryType = InquiryType.Month,
+                    FromDate = fromDateTime,
+                    ToDate = toDateTime,
+                    CostInfo = CostManager.GetCostInfo(fromDateTime, toDateTime),
+                    DisplayString = fromDateTime.Month.ToString()
+                });
+
+                foreach (CostInfo costInfo in mStatisticsModel[i].CostInfo)
+                {
+                    if (categoryCostDic.ContainsKey(costInfo.Category))
+                    {
+                        categoryCostDic[costInfo.Category] += costInfo.Cost;
+                    }
+                    else
+                    {
+                        categoryCostDic.Add(costInfo.Category, costInfo.Cost);
+                    }
+                }
+
+                fromDateTime = fromDateTime.AddMonths(1);
+            }
+
+            cashColumn.ItemsSource = mStatisticsModel;
+            cardColumn.ItemsSource = mStatisticsModel;
+            costHistoryXAxis.Header = "기간(월)";
+
+            DisplayTop5CostCategory(categoryCostDic);
+            DisplayTotalCostInfo();
+        }
+        private void DisplayStatisticsDataBySpecificDate()
+        {
+            mStatisticsModel.Clear();
+            Dictionary<string, int> categoryCostDic = new Dictionary<string, int>();
+            DateTime currentDateTime = new DateTime(DateTime.Now.Year, 1, 1);
+            DateTime toDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 20);
+            for (int i = 0; i < (toDateTime - currentDateTime).TotalDays ; i++)
+            {
+                mStatisticsModel.Add(new CostStatisticsModel()
+                {
+                    InquiryType = InquiryType.Today,
+                    FromDate = currentDateTime,
+                    ToDate = currentDateTime,
+                    CostInfo = CostManager.GetCostInfo(currentDateTime),
+                    DisplayString = currentDateTime.ToString("dd")
+                });
+
+                foreach (CostInfo costInfo in mStatisticsModel[i].CostInfo)
+                {
+                    if (categoryCostDic.ContainsKey(costInfo.Category))
+                    {
+                        categoryCostDic[costInfo.Category] += costInfo.Cost;
+                    }
+                    else
+                    {
+                        categoryCostDic.Add(costInfo.Category, costInfo.Cost);
+                    }
+                }
+
+                currentDateTime = currentDateTime.AddDays(1);
+            }
+
+            cashColumn.ItemsSource = mStatisticsModel;
+            cardColumn.ItemsSource = mStatisticsModel;
+            costHistoryXAxis.Header = "기간(일)";
         }
 
         private void DisplayTop5CostCategory(Dictionary<string, int> aCategoryCostDic)
@@ -121,7 +199,10 @@ namespace EasyCost.Pages
 
             topCategoryCostBar.ItemsSource = categoryCostModels;
 
-            DisplayTop5CostSubCategory(categoryCostModels.Select(x => x.Category).Last());
+            if (categoryCostModels.Count != 0)
+            {
+                DisplayTop5CostSubCategory(categoryCostModels.Select(x => x.Category).Last());
+            }
         }
         private void DisplayTop5CostSubCategory(string aCategory)
         {
@@ -163,6 +244,28 @@ namespace EasyCost.Pages
             txtCashCost.Text = mStatisticsModel.Sum(x => x.CashCost).ToString("#,##0");
         }
 
+        private void DisplayDetailStatisticsData(CostStatisticsModel aCostStatisticsModel)
+        {
+            if (aCostStatisticsModel.InquiryType == InquiryType.Today)
+            {
+                txtSubInquriyDate.Text = aCostStatisticsModel.FromDate.ToString("yyyy-MM-dd");
+            }
+            else  // Case of month
+            {
+                txtSubInquriyDate.Text = aCostStatisticsModel.FromDate.ToString("yyyy-MM-dd")
+                                       + " ~ "
+                                       + aCostStatisticsModel.ToDate.ToString("yyyy-MM-dd");
+            }
+            txtSubTotalCost.Text = aCostStatisticsModel.Cost.ToString("#,##0");
+            txtSubCardCost.Text = aCostStatisticsModel.CardCost.ToString("#,##0");
+            txtSubCashCost.Text = aCostStatisticsModel.CashCost.ToString("#,##0");
+
+            subCostCategoryChart.ItemsSource = aCostStatisticsModel.CostInfo.GroupBy(x => new { x.Category })
+                                                                            .Select(x => new { Category = x.Key.Category, Cost = x.Sum(y => y.Cost) })
+                                                                            .OrderBy(x => x.Cost)
+                                                                            .ToList();
+        }
+
         private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
         {
             DisplayStatisticsDataByWeek();
@@ -173,18 +276,22 @@ namespace EasyCost.Pages
         }
         private void btnSearchYear_Click(object sender, RoutedEventArgs e)
         {
-            List<CostInfo> costInfo = CostManager.GetCostInfo(InquiryType.Year, true);
+            DisplayStatisticsDataByYear();
         }
         private void btnSearchCustom_Click(object sender, RoutedEventArgs e)
         {
-            
+            DisplayStatisticsDataBySpecificDate();
         }
 
         private void costHistoryChart_SelectionChanged(object sender, Syncfusion.UI.Xaml.Charts.ChartSelectionChangedEventArgs e)
         {
             inputCostMainSplitView.IsPaneOpen = !inputCostMainSplitView.IsPaneOpen;
+            if (inputCostMainSplitView.IsPaneOpen && e.SelectedSegment != null)
+            {
+                DisplayDetailStatisticsData((CostStatisticsModel)e.SelectedSegment.Item);
+            }
         }
-
+        
         private void topCostChart_SelectionChanged(object sender, Syncfusion.UI.Xaml.Charts.ChartSelectionChangedEventArgs e)
         {
             if (e.SelectedSegment == null)
