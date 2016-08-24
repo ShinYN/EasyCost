@@ -65,6 +65,7 @@ namespace EasyCost.Pages.Settings
                 SettingManager.DeleteCategory(category.Category);
                 SettingManager.DeleteSubCategory(category.Category);
                 DisplayCategoryList();
+                txtCategory.Text = string.Empty;
             }
         }
 
@@ -76,6 +77,7 @@ namespace EasyCost.Pages.Settings
             });
 
             DisplayCategoryList();
+            txtCategory.Text = string.Empty;
         }
 
         private void btnRemoveSubCategory_Click(object sender, RoutedEventArgs e)
@@ -87,6 +89,7 @@ namespace EasyCost.Pages.Settings
 
                 SettingManager.DeleteSubCategory(new SubCategoryMaster { Category = category.Category, SubCategory = subCategory.SubCategory });
                 DisplaySubCategoryList();
+                txtSubCategory.Text = string.Empty;
             }
         }
 
@@ -99,6 +102,7 @@ namespace EasyCost.Pages.Settings
             });
 
             DisplaySubCategoryList();
+            txtSubCategory.Text = string.Empty;
         }
 
         private void lsvCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)

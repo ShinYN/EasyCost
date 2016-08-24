@@ -61,7 +61,10 @@ namespace EasyCost.Pages
 
                 currentDateTime = currentDateTime.AddDays(1);
             }
-            
+
+            txtInquiryTarget.Text = currentDateTime.AddDays(-7).ToString("yyyy/MM/dd")
+                                  + " - " 
+                                  + currentDateTime.AddDays(-1).ToString("yyyy/MM/dd");
             cashColumn.ItemsSource = mStatisticsModel;
             cardColumn.ItemsSource = mStatisticsModel;
             costHistoryXAxis.Header = "기간(일)";
@@ -100,6 +103,10 @@ namespace EasyCost.Pages
                 currentDateTime = currentDateTime.AddDays(1);
             }
 
+            txtInquiryTarget.Text = currentDateTime.AddDays(-1 * DateTime.Now.Day).ToString("yyyy/MM/dd")
+                                  + " - "
+                                  + currentDateTime.AddDays(-1).ToString("yyyy/MM/dd");
+
             cashColumn.ItemsSource = mStatisticsModel;
             cardColumn.ItemsSource = mStatisticsModel;
             costHistoryXAxis.Header = "기간(일)";
@@ -112,7 +119,7 @@ namespace EasyCost.Pages
             mStatisticsModel.Clear();
             Dictionary<string, int> categoryCostDic = new Dictionary<string, int>();
             DateTime fromDateTime = new DateTime(DateTime.Now.Year, 1, 1);
-            DateTime toDateTime;
+            DateTime toDateTime = new DateTime();
             for (int i = 0; i < DateTime.Now.Month; i++)
             {
                 toDateTime = new DateTime(fromDateTime.Year, fromDateTime.Month, DateTime.DaysInMonth(fromDateTime.Year, fromDateTime.Month));
@@ -139,6 +146,9 @@ namespace EasyCost.Pages
 
                 fromDateTime = fromDateTime.AddMonths(1);
             }
+            txtInquiryTarget.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("yyyy/MM/dd")
+                                  + " - "
+                                  + toDateTime.ToString("yyyy/MM/dd");
 
             cashColumn.ItemsSource = mStatisticsModel;
             cardColumn.ItemsSource = mStatisticsModel;
