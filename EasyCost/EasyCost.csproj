@@ -119,6 +119,9 @@
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\MyColorHelper.cs" />
     <Compile Include="Helpers\SettingManager.cs" />
+    <Compile Include="IntroPage.xaml.cs">
+      <DependentUpon>IntroPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -163,6 +166,8 @@
     <Content Include="Assets\MenuIcons\menuSetting_D.png" />
     <Content Include="Assets\MenuIcons\menuStatistics_D.png" />
     <Content Include="Assets\MenuIcons\modifyItem_G.png" />
+    <Content Include="Assets\MenuIcons\move_Prev.png" />
+    <Content Include="Assets\MenuIcons\move_Next.png" />
     <Content Include="Assets\MenuIcons\removeItem_G.png" />
     <Content Include="Assets\MenuIcons\backwardArrow.png" />
     <Content Include="Assets\MenuIcons\calendar.png" />
@@ -205,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ViewCostHistoryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IntroPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

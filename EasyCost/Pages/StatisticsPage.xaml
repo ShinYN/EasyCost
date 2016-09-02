@@ -138,8 +138,13 @@
         <StackPanel Orientation="Horizontal" Margin="20,0,0,0" Grid.Row="1">
             <Ellipse Height="8" Width="8" Fill="#666666" VerticalAlignment="Center" Margin="0,0,5,0"/>
             <TextBlock Text="조회 기간:" Foreground="#666666" VerticalAlignment="Center"/>
-            <TextBlock Name="txtInquiryTarget" Text="32" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF0221EA" />
-            <TextBlock Text="원" Foreground="#666666" VerticalAlignment="Center"/>
+            <Button x:Name="btnMovePrev" Background="Transparent" Foreground="Transparent" Padding="8" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnMovePrev_Click">
+                <Image Source="ms-appx:///Assets/MenuIcons/move_Prev.png"/>
+            </Button>
+            <TextBlock Name="txtInquiryTarget" Text="32" FontWeight="Bold" VerticalAlignment="Center" Margin="0" Foreground="#FF0221EA" />
+            <Button x:Name="btnMoveNext" Background="Transparent" Foreground="Transparent" Padding="8" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnMoveNext_Click">
+                <Image Source="ms-appx:///Assets/MenuIcons/move_Next.png"/>
+            </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="20,0,0,0" Grid.Row="2">
             <Ellipse Height="8" Width="8" Fill="#666666" VerticalAlignment="Center" Margin="0,0,5,0"/>
@@ -250,12 +255,12 @@
                             <syncfusion:SfChart.SecondaryAxis>
                                 <syncfusion:NumericalAxis Header="비용" FontSize="12" Foreground="Gray"  ShowGridLines="True"/>
                             </syncfusion:SfChart.SecondaryAxis>
-                            <syncfusion:BarSeries x:Name="topCategoryCostBar" XBindingPath="Category" YBindingPath="Cost" ItemsSource="{Binding mTopCostStatisticsModel}" ShowTooltip="True"  Label="Top 5 지출" Margin="0,0,0,0"/>
+                            <syncfusion:BarSeries x:Name="topCategoryCostBar" XBindingPath="Category" Palette="Metro" YBindingPath="Cost" ItemsSource="{Binding mTopCostStatisticsModel}" ShowTooltip="True"  Label="Top 5 지출" Margin="0,0,0,0"/>
                             <syncfusion:SfChart.Behaviors>
-                                <syncfusion:ChartSelectionBehavior EnableSegmentSelection="True" SelectionMode="MouseClick" SelectionStyle="Single"  />
+                                <syncfusion:ChartSelectionBehavior EnableSegmentSelection="True" SelectionMode="MouseClick" SelectionStyle="Single" />
                             </syncfusion:SfChart.Behaviors>
                             <syncfusion:SfChart.Legend>
-                                <syncfusion:ChartLegend Visibility="Visible" IconVisibility="Collapsed"/>
+                                <syncfusion:ChartLegend Visibility="Visible" IconVisibility="Collapsed" />
                             </syncfusion:SfChart.Legend>
                         </syncfusion:SfChart>
                         <syncfusion:SfChart x:Name="topSubCostChart" Header="" Grid.Row="2" RequestedTheme="Light" Foreground="Gray" Margin="0,0,20,0">
@@ -269,6 +274,7 @@
                             <syncfusion:SfChart.Legend>
                                 <syncfusion:ChartLegend Visibility="Visible" IconVisibility="Collapsed"/>
                             </syncfusion:SfChart.Legend>
+                            
                         </syncfusion:SfChart>
                     </Grid>
                 </Grid>

@@ -14,6 +14,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1">
             <TextBlock Text="데이터 동기화" FontSize="20" />
+            <TextBlock Text="- 준비 중입니다 -" FontSize="15" />
         </StackPanel>
     </Grid>
 </Page>

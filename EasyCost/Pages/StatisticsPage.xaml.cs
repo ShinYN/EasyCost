@@ -18,6 +18,7 @@ namespace EasyCost.Pages
     /// </summary>
     public sealed partial class StatisticsPage : Page
     {
+        private InquiryType mCurrentInquiryType;
         private ObservableCollection<CostStatisticsModel> mStatisticsModel = new ObservableCollection<CostStatisticsModel>();
         
         public StatisticsPage()
@@ -33,18 +34,21 @@ namespace EasyCost.Pages
 
         private void DisplayStatisticsDataByWeek()
         {
+            DisplayStatisticsDataByWeek(DateTime.Now.StartOfWeek(DayOfWeek.Monday));
+        }
+        private void DisplayStatisticsDataByWeek(DateTime aStartDayOfWeek)
+        {
             mStatisticsModel.Clear();
             Dictionary<string, int> categoryCostDic = new Dictionary<string, int>();
-            DateTime currentDateTime = DateTime.Now.StartOfWeek(DayOfWeek.Monday);
             for (int i = 0; i < 7; i++)
             {
                 mStatisticsModel.Add(new CostStatisticsModel()
                 {
                     InquiryType = InquiryType.Today,
-                    FromDate = currentDateTime,
-                    ToDate = currentDateTime,
-                    CostInfo = CostManager.GetCostInfo(currentDateTime),
-                    DisplayString = currentDateTime.ToString("MM/dd")
+                    FromDate = aStartDayOfWeek,
+                    ToDate = aStartDayOfWeek,
+                    CostInfo = CostManager.GetCostInfo(aStartDayOfWeek),
+                    DisplayString = aStartDayOfWeek.ToString("MM/dd")
                 });
 
                 foreach (CostInfo costInfo in mStatisticsModel[i].CostInfo)
@@ -59,33 +63,40 @@ namespace EasyCost.Pages
                     }
                 }
 
-                currentDateTime = currentDateTime.AddDays(1);
+                aStartDayOfWeek = aStartDayOfWeek.AddDays(1);
             }
 
-            txtInquiryTarget.Text = currentDateTime.AddDays(-7).ToString("yyyy/MM/dd")
-                                  + " - " 
-                                  + currentDateTime.AddDays(-1).ToString("yyyy/MM/dd");
+            txtInquiryTarget.Text = aStartDayOfWeek.AddDays(-7).ToString("yyyy/MM/dd")
+                                  + " - "
+                                  + aStartDayOfWeek.AddDays(-1).ToString("yyyy/MM/dd");
             cashColumn.ItemsSource = mStatisticsModel;
             cardColumn.ItemsSource = mStatisticsModel;
             costHistoryXAxis.Header = "기간(일)";
 
             DisplayTop5CostCategory(categoryCostDic);
             DisplayTotalCostInfo();
+
+            mCurrentInquiryType = InquiryType.Week;
         }
         private void DisplayStatisticsDataByMonth()
         {
+            DisplayStatisticsDataByMonth(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1));
+        }
+        private void DisplayStatisticsDataByMonth(DateTime aStartDayOfMonth)
+        {
             mStatisticsModel.Clear();
+
+            var endDayOfMonth = aStartDayOfMonth.AddMonths(1).AddDays(-1).Day;
             Dictionary<string, int> categoryCostDic = new Dictionary<string, int>();
-            DateTime currentDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            for (int i = 0; i < DateTime.Now.Day; i++)
+            for (int i = 0; i < endDayOfMonth; i++)
             {
                 mStatisticsModel.Add(new CostStatisticsModel()
                 {
                     InquiryType = InquiryType.Today,
-                    FromDate = currentDateTime,
-                    ToDate = currentDateTime,
-                    CostInfo = CostManager.GetCostInfo(currentDateTime),
-                    DisplayString = currentDateTime.ToString("dd")
+                    FromDate = aStartDayOfMonth,
+                    ToDate = aStartDayOfMonth,
+                    CostInfo = CostManager.GetCostInfo(aStartDayOfMonth),
+                    DisplayString = aStartDayOfMonth.ToString("dd")
                 });
 
                 foreach (CostInfo costInfo in mStatisticsModel[i].CostInfo)
@@ -100,12 +111,12 @@ namespace EasyCost.Pages
                     }
                 }
 
-                currentDateTime = currentDateTime.AddDays(1);
+                aStartDayOfMonth = aStartDayOfMonth.AddDays(1);
             }
 
-            txtInquiryTarget.Text = currentDateTime.AddDays(-1 * DateTime.Now.Day).ToString("yyyy/MM/dd")
+            txtInquiryTarget.Text = aStartDayOfMonth.AddDays(-1 * endDayOfMonth).ToString("yyyy/MM/dd")
                                   + " - "
-                                  + currentDateTime.AddDays(-1).ToString("yyyy/MM/dd");
+                                  + aStartDayOfMonth.AddDays(-1).ToString("yyyy/MM/dd");
 
             cashColumn.ItemsSource = mStatisticsModel;
             cardColumn.ItemsSource = mStatisticsModel;
@@ -113,23 +124,24 @@ namespace EasyCost.Pages
 
             DisplayTop5CostCategory(categoryCostDic);
             DisplayTotalCostInfo();
+
+            mCurrentInquiryType = InquiryType.Month;
         }
-        private void DisplayStatisticsDataByYear()
+        private void DisplayStatisticsDataByYear(DateTime aStartDayOfYear)
         {
             mStatisticsModel.Clear();
             Dictionary<string, int> categoryCostDic = new Dictionary<string, int>();
-            DateTime fromDateTime = new DateTime(DateTime.Now.Year, 1, 1);
-            DateTime toDateTime = new DateTime();
-            for (int i = 0; i < DateTime.Now.Month; i++)
+            DateTime aEndDayOfMonth = new DateTime();
+            for (int i = 0; i < 12; i++)
             {
-                toDateTime = new DateTime(fromDateTime.Year, fromDateTime.Month, DateTime.DaysInMonth(fromDateTime.Year, fromDateTime.Month));
+                aEndDayOfMonth = new DateTime(aStartDayOfYear.Year, aStartDayOfYear.Month, DateTime.DaysInMonth(aStartDayOfYear.Year, aStartDayOfYear.Month));
                 mStatisticsModel.Add(new CostStatisticsModel()
                 {
                     InquiryType = InquiryType.Month,
-                    FromDate = fromDateTime,
-                    ToDate = toDateTime,
-                    CostInfo = CostManager.GetCostInfo(fromDateTime, toDateTime),
-                    DisplayString = fromDateTime.Month.ToString()
+                    FromDate = aStartDayOfYear,
+                    ToDate = aEndDayOfMonth,
+                    CostInfo = CostManager.GetCostInfo(aStartDayOfYear, aEndDayOfMonth),
+                    DisplayString = aStartDayOfYear.Month.ToString()
                 });
 
                 foreach (CostInfo costInfo in mStatisticsModel[i].CostInfo)
@@ -144,11 +156,11 @@ namespace EasyCost.Pages
                     }
                 }
 
-                fromDateTime = fromDateTime.AddMonths(1);
+                aStartDayOfYear = aStartDayOfYear.AddMonths(1);
             }
-            txtInquiryTarget.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("yyyy/MM/dd")
+            txtInquiryTarget.Text = new DateTime(aStartDayOfYear.Year - 1, 1, 1).ToString("yyyy/MM/dd")
                                   + " - "
-                                  + toDateTime.ToString("yyyy/MM/dd");
+                                  + aEndDayOfMonth.ToString("yyyy/MM/dd");
 
             cashColumn.ItemsSource = mStatisticsModel;
             cardColumn.ItemsSource = mStatisticsModel;
@@ -156,6 +168,8 @@ namespace EasyCost.Pages
 
             DisplayTop5CostCategory(categoryCostDic);
             DisplayTotalCostInfo();
+
+            mCurrentInquiryType = InquiryType.Year;
         }
         private void DisplayStatisticsDataBySpecificDate()
         {
@@ -278,15 +292,15 @@ namespace EasyCost.Pages
 
         private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
         {
-            DisplayStatisticsDataByWeek();
+            DisplayStatisticsDataByWeek(DateTime.Now.StartOfWeek(DayOfWeek.Monday));
         }
         private void btnSearchMonth_Click(object sender, RoutedEventArgs e)
         {
-            DisplayStatisticsDataByMonth();
+            DisplayStatisticsDataByMonth(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1));
         }
         private void btnSearchYear_Click(object sender, RoutedEventArgs e)
         {
-            DisplayStatisticsDataByYear();
+            DisplayStatisticsDataByYear(new DateTime(DateTime.Now.Year, 1, 1));
         }
         private void btnSearchCustom_Click(object sender, RoutedEventArgs e)
         {
@@ -301,14 +315,46 @@ namespace EasyCost.Pages
                 DisplayDetailStatisticsData((CostStatisticsModel)e.SelectedSegment.Item);
             }
         }
-        
         private void topCostChart_SelectionChanged(object sender, Syncfusion.UI.Xaml.Charts.ChartSelectionChangedEventArgs e)
         {
             if (e.SelectedSegment == null)
             {
                 return;
             }
+            
             DisplayTop5CostSubCategory(((CategoryCostModel)e.SelectedSegment.Item).Category);
+            topSubCategoryCostBar.Interior = e.SelectedSegment.Interior;
+        }
+
+        private void btnMoveNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (mCurrentInquiryType == InquiryType.Week)
+            {
+                DisplayStatisticsDataByWeek(mStatisticsModel[0].FromDate.AddDays(7).StartOfWeek(DayOfWeek.Monday));
+            }
+            else if (mCurrentInquiryType == InquiryType.Month)
+            {
+                DisplayStatisticsDataByMonth(mStatisticsModel[0].FromDate.AddMonths(1));
+            }
+            else if (mCurrentInquiryType == InquiryType.Year)
+            {
+                DisplayStatisticsDataByYear(mStatisticsModel[0].FromDate.AddYears(1));
+            }
+        }
+        private void btnMovePrev_Click(object sender, RoutedEventArgs e)
+        {
+            if (mCurrentInquiryType == InquiryType.Week)
+            {
+                DisplayStatisticsDataByWeek(mStatisticsModel[0].FromDate.AddDays(-7).StartOfWeek(DayOfWeek.Monday));
+            }
+            else if (mCurrentInquiryType == InquiryType.Month)
+            {
+                DisplayStatisticsDataByMonth(mStatisticsModel[0].FromDate.AddMonths(-1));
+            }
+            else if (mCurrentInquiryType == InquiryType.Year)
+            {
+                DisplayStatisticsDataByYear(mStatisticsModel[0].FromDate.AddYears(-1));
+            }
         }
     }
 }
