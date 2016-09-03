@@ -8,16 +8,16 @@
     mc:Ignorable="d">
 
     <RelativePanel Background="#FFFFBB00" Margin="0,0,0,0">
-        <TextBlock x:Name="lblTitle" Text="쉽게 쓰는 지출 관리" FontWeight="Bold" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Foreground="White" FontSize="25" Margin="3,-87,-3,87"/>
-        <StackPanel x:Name="pnDescription" RelativePanel.Below="lblTitle" Margin="300,-50,0,0">
-            <TextBlock Text="지출 관리" />
-            <TextBlock Text="지출 정보를 쉽게 입력하고 조회할 수 있습니다" />
-            <TextBlock Text="지출 통계" />
-            <TextBlock Text="지출 트렌드를 파악할 수 있도록 " />
-            <TextBlock Text="지출 통계" />
-            <TextBlock Text="지출 트렌드를 파악할 수 있도록 " />
+        <TextBlock x:Name="lblTitle" Text="&quot;안녕하세요. 공감 가계부입니다.&quot;" FontWeight="Bold" Foreground="White" FontSize="25" RelativePanel.Above="pnDescription" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,-80,0,0"/>
+        <StackPanel x:Name="pnDescription" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" >
+            <TextBlock Text="지출 관리" Foreground="White" FontWeight="Bold" />
+            <TextBlock Text="지출 정보를 쉽게 입력하고 조회할 수 있습니다" Foreground="#FF665656" FontSize="12"/>
+            <TextBlock Text="지출 통계" Foreground="White" Margin="0,20,0,0"/>
+            <TextBlock Text="그래프를 이용해서 지출 트렌드를 한눈에 파악할 수 있습니다." Foreground="#FF665656" FontSize="12"/>
+            <TextBlock Text="무료" Foreground="White" Margin="0,20,0,0"/>
+            <TextBlock Text="공감 가계부는 무료입니다." Foreground="#FF665656" FontSize="12"/>
         </StackPanel>
-        <Button Name="btnStart" Content="시작합니다" RelativePanel.Below="pnDescription" Width="120" RelativePanel.AlignHorizontalCenterWithPanel="True" BorderThickness="1" Background="#FF0079FF" Foreground="White" HorizontalAlignment="Right" Click="btnStart_Click" />
+        <Button Name="btnStart" Content="시작합니다" RelativePanel.Below="pnDescription" Width="120" RelativePanel.AlignHorizontalCenterWithPanel="True" BorderThickness="1" Background="#FF0079FF" Foreground="White" HorizontalAlignment="Right" Margin="0,60,0,0" Click="btnStart_Click" />
     </RelativePanel>
     <!--<StackPanel Background="#FFFFBB00">
         <TextBlock Text="시작하기" Foreground="White" FontWeight="Bold"/>
