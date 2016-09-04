@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EasyCost;
+using EasyCost.Pages.Intros;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,17 +33,11 @@ namespace EasyCost
 
         private void SetImage()
         {
-            IntroPage introPage = new IntroPage();
-            MainPage mainPage = new MainPage();
-
             List<Page> itemsList = new List<Page>();
-            itemsList.Add(introPage);
-            itemsList.Add(mainPage);
+            itemsList.Add(new IntroPage_1());
+            itemsList.Add(new IntroPage_2());
 
             itemFlipView.ItemsSource = itemsList;
-
-
-
         }
     }
 }

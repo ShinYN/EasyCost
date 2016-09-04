@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="EasyCost.IntroPage"
+    x:Class="EasyCost.Pages.Intros.IntroPage_1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:EasyCost"
+    xmlns:local="using:EasyCost.Pages.Intros"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -17,7 +17,6 @@
             <TextBlock Text="무료" Foreground="White" Margin="0,20,0,0"/>
             <TextBlock Text="공감 가계부는 무료입니다." Foreground="#FF665656" FontSize="12"/>
         </StackPanel>
-        <Button Name="btnStart" Content="시작합니다" RelativePanel.Below="pnDescription" Width="120" RelativePanel.AlignHorizontalCenterWithPanel="True" BorderThickness="1" Background="#FF0079FF" Foreground="White" HorizontalAlignment="Right" Margin="0,60,0,0" Click="btnStart_Click" />
     </RelativePanel>
     <!--<StackPanel Background="#FFFFBB00">
         <TextBlock Text="시작하기" Foreground="White" FontWeight="Bold"/>

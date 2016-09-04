@@ -15,21 +15,23 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace EasyCost
+namespace EasyCost.Pages.Intros
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class IntroPage : Page
+    public sealed partial class IntroPage_2 : Page
     {
-        public IntroPage()
+        public IntroPage_2()
         {
             this.InitializeComponent();
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainPage));
+
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(MainPage));
         }
     }
 }
