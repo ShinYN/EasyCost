@@ -22,18 +22,31 @@ namespace EasyCost.Databases
             }
         }
 
-        public static void Initialize()
+        public static void CreateDB()
         {
             DbConnection.CreateTable<UserMaster>();
             DbConnection.CreateTable<CostInfo>();
             DbConnection.CreateTable<CategoryMaster>();
             DbConnection.Execute(@"CREATE TABLE IF NOT EXISTS SubCategoryMaster (Category VARCHAR(50), SubCategory VARCHAR(50), Description VARCHAR(100), PRIMARY KEY (Category, SubCategory))");
         }
-        public static void InitDB()
+        public static void DropDB()
         {
+            DbConnection.DropTable<UserMaster>();
             DbConnection.DropTable<CategoryMaster>();
             DbConnection.DropTable<SubCategoryMaster>();
             DbConnection.DropTable<CostInfo>();
+        }
+        public static bool IsFirstConnection()
+        {
+            try
+            {
+                DbConnection.Execute(@"SELECT * FROM UserMaster");
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
         }
     }
 }

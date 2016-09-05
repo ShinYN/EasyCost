@@ -14,7 +14,10 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1">
             <TextBlock Text="데이터 동기화" FontSize="20" />
-            <TextBlock Text="- 준비 중입니다 -" FontSize="15" />
+            <StackPanel Orientation ="Horizontal" Margin="10,30,0,0" VerticalAlignment="Center">
+                <TextBlock Text="데이터 초기화" FontSize="15" VerticalAlignment="Center"/>
+                <Button Name="btnInitData" Content="선택" Margin="50,0,0,0" Padding="0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="71" Click="btnInitData_Click"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

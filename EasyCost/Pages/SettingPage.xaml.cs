@@ -38,7 +38,7 @@ namespace EasyCost.Pages
             lsvSettingItem.Items.Clear();
             lsvSettingItem.Items.Add(new { Item = MENU_CATEGORY });
             lsvSettingItem.Items.Add(new { Item = MENU_DATASYNC });
-            lsvSettingItem.Items.Add(new { Item = MENU_PROGRAMINFO });
+            //lsvSettingItem.Items.Add(new { Item = MENU_PROGRAMINFO });
             lsvSettingItem.SelectedIndex = 0;
         }
 

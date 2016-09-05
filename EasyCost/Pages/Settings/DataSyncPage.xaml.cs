@@ -1,10 +1,12 @@
-﻿using System;
+﻿using EasyCost.Databases;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +27,28 @@ namespace EasyCost.Pages.Settings
         public DataSyncPage()
         {
             this.InitializeComponent();
+        }
+
+        private async void btnInitData_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new MessageDialog("정말로 데이터를 모두 초기화 하시겠습니까?.\r\n초기화 된 데이터는 다시 복구할 수 없습니다.");
+            dialog.Title = "확인";
+            dialog.Commands.Add(new UICommand { Label = "예", Id = 0 });
+            dialog.Commands.Add(new UICommand { Label = "아니요", Id = 1 });
+            var res = await dialog.ShowAsync();
+
+            if ((int)res.Id == 0)
+            {
+                InitData();
+            }
+        }
+
+        private void InitData()
+        {
+            DBConnHandler.DropDB();
+            DBConnHandler.CreateDB();
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(StartPage));
         }
     }
 }

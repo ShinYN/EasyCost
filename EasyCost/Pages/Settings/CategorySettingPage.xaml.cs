@@ -63,7 +63,6 @@ namespace EasyCost.Pages.Settings
                 dynamic category = lsvCategory.SelectedValue;
 
                 SettingManager.DeleteCategory(category.Category);
-                SettingManager.DeleteSubCategory(category.Category);
                 DisplayCategoryList();
                 txtCategory.Text = string.Empty;
             }

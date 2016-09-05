@@ -1,4 +1,5 @@
 ﻿using EasyCost.Databases;
+using EasyCost.Pages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,7 @@ namespace EasyCost
     /// </summary>
     sealed partial class App : Application
     {
+        private bool mIsFirstConnection = false;
         /// <summary>
         /// Singleton 응용 프로그램 개체를 초기화합니다. 이것은 실행되는 작성 코드의 첫 번째
         /// 줄이며 따라서 main() 또는 WinMain()과 논리적으로 동일합니다.
@@ -34,7 +36,12 @@ namespace EasyCost
 
             //DB초기화 함수. 프로그램 리셋이 필요할 때 호출
             //DBConnHandler.InitDB();
-            DBConnHandler.Initialize();
+
+            if (DBConnHandler.IsFirstConnection())
+            {
+                mIsFirstConnection = true;
+            }
+            DBConnHandler.CreateDB();
         }
 
         /// <summary>
@@ -79,7 +86,15 @@ namespace EasyCost
                     // 구성합니다.
                     //rootFrame.Navigate(typeof(MainPage), e.Arguments);
                     //rootFrame.Navigate(typeof(IntroPage), e.Arguments);
-                    rootFrame.Navigate(typeof(StartPage), e.Arguments);
+
+                    if (mIsFirstConnection)
+                    {
+                        rootFrame.Navigate(typeof(StartPage), e.Arguments);
+                    }
+                    else
+                    {
+                        rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    }
                 }
                 // 현재 창이 활성 창인지 확인
                 Window.Current.Activate();
