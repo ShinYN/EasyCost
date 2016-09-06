@@ -29,8 +29,7 @@ namespace EasyCost
             this.InitializeComponent();
             SetImage();
         }
-
-
+        
         private void SetImage()
         {
             List<Page> itemsList = new List<Page>();
