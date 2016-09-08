@@ -1,2 +1,2 @@
-MainPackage=C:\EasyCost\EasyCost\EasyCost\bin\x64\Release\Upload\EasyCost_1.1.0.0_x64.appx
-SymbolPackage=C:\EasyCost\EasyCost\EasyCost\AppPackages\EasyCost_1.1.0.0\EasyCost_1.1.0.0_x64.appxsym
+MainPackage=C:\EasyCost\EasyCost\EasyCost\bin\x64\Release\Upload\EasyCost_1.1.1.0_x64.appx
+SymbolPackage=C:\EasyCost\EasyCost\EasyCost\AppPackages\EasyCost_1.1.1.0\EasyCost_1.1.1.0_x64.appxsym

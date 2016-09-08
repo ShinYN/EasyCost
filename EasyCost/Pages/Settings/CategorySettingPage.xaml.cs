@@ -70,6 +70,11 @@ namespace EasyCost.Pages.Settings
 
         private void btnAddCategory_Click(object sender, RoutedEventArgs e)
         {
+            if (txtCategory.Text.Trim() == string.Empty)
+            {
+                return;
+            }
+
             SettingManager.SaveCategory(new Databases.TableModels.CategoryMaster
             {
                 Category = txtCategory.Text.Trim(), Description = string.Empty
@@ -94,6 +99,11 @@ namespace EasyCost.Pages.Settings
 
         private void btnAddSubCategory_Click(object sender, RoutedEventArgs e)
         {
+            if (txtSubCategory.Text.Trim() == string.Empty)
+            {
+                return;
+            }
+
             dynamic category = lsvCategory.SelectedValue;
             SettingManager.SaveSubCategory(new Databases.TableModels.SubCategoryMaster
             {
