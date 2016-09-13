@@ -22,12 +22,30 @@ namespace EasyCost.Databases
             }
         }
 
+        public static bool IsFirstConnection
+        {
+            get
+            {
+                try
+                {
+                    DbConnection.Execute(@"SELECT * FROM UserMaster");
+                    return false;
+                }
+                catch
+                {
+                    return true;
+                }
+            }
+        }
+
         public static void CreateDB()
         {
             DbConnection.CreateTable<UserMaster>();
             DbConnection.CreateTable<CostInfo>();
             DbConnection.CreateTable<CategoryMaster>();
             DbConnection.Execute(@"CREATE TABLE IF NOT EXISTS SubCategoryMaster (Category VARCHAR(50), SubCategory VARCHAR(50), Description VARCHAR(100), PRIMARY KEY (Category, SubCategory))");
+
+            CreateInitialCategory();
         }
         public static void DropDB()
         {
@@ -36,17 +54,29 @@ namespace EasyCost.Databases
             DbConnection.DropTable<SubCategoryMaster>();
             DbConnection.DropTable<CostInfo>();
         }
-        public static bool IsFirstConnection()
+
+        private static void CreateInitialCategory()
         {
-            try
-            {
-                DbConnection.Execute(@"SELECT * FROM UserMaster");
-                return false;
-            }
-            catch
-            {
-                return true;
-            }
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '교통비', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '교통비', '지하철', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '교통비', '버스', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '교통비', '택시', ''");
+
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '식비', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '식비', '아침', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '식비', '점심', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '식비', '저녁', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '식비', '커피', ''");
+
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '공과금', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '공과금', '전기요금', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '공과금', '가스요금', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '공과금', '수도요금', ''");
+
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '취미', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '취미', '책', ''");
+
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '기타', ''");
         }
     }
 }

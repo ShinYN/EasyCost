@@ -46,7 +46,6 @@ namespace EasyCost.Pages.Settings
         private void InitData()
         {
             DBConnHandler.DropDB();
-            DBConnHandler.CreateDB();
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(StartPage));
         }

@@ -18,7 +18,4 @@
             <TextBlock Text="공감 가계부는 무료입니다." Foreground="#FF665656" FontSize="12"/>
         </StackPanel>
     </RelativePanel>
-    <!--<StackPanel Background="#FFFFBB00">
-        <TextBlock Text="시작하기" Foreground="White" FontWeight="Bold"/>
-    </StackPanel>-->
 </Page>

@@ -37,11 +37,11 @@ namespace EasyCost
             //DB초기화 함수. 프로그램 리셋이 필요할 때 호출
             //DBConnHandler.DropDB();
 
-            if (DBConnHandler.IsFirstConnection())
+            if (DBConnHandler.IsFirstConnection)
             {
                 mIsFirstConnection = true;
             }
-            DBConnHandler.CreateDB();
+            //DBConnHandler.CreateDB();
         }
 
         /// <summary>

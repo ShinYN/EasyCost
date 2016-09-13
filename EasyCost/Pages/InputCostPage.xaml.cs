@@ -204,9 +204,6 @@ namespace EasyCost.Pages
             lastInquiryType = InquiryType.Year;
             costHistory.Display(lastInquiryType);
         }
-        private void btnModifyCost_Click(object sender, RoutedEventArgs e)
-        {
-        }
 
         private void inputCostMainSplitView_PaneClosed(SplitView sender, object args)
         {
@@ -222,6 +219,11 @@ namespace EasyCost.Pages
                 sender.Text = sender.Text.Remove(pos, 1);
                 sender.SelectionStart = pos;
             }
+        }
+
+        private void btnExportCSV_Click(object sender, RoutedEventArgs e)
+        {
+            CostManager.ExportCSV("");
         }
     }
 }

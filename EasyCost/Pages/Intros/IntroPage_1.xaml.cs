@@ -26,10 +26,5 @@ namespace EasyCost.Pages.Intros
         {
             this.InitializeComponent();
         }
-
-        private void btnStart_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainPage));
-        }
     }
 }

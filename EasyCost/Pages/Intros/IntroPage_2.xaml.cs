@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasyCost.Databases;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace EasyCost.Pages.Intros
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-
+            DBConnHandler.CreateDB();
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(MainPage));
         }

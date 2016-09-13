@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace EasyCost.Helpers
 {
@@ -96,6 +97,23 @@ namespace EasyCost.Helpers
         public static void DeleteCostInfo(int aID)
         {
             DBConnHandler.DbConnection.Execute(string.Format("DELETE FROM CostInfo WHERE Id = {0}", aID));
+        }
+
+        public static void ExportCSV(string aFilePath)
+        {
+            //DBConnHandler.DbConnection.Execute(".headers on");
+            //DBConnHandler.DbConnection.Execute(".mode csv");
+            //DBConnHandler.DbConnection.Execute(".output data.csv");
+            
+
+
+            DBConnHandler.DbConnection.Execute(@".headers on
+                                                 .mode csv
+                                                 .output data.csv
+                                                 SELECT UserID, CostDate, Category, SubCategory, CostType, Cost, Description
+                                                 FROM CostInfo
+                                                 .quit");
+            //DBConnHandler.DbConnection.Execute(".quit");
         }
     }
 }

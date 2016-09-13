@@ -181,6 +181,7 @@
             <Button x:Name="btnViewAddCostPanel" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnViewAddCostPanel_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/addItem_G.png"/>
             </Button>
+            <Button x:Name="btnExportCSV" Content="Export CSV" RelativePanel.AlignLeftWithPanel="True"  RelativePanel.AlignHorizontalCenterWithPanel="True" Click="btnExportCSV_Click"/>
         </RelativePanel>
     </Grid>
 </Page>
