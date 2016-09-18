@@ -1,5 +1,5 @@
-MainPackage=C:\EasyCost\EasyCost\EasyCost\bin\ARM\Release\Upload\EasyCost_1.1.1.0_ARM.appx
-SymbolPackage=C:\EasyCost\EasyCost\EasyCost\AppPackages\EasyCost_1.1.1.0\EasyCost_1.1.1.0_ARM.appxsym
+MainPackage=C:\EasyCost\EasyCost\EasyCost\bin\ARM\Release\Upload\EasyCost_1.1.2.0_ARM.appx
+SymbolPackage=C:\EasyCost\EasyCost\EasyCost\AppPackages\EasyCost_1.1.2.0\EasyCost_1.1.2.0_ARM.appxsym
 ResourcePack=C:\EasyCost\EasyCost\EasyCost\_scale-100.appx
 ResourcePack=C:\EasyCost\EasyCost\EasyCost\_scale-125.appx
 ResourcePack=C:\EasyCost\EasyCost\EasyCost\_scale-150.appx

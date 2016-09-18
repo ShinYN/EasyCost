@@ -10,8 +10,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -113,13 +115,15 @@ namespace EasyCost.Pages
 
         private void SaveCostInfo()
         {
-            CostManager.SaveConstInfo(MakeCostInfoViaInputCostControls());
+            CheckIsValidCostInfoData();
+            CostManager.SaveConstInfo(MakeCostInfoUsingInputCostControls());
         }
         private void UpdateCostInfo()
         {
-            CostInfo costInfo = MakeCostInfoViaInputCostControls();
+            CostInfo costInfo = MakeCostInfoUsingInputCostControls();
             costInfo.Id = costHistory.SelectedItem.Id;
 
+            CheckIsValidCostInfoData();
             CostManager.UpdateCostInfo(costInfo);
         }
         private void DeleteCostInfo()
@@ -129,7 +133,66 @@ namespace EasyCost.Pages
                 CostManager.DeleteCostInfo(costHistory.SelectedItem.Id);
             }
         }
-        private CostInfo MakeCostInfoViaInputCostControls()
+        private void CheckIsValidCostInfoData()
+        {
+            if (costDatePicker.Date.Value.DateTime > DateTime.Now)
+            {
+                costDatePicker.Focus(FocusState.Keyboard);
+                throw new Exception("현재 시점보다 이후의 날짜는 선택할 수 없습니다");
+            }
+            else if (cboCategory.SelectedValue.ToString() == string.Empty)
+            {
+                cboCategory.Focus(FocusState.Keyboard);
+                throw new Exception("카테고리 분류를 선택해 주세요");
+            }
+            else if (cboSubCategory.SelectedValue.ToString() == string.Empty)
+            {
+                cboSubCategory.Focus(FocusState.Keyboard);
+                throw new Exception("세부 분류를 선택해 주세요");
+            }
+            else if (txtCost.Text.Trim() == string.Empty)
+            {
+                txtCost.Focus(FocusState.Keyboard);
+                throw new Exception("지출 금액을 입력해 주세요");
+            }
+        }
+        //private async Task<bool> IsValidCostInfoData()
+        //{
+        //    var dialog = new MessageDialog(string.Empty, "확인");
+        //    dialog.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
+
+        //    if (costDatePicker.Date.Value.DateTime > DateTime.Now)
+        //    {
+        //        dialog.Content = "현재 시점보다 이후의 날짜는 선택할 수 없습니다";
+        //        var res = await dialog.ShowAsync();
+        //        costDatePicker.Focus(FocusState.Keyboard);
+        //        return false;
+        //    }
+        //    else if (cboCategory.SelectedValue.ToString() == string.Empty)
+        //    {
+        //        dialog.Content = "카테고리 분류를 선택해 주세요";
+        //        var res = await dialog.ShowAsync();
+        //        cboCategory.Focus(FocusState.Keyboard);
+        //        return false;
+        //    }
+        //    else if (cboSubCategory.SelectedValue.ToString() == string.Empty)
+        //    {
+        //        dialog.Content = "세부 분류를 선택해 주세요";
+        //        var res = await dialog.ShowAsync();
+        //        cboSubCategory.Focus(FocusState.Keyboard);
+        //        return false;
+        //    }
+        //    else if (txtCost.Text.Trim() == string.Empty)
+        //    {
+        //        dialog.Content = "지출 금액을 입력해 주세요";
+        //        var res = await dialog.ShowAsync();
+        //        txtCost.Focus(FocusState.Keyboard);
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
+        private CostInfo MakeCostInfoUsingInputCostControls()
         {
             CostInfo costInfo = new CostInfo();
             costInfo.UserID = LoginInfo.UserID;
@@ -153,25 +216,52 @@ namespace EasyCost.Pages
                 inputCostMainSplitView.IsPaneOpen = true;
             }
         }
-        private void btnInputCost_Click(object sender, RoutedEventArgs e)
+        private async void btnInputCost_Click(object sender, RoutedEventArgs e)
         {
-            SaveCostInfo();
-            inputCostMainSplitView.IsPaneOpen = false;
-            DisplayCostHistory();
+            try
+            {
+                SaveCostInfo();
+                inputCostMainSplitView.IsPaneOpen = false;
+                DisplayCostHistory();
+            }
+            catch (Exception ex)
+            {
+                var dialog = new MessageDialog(ex.Message, "확인");
+                dialog.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
+                await dialog.ShowAsync();
+            }
         }
-        private void btnDeleteCost_Click(object sender, RoutedEventArgs e)
+        private async void btnUpdateCost_Click(object sender, RoutedEventArgs e)
         {
-            DeleteCostInfo();
-            inputCostMainSplitView.IsPaneOpen = false;
-            DisplayCostHistory();
+            try
+            {
+                UpdateCostInfo();
+                inputCostMainSplitView.IsPaneOpen = false;
+                DisplayCostHistory();
+            }
+            catch (Exception ex)
+            {
+                var dialog = new MessageDialog(ex.Message, "확인");
+                dialog.Commands.Add(new UICommand { Label = "OK", Id = 0 });
+                await dialog.ShowAsync();
+            }
         }
-        private void btnUpdateCost_Click(object sender, RoutedEventArgs e)
+        private async void btnDeleteCost_Click(object sender, RoutedEventArgs e)
         {
-            UpdateCostInfo();
-            inputCostMainSplitView.IsPaneOpen = false;
-            DisplayCostHistory();
+            try
+            {
+                DeleteCostInfo();
+                inputCostMainSplitView.IsPaneOpen = false;
+                DisplayCostHistory();
+            }
+            catch (Exception ex)
+            {
+                var dialog = new MessageDialog(ex.Message, "확인");
+                dialog.Commands.Add(new UICommand { Label = "OK", Id = 0 });
+                await dialog.ShowAsync();
+            }
         }
-
+        
         private void cboCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((string)cboCategory.SelectedValue == string.Empty)

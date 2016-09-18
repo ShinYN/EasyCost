@@ -1,1 +1,1 @@
-C:\EasyCost\EasyCost\EasyCost\AppPackages\EasyCost_1.1.1.0\EasyCost_1.1.1.0_x86_x64_arm.appxbundle
+C:\EasyCost\EasyCost\EasyCost\AppPackages\EasyCost_1.1.2.0\EasyCost_1.1.2.0_x86_x64_arm.appxbundle
