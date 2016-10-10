@@ -178,6 +178,7 @@
             </SplitView.Content>
         </SplitView>
         <RelativePanel Grid.Row ="2" Margin="-25,0,25,0">
+            <Button x:Name="btnExportExcel" Content="Excel" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Click="btnExportExcel_Click"/>
             <Button x:Name="btnViewAddCostPanel" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnViewAddCostPanel_Click">
                 <Image Source="ms-appx:///Assets/MenuIcons/addItem_G.png"/>
             </Button>

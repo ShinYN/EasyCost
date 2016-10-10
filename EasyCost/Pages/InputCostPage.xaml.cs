@@ -311,9 +311,12 @@ namespace EasyCost.Pages
             }
         }
 
-        private void btnExportCSV_Click(object sender, RoutedEventArgs e)
+        private async void btnExportExcel_Click(object sender, RoutedEventArgs e)
         {
-            CostManager.ExportCSV("");
+            if (costHistory.CostInfo.Count != 0)
+            {
+                await CostManager.ExportToExcel(costHistory.CostInfo);
+            }
         }
     }
 }

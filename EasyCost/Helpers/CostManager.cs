@@ -10,6 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Syncfusion.XlsIO;
+using Windows.Storage.Pickers;
+using Windows.UI.Popups;
 
 namespace EasyCost.Helpers
 {
@@ -98,22 +101,59 @@ namespace EasyCost.Helpers
         {
             DBConnHandler.DbConnection.Execute(string.Format("DELETE FROM CostInfo WHERE Id = {0}", aID));
         }
-
-        public static void ExportCSV(string aFilePath)
+        public static async Task ExportToExcel(List<CostInfo> aCostInfoList)
         {
-            //DBConnHandler.DbConnection.Execute(".headers on");
-            //DBConnHandler.DbConnection.Execute(".mode csv");
-            //DBConnHandler.DbConnection.Execute(".output data.csv");
-            
+            using (ExcelEngine excelEngine = new ExcelEngine())
+            {
+                excelEngine.Excel.DefaultVersion = ExcelVersion.Excel2013;
 
+                IWorkbook workbook = excelEngine.Excel.Workbooks.Create(1);
+                IWorksheet worksheet = workbook.Worksheets[0];
 
-            DBConnHandler.DbConnection.Execute(@".headers on
-                                                 .mode csv
-                                                 .output data.csv
-                                                 SELECT UserID, CostDate, Category, SubCategory, CostType, Cost, Description
-                                                 FROM CostInfo
-                                                 .quit");
-            //DBConnHandler.DbConnection.Execute(".quit");
+                worksheet.Range["A1"].Text = "사용 날짜";
+                worksheet.Range["B1"].Text = "지출 분류";
+                worksheet.Range["C1"].Text = "세부 분류";
+                worksheet.Range["D1"].Text = "타입";
+                worksheet.Range["E1"].Text = "지출 내역";
+                worksheet.Range["F1"].Text = "지출 금액";
+                
+                int rowIndex = 2;
+                foreach (CostInfo costInfo in aCostInfoList)
+                {
+                    worksheet.Range["A" + rowIndex].Text = costInfo.CostDate.ToString("yyyy-MM-dd HH:mm:ss");
+                    worksheet.Range["B" + rowIndex].Text = costInfo.Category;
+                    worksheet.Range["C" + rowIndex].Text = costInfo.SubCategory;
+                    worksheet.Range["D" + rowIndex].Text = costInfo.CostType;
+                    worksheet.Range["E" + rowIndex].Text = costInfo.Description;
+                    worksheet.Range["F" + rowIndex].Text = costInfo.Cost.ToString();
+
+                    rowIndex++;
+                }
+                
+                FileSavePicker savePicker = new FileSavePicker();
+                savePicker.SuggestedStartLocation = PickerLocationId.Desktop;
+                savePicker.SuggestedFileName = "공감가계부_지출내역";
+                savePicker.FileTypeChoices.Add("Excel Files", new List<string>() { ".xlsx" });
+                StorageFile storageFile = await savePicker.PickSaveFileAsync();
+
+                if (storageFile != null)
+                {
+                    await workbook.SaveAsAsync(storageFile);
+                    workbook.Close();
+
+                    MessageDialog msgDialog = new MessageDialog("생성된 파일을 열어보시겠습니까?", "파일이 성공적으로 생성되었습니다.");
+
+                    UICommand yesCmd = new UICommand("예");
+                    msgDialog.Commands.Add(yesCmd);
+                    UICommand noCmd = new UICommand("아니요");
+                    msgDialog.Commands.Add(noCmd);
+                    IUICommand cmd = await msgDialog.ShowAsync();
+                    if (cmd == yesCmd)
+                    {
+                        bool success = await Windows.System.Launcher.LaunchFileAsync(storageFile);
+                    }
+                }
+            }
         }
     }
 }
