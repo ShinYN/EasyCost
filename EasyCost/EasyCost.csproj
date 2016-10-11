@@ -95,6 +95,8 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\badge.scale-400.png" />
     <Content Include="Assets\Icon_Base.png" />
+    <Content Include="Assets\MenuIcons\exportExcel_GR.png" />
+    <Content Include="Assets\MenuIcons\exportExcel.png" />
     <Content Include="Assets\NewStoreLogo.scale-400.png" />
     <None Include="EasyCost_StoreKey.pfx" />
     <None Include="project.json" />
