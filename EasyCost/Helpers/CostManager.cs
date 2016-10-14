@@ -129,7 +129,21 @@ namespace EasyCost.Helpers
 
                     rowIndex++;
                 }
-                
+
+                worksheet.Range[1, 1, aCostInfoList.Count, 1].ColumnWidth = 20;
+                worksheet.Range[1, 2, aCostInfoList.Count, 2].ColumnWidth = 15;
+                worksheet.Range[1, 3, aCostInfoList.Count, 3].ColumnWidth = 15;
+                worksheet.Range[1, 4, aCostInfoList.Count, 4].ColumnWidth = 10;
+                worksheet.Range[1, 5, aCostInfoList.Count, 5].ColumnWidth = 20;
+                worksheet.Range[1, 6, aCostInfoList.Count, 6].ColumnWidth = 15;
+
+                worksheet.Range["A1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
+                worksheet.Range["B1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
+                worksheet.Range["C1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
+                worksheet.Range["D1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
+                worksheet.Range["E1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
+                worksheet.Range["F1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
+
                 FileSavePicker savePicker = new FileSavePicker();
                 savePicker.SuggestedStartLocation = PickerLocationId.Desktop;
                 savePicker.SuggestedFileName = "공감가계부_지출내역";

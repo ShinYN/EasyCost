@@ -14,6 +14,10 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1">
             <TextBlock Text="프로그램 정보" FontSize="20" />
+            <StackPanel Orientation ="Horizontal" Margin="10,30,0,0" VerticalAlignment="Center">
+                <TextBlock Text="프로그램 문의" FontSize="15" VerticalAlignment="Center"/>
+                <TextBlock Text="go1323@gmail.com" FontSize="15" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>
