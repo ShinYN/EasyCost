@@ -127,13 +127,11 @@
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="120" />
-                <!--<ColumnDefinition Width="120" />-->
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Name="btnSearchWeek" Content="주" BorderThickness="1,1,1,1"  Width="120" Height="30" Grid.Column="1" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchWeek_Click"/>
-            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchMonth_Click"/>
-            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchYear_Click"/>
-            <!--<Button Name="btnSearchCustom" Content="기간" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="4" Foreground="Red" Background="{x:Null}" BorderBrush="Red" Style="{StaticResource CustomButtonStyle}" Click="btnSearchCustom_Click"/>-->
+            <Button Name="btnSearchWeek" Content="주" BorderThickness="1,1,1,1"  Width="120" Height="30" Grid.Column="1" Foreground="#767676" Background="White" BorderBrush="#767676" Click="btnSearchWeek_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
+            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Foreground="#767676" Background="White" BorderBrush="#767676" Click="btnSearchMonth_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
+            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3" Foreground="#767676" Background="White" BorderBrush="#767676" Click="btnSearchYear_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
         </Grid>
         <StackPanel Orientation="Horizontal" Margin="20,0,0,0" Grid.Row="1">
             <Ellipse Height="8" Width="8" Fill="#666666" VerticalAlignment="Center" Margin="0,0,5,0"/>

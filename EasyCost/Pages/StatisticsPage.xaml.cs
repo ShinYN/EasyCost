@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using System.Linq;
+using Windows.UI.Xaml.Media;
 
 // 빈 페이지 항목 템플릿에 대한 설명은 http://go.microsoft.com/fwlink/?LinkId=234238에 나와 있습니다.
 
@@ -18,8 +19,10 @@ namespace EasyCost.Pages
     /// </summary>
     public sealed partial class StatisticsPage : Page
     {
-        private InquiryType mCurrentInquiryType;
-        private ObservableCollection<CostStatisticsModel> mStatisticsModel = new ObservableCollection<CostStatisticsModel>();
+        private InquiryType _currentInquiryType;
+        Button _currentButton = null;
+        List<Button> _searchButtonList = new List<Button>();
+        private ObservableCollection<CostStatisticsModel> _statisticsModel = new ObservableCollection<CostStatisticsModel>();
         
         public StatisticsPage()
         {
@@ -29,6 +32,14 @@ namespace EasyCost.Pages
 
         private void InitializeControls()
         {
+            _searchButtonList.Clear();
+            _searchButtonList.Add(btnSearchWeek);
+            _searchButtonList.Add(btnSearchMonth);
+            _searchButtonList.Add(btnSearchYear);
+
+            _currentButton = btnSearchWeek;
+            SetSearchButtonColor(_currentButton);
+
             DisplayStatisticsDataByWeek();
         }
 
@@ -38,11 +49,11 @@ namespace EasyCost.Pages
         }
         private void DisplayStatisticsDataByWeek(DateTime aStartDayOfWeek)
         {
-            mStatisticsModel.Clear();
+            _statisticsModel.Clear();
             Dictionary<string, int> categoryCostDic = new Dictionary<string, int>();
             for (int i = 0; i < 7; i++)
             {
-                mStatisticsModel.Add(new CostStatisticsModel()
+                _statisticsModel.Add(new CostStatisticsModel()
                 {
                     InquiryType = InquiryType.Today,
                     FromDate = aStartDayOfWeek,
@@ -51,7 +62,7 @@ namespace EasyCost.Pages
                     DisplayString = aStartDayOfWeek.ToString("MM/dd")
                 });
 
-                foreach (CostInfo costInfo in mStatisticsModel[i].CostInfo)
+                foreach (CostInfo costInfo in _statisticsModel[i].CostInfo)
                 {
                     if (categoryCostDic.ContainsKey(costInfo.Category))
                     {
@@ -69,14 +80,14 @@ namespace EasyCost.Pages
             txtInquiryTarget.Text = aStartDayOfWeek.AddDays(-7).ToString("yyyy/MM/dd")
                                   + " - "
                                   + aStartDayOfWeek.AddDays(-1).ToString("yyyy/MM/dd");
-            cashColumn.ItemsSource = mStatisticsModel;
-            cardColumn.ItemsSource = mStatisticsModel;
+            cashColumn.ItemsSource = _statisticsModel;
+            cardColumn.ItemsSource = _statisticsModel;
             costHistoryXAxis.Header = "기간(일)";
 
             DisplayTop5CostCategory(categoryCostDic);
             DisplayTotalCostInfo();
 
-            mCurrentInquiryType = InquiryType.Week;
+            _currentInquiryType = InquiryType.Week;
         }
         private void DisplayStatisticsDataByMonth()
         {
@@ -84,13 +95,13 @@ namespace EasyCost.Pages
         }
         private void DisplayStatisticsDataByMonth(DateTime aStartDayOfMonth)
         {
-            mStatisticsModel.Clear();
+            _statisticsModel.Clear();
 
             var endDayOfMonth = aStartDayOfMonth.AddMonths(1).AddDays(-1).Day;
             Dictionary<string, int> categoryCostDic = new Dictionary<string, int>();
             for (int i = 0; i < endDayOfMonth; i++)
             {
-                mStatisticsModel.Add(new CostStatisticsModel()
+                _statisticsModel.Add(new CostStatisticsModel()
                 {
                     InquiryType = InquiryType.Today,
                     FromDate = aStartDayOfMonth,
@@ -99,7 +110,7 @@ namespace EasyCost.Pages
                     DisplayString = aStartDayOfMonth.ToString("dd")
                 });
 
-                foreach (CostInfo costInfo in mStatisticsModel[i].CostInfo)
+                foreach (CostInfo costInfo in _statisticsModel[i].CostInfo)
                 {
                     if (categoryCostDic.ContainsKey(costInfo.Category))
                     {
@@ -118,24 +129,24 @@ namespace EasyCost.Pages
                                   + " - "
                                   + aStartDayOfMonth.AddDays(-1).ToString("yyyy/MM/dd");
 
-            cashColumn.ItemsSource = mStatisticsModel;
-            cardColumn.ItemsSource = mStatisticsModel;
+            cashColumn.ItemsSource = _statisticsModel;
+            cardColumn.ItemsSource = _statisticsModel;
             costHistoryXAxis.Header = "기간(일)";
 
             DisplayTop5CostCategory(categoryCostDic);
             DisplayTotalCostInfo();
 
-            mCurrentInquiryType = InquiryType.Month;
+            _currentInquiryType = InquiryType.Month;
         }
         private void DisplayStatisticsDataByYear(DateTime aStartDayOfYear)
         {
-            mStatisticsModel.Clear();
+            _statisticsModel.Clear();
             Dictionary<string, int> categoryCostDic = new Dictionary<string, int>();
             DateTime aEndDayOfMonth = new DateTime();
             for (int i = 0; i < 12; i++)
             {
                 aEndDayOfMonth = new DateTime(aStartDayOfYear.Year, aStartDayOfYear.Month, DateTime.DaysInMonth(aStartDayOfYear.Year, aStartDayOfYear.Month));
-                mStatisticsModel.Add(new CostStatisticsModel()
+                _statisticsModel.Add(new CostStatisticsModel()
                 {
                     InquiryType = InquiryType.Month,
                     FromDate = aStartDayOfYear,
@@ -144,7 +155,7 @@ namespace EasyCost.Pages
                     DisplayString = aStartDayOfYear.Month.ToString()
                 });
 
-                foreach (CostInfo costInfo in mStatisticsModel[i].CostInfo)
+                foreach (CostInfo costInfo in _statisticsModel[i].CostInfo)
                 {
                     if (categoryCostDic.ContainsKey(costInfo.Category))
                     {
@@ -162,24 +173,24 @@ namespace EasyCost.Pages
                                   + " - "
                                   + aEndDayOfMonth.ToString("yyyy/MM/dd");
 
-            cashColumn.ItemsSource = mStatisticsModel;
-            cardColumn.ItemsSource = mStatisticsModel;
+            cashColumn.ItemsSource = _statisticsModel;
+            cardColumn.ItemsSource = _statisticsModel;
             costHistoryXAxis.Header = "기간(월)";
 
             DisplayTop5CostCategory(categoryCostDic);
             DisplayTotalCostInfo();
 
-            mCurrentInquiryType = InquiryType.Year;
+            _currentInquiryType = InquiryType.Year;
         }
         private void DisplayStatisticsDataBySpecificDate()
         {
-            mStatisticsModel.Clear();
+            _statisticsModel.Clear();
             Dictionary<string, int> categoryCostDic = new Dictionary<string, int>();
             DateTime currentDateTime = new DateTime(DateTime.Now.Year, 1, 1);
             DateTime toDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 20);
             for (int i = 0; i < (toDateTime - currentDateTime).TotalDays ; i++)
             {
-                mStatisticsModel.Add(new CostStatisticsModel()
+                _statisticsModel.Add(new CostStatisticsModel()
                 {
                     InquiryType = InquiryType.Today,
                     FromDate = currentDateTime,
@@ -188,7 +199,7 @@ namespace EasyCost.Pages
                     DisplayString = currentDateTime.ToString("dd")
                 });
 
-                foreach (CostInfo costInfo in mStatisticsModel[i].CostInfo)
+                foreach (CostInfo costInfo in _statisticsModel[i].CostInfo)
                 {
                     if (categoryCostDic.ContainsKey(costInfo.Category))
                     {
@@ -203,8 +214,8 @@ namespace EasyCost.Pages
                 currentDateTime = currentDateTime.AddDays(1);
             }
 
-            cashColumn.ItemsSource = mStatisticsModel;
-            cardColumn.ItemsSource = mStatisticsModel;
+            cashColumn.ItemsSource = _statisticsModel;
+            cardColumn.ItemsSource = _statisticsModel;
             costHistoryXAxis.Header = "기간(일)";
         }
 
@@ -231,7 +242,7 @@ namespace EasyCost.Pages
         private void DisplayTop5CostSubCategory(string aCategory)
         {
             Dictionary<string, int> subCategoryCostDic = new Dictionary<string, int>();
-            foreach (CostStatisticsModel item in mStatisticsModel)
+            foreach (CostStatisticsModel item in _statisticsModel)
             {
                 foreach (CostInfo costInfo in item.CostInfo.Where(elem => elem.Category == aCategory))
                 {
@@ -263,9 +274,9 @@ namespace EasyCost.Pages
 
         private void DisplayTotalCostInfo()
         {
-            txtTotalCost.Text = mStatisticsModel.Sum(x => x.Cost).ToString("#,##0");
-            txtCardCost.Text = mStatisticsModel.Sum(x => x.CardCost).ToString("#,##0");
-            txtCashCost.Text = mStatisticsModel.Sum(x => x.CashCost).ToString("#,##0");
+            txtTotalCost.Text = _statisticsModel.Sum(x => x.Cost).ToString("#,##0");
+            txtCardCost.Text = _statisticsModel.Sum(x => x.CardCost).ToString("#,##0");
+            txtCashCost.Text = _statisticsModel.Sum(x => x.CashCost).ToString("#,##0");
         }
 
         private void DisplayDetailStatisticsData(CostStatisticsModel aCostStatisticsModel)
@@ -292,14 +303,23 @@ namespace EasyCost.Pages
 
         private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
         {
+            _currentButton = (Button)sender;
+            SetSearchButtonColor(_currentButton);
+
             DisplayStatisticsDataByWeek(DateTime.Now.StartOfWeek(DayOfWeek.Monday));
         }
         private void btnSearchMonth_Click(object sender, RoutedEventArgs e)
         {
+            _currentButton = (Button)sender;
+            SetSearchButtonColor(_currentButton);
+
             DisplayStatisticsDataByMonth(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1));
         }
         private void btnSearchYear_Click(object sender, RoutedEventArgs e)
         {
+            _currentButton = (Button)sender;
+            SetSearchButtonColor(_currentButton);
+
             DisplayStatisticsDataByYear(new DateTime(DateTime.Now.Year, 1, 1));
         }
         private void btnSearchCustom_Click(object sender, RoutedEventArgs e)
@@ -328,32 +348,61 @@ namespace EasyCost.Pages
 
         private void btnMoveNext_Click(object sender, RoutedEventArgs e)
         {
-            if (mCurrentInquiryType == InquiryType.Week)
+            if (_currentInquiryType == InquiryType.Week)
             {
-                DisplayStatisticsDataByWeek(mStatisticsModel[0].FromDate.AddDays(7).StartOfWeek(DayOfWeek.Monday));
+                DisplayStatisticsDataByWeek(_statisticsModel[0].FromDate.AddDays(7).StartOfWeek(DayOfWeek.Monday));
             }
-            else if (mCurrentInquiryType == InquiryType.Month)
+            else if (_currentInquiryType == InquiryType.Month)
             {
-                DisplayStatisticsDataByMonth(mStatisticsModel[0].FromDate.AddMonths(1));
+                DisplayStatisticsDataByMonth(_statisticsModel[0].FromDate.AddMonths(1));
             }
-            else if (mCurrentInquiryType == InquiryType.Year)
+            else if (_currentInquiryType == InquiryType.Year)
             {
-                DisplayStatisticsDataByYear(mStatisticsModel[0].FromDate.AddYears(1));
+                DisplayStatisticsDataByYear(_statisticsModel[0].FromDate.AddYears(1));
             }
         }
         private void btnMovePrev_Click(object sender, RoutedEventArgs e)
         {
-            if (mCurrentInquiryType == InquiryType.Week)
+            if (_currentInquiryType == InquiryType.Week)
             {
-                DisplayStatisticsDataByWeek(mStatisticsModel[0].FromDate.AddDays(-7).StartOfWeek(DayOfWeek.Monday));
+                DisplayStatisticsDataByWeek(_statisticsModel[0].FromDate.AddDays(-7).StartOfWeek(DayOfWeek.Monday));
             }
-            else if (mCurrentInquiryType == InquiryType.Month)
+            else if (_currentInquiryType == InquiryType.Month)
             {
-                DisplayStatisticsDataByMonth(mStatisticsModel[0].FromDate.AddMonths(-1));
+                DisplayStatisticsDataByMonth(_statisticsModel[0].FromDate.AddMonths(-1));
             }
-            else if (mCurrentInquiryType == InquiryType.Year)
+            else if (_currentInquiryType == InquiryType.Year)
             {
-                DisplayStatisticsDataByYear(mStatisticsModel[0].FromDate.AddYears(-1));
+                DisplayStatisticsDataByYear(_statisticsModel[0].FromDate.AddYears(-1));
+            }
+        }
+
+        private void btnSearchButton_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            SetSearchButtonColor((Button)sender);
+        }
+
+        private void btnSearchButton_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            SetSearchButtonColor(_currentButton);
+        }
+
+        private void SetSearchButtonColor(Button aMouseOverButton)
+        {
+            const string main_color = "767676";
+
+            foreach (var button in _searchButtonList)
+            {
+                if (button == _currentButton || button == aMouseOverButton)
+                {
+                    button.Background = MyColorHelper.GetSolidColorBrush(main_color);
+                    button.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
+                }
+                else
+                {
+                    button.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                    button.Foreground = MyColorHelper.GetSolidColorBrush(main_color);
+                }
             }
         }
     }

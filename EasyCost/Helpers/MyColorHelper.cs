@@ -9,6 +9,11 @@ namespace EasyCost.Helpers
         public static SolidColorBrush GetSolidColorBrush(string hex)
         {
             hex = hex.Replace("#", string.Empty);
+            if (hex.Length == 6)
+            {
+                hex = "FF" + hex;
+            }
+            
             byte a = (byte)(Convert.ToUInt32(hex.Substring(0, 2), 16));
             byte r = (byte)(Convert.ToUInt32(hex.Substring(2, 2), 16));
             byte g = (byte)(Convert.ToUInt32(hex.Substring(4, 2), 16));

@@ -31,14 +31,16 @@ namespace EasyCost.Pages
     /// </summary>
     public sealed partial class InputCostPage : Page
     {
-        InquiryType lastInquiryType;
+        InquiryType _lastInquiryType;
+        Button _currentButton = null;
+        List<Button> _searchButtonList = new List<Button>();
         public InputCostPage()
         {
             this.InitializeComponent();
 
             costHistory.CostItemSelectedEvent += new Controls.ViewCostHistoryControl.CostItemSelected(DisplayInputCostForUpdate);
             dateSearchControl.DateSelectedEvent += () => Flyout.ShowAttachedFlyout(btnSearchCustom);
-            dateSearchControl.DisplayDateEvent += (x, y) => costHistory.Display(x, y, false);
+            dateSearchControl.DisplayDateEvent += (x, y) => DisplayCustomCostHistory(x, y);
             Flyout.SetAttachedFlyout(btnSearchCustom, searchCustomFlyout);
 
             InitControls();
@@ -47,7 +49,17 @@ namespace EasyCost.Pages
 
         private void InitControls()
         {
-            lastInquiryType = InquiryType.Today;
+            _searchButtonList.Clear();
+            _searchButtonList.Add(btnSearchDay);
+            _searchButtonList.Add(btnSearchWeek);
+            _searchButtonList.Add(btnSearchMonth);
+            _searchButtonList.Add(btnSearchYear);
+            _searchButtonList.Add(btnSearchCustom);
+
+            _lastInquiryType = InquiryType.Today;
+            _currentButton = btnSearchDay;
+            SetSearchButtonColor(_currentButton);
+
             InitInputCostControls();
         }
         private void InitInputCostControls()
@@ -73,8 +85,17 @@ namespace EasyCost.Pages
 
         private void DisplayCostHistory()
         {
-            costHistory.Display(lastInquiryType);
+            costHistory.Display(_lastInquiryType);
         }
+        private void DisplayCustomCostHistory(DateTime aFromDate, DateTime aToDate)
+        {
+            _currentButton = btnSearchCustom;
+            SetSearchButtonColor(_currentButton);
+
+            costHistory.Display(aFromDate, aToDate, false);
+        }
+
+
         private void DisplaySubCategory(string aCategory)
         {
             cboSubCategory.Items.Clear();
@@ -156,42 +177,6 @@ namespace EasyCost.Pages
                 throw new Exception("지출 금액을 입력해 주세요");
             }
         }
-        //private async Task<bool> IsValidCostInfoData()
-        //{
-        //    var dialog = new MessageDialog(string.Empty, "확인");
-        //    dialog.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
-
-        //    if (costDatePicker.Date.Value.DateTime > DateTime.Now)
-        //    {
-        //        dialog.Content = "현재 시점보다 이후의 날짜는 선택할 수 없습니다";
-        //        var res = await dialog.ShowAsync();
-        //        costDatePicker.Focus(FocusState.Keyboard);
-        //        return false;
-        //    }
-        //    else if (cboCategory.SelectedValue.ToString() == string.Empty)
-        //    {
-        //        dialog.Content = "카테고리 분류를 선택해 주세요";
-        //        var res = await dialog.ShowAsync();
-        //        cboCategory.Focus(FocusState.Keyboard);
-        //        return false;
-        //    }
-        //    else if (cboSubCategory.SelectedValue.ToString() == string.Empty)
-        //    {
-        //        dialog.Content = "세부 분류를 선택해 주세요";
-        //        var res = await dialog.ShowAsync();
-        //        cboSubCategory.Focus(FocusState.Keyboard);
-        //        return false;
-        //    }
-        //    else if (txtCost.Text.Trim() == string.Empty)
-        //    {
-        //        dialog.Content = "지출 금액을 입력해 주세요";
-        //        var res = await dialog.ShowAsync();
-        //        txtCost.Focus(FocusState.Keyboard);
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
         private CostInfo MakeCostInfoUsingInputCostControls()
         {
             CostInfo costInfo = new CostInfo();
@@ -276,23 +261,35 @@ namespace EasyCost.Pages
 
         private void btnSearchDay_Click(object sender, RoutedEventArgs e)
         {
-            lastInquiryType = InquiryType.Today;
-            costHistory.Display(lastInquiryType);
+            _currentButton = (Button)sender;
+            SetSearchButtonColor(_currentButton);
+
+            _lastInquiryType = InquiryType.Today;
+            costHistory.Display(_lastInquiryType);
         }
         private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
         {
-            lastInquiryType = InquiryType.Week;
-            costHistory.Display(lastInquiryType);
+            _currentButton = (Button)sender;
+            SetSearchButtonColor(_currentButton);
+
+            _lastInquiryType = InquiryType.Week;
+            costHistory.Display(_lastInquiryType);
         }
         private void btnSearchMonth_Click(object sender, RoutedEventArgs e)
         {
-            lastInquiryType = InquiryType.Month;
-            costHistory.Display(lastInquiryType);
+            _currentButton = (Button)sender;
+            SetSearchButtonColor(_currentButton);
+
+            _lastInquiryType = InquiryType.Month;
+            costHistory.Display(_lastInquiryType);
         }
         private void btnSearchYear_Click(object sender, RoutedEventArgs e)
         {
-            lastInquiryType = InquiryType.Year;
-            costHistory.Display(lastInquiryType);
+            _currentButton = (Button)sender;
+            SetSearchButtonColor(_currentButton);
+
+            _lastInquiryType = InquiryType.Year;
+            costHistory.Display(_lastInquiryType);
         }
 
         private void inputCostMainSplitView_PaneClosed(SplitView sender, object args)
@@ -316,6 +313,35 @@ namespace EasyCost.Pages
             if (costHistory.CostInfo.Count != 0)
             {
                 await CostManager.ExportToExcel(costHistory.CostInfo);
+            }
+        }
+        
+        private void btnSearchButton_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            SetSearchButtonColor((Button)sender);
+        }
+
+        private void btnSearchButton_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            SetSearchButtonColor(_currentButton);
+        }
+
+        private void SetSearchButtonColor(Button aMouseOverButton)
+        {
+            const string main_color = "006FB6";
+
+            foreach (var button in _searchButtonList)
+            {
+                if (button == _currentButton || button == aMouseOverButton)
+                {
+                    button.Background = MyColorHelper.GetSolidColorBrush(main_color);
+                    button.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
+                }
+                else
+                {
+                    button.Background = new SolidColorBrush(Windows.UI.Colors.White);
+                    button.Foreground = MyColorHelper.GetSolidColorBrush(main_color);
+                }
             }
         }
     }
