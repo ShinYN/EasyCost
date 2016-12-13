@@ -229,13 +229,71 @@
                             <syncfusion:CategoryAxis x:Name="costHistoryXAxis" Header="기간" FontSize="12" Foreground="Gray"  LabelsIntersectAction="Auto"  ShowGridLines="False" />
                         </syncfusion:SfChart.PrimaryAxis>
                         <syncfusion:SfChart.SecondaryAxis>
-                            <syncfusion:NumericalAxis Header="비용" FontSize="12" Foreground="Gray"  ShowGridLines="True"/>
+                            <syncfusion:NumericalAxis Header="비용(원)" FontSize="12" Foreground="Gray"  ShowGridLines="True" LabelFormat="#,##0"/>
                         </syncfusion:SfChart.SecondaryAxis>
                         <syncfusion:SfChart.Legend>
                             <syncfusion:ChartLegend Visibility="Visible"/>
                         </syncfusion:SfChart.Legend>
-                        <syncfusion:StackingColumnSeries x:Name="cashColumn" Interior="#FFB4B565" GroupingLabel="Group1" XBindingPath="DisplayString" YBindingPath="CashCost" Label="현금" ItemsSource="{Binding mStatisticsModel}" ShowTooltip="True" />
-                        <syncfusion:StackingColumnSeries x:Name="cardColumn" Interior="#FFDA6D32" GroupingLabel="Group1" XBindingPath="DisplayString" YBindingPath="CardCost" Label="카드" ItemsSource="{Binding mStatisticsModel}" ShowTooltip="True" />
+                        <syncfusion:StackingColumnSeries x:Name="cashColumn" Interior="#FFB4B565" GroupingLabel="Group1" XBindingPath="DisplayString" YBindingPath="CashCost" Label="현금" ItemsSource="{Binding mStatisticsModel}" ShowTooltip="True">
+                            <syncfusion:StackingColumnSeries.TooltipTemplate>
+                                <DataTemplate >
+                                    <Border BorderBrush="Black" BorderThickness="1">
+                                        <Grid Height="80">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.4*" />
+                                                <RowDefinition Height="0.3*" />
+                                                <RowDefinition Height="0.3*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Fill="White" Grid.RowSpan="3" Grid.ColumnSpan="3" ></Rectangle>
+                                            <TextBlock Margin="3,3,6,3" Text="지출" FontSize="14" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="현금" FontSize="14" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="카드" FontSize="14" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="{Binding Item.CostString}" FontSize="14" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Foreground="#FF0221EA" FontWeight="Bold" />
+                                            <TextBlock Margin="3,3,6,3" Text="{Binding Item.CashCostString}" FontSize="14" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="{Binding Item.CardCostString}" FontSize="14" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="원" FontSize="14" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="원" FontSize="14" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="원" FontSize="14" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </syncfusion:StackingColumnSeries.TooltipTemplate>
+                        </syncfusion:StackingColumnSeries>
+                        <syncfusion:StackingColumnSeries x:Name="cardColumn" Interior="#FFDA6D32" GroupingLabel="Group1" XBindingPath="DisplayString" YBindingPath="CardCost" Label="카드" ItemsSource="{Binding mStatisticsModel}" ShowTooltip="True" >
+                            <syncfusion:StackingColumnSeries.TooltipTemplate>
+                                <DataTemplate >
+                                    <Border BorderBrush="Black" BorderThickness="1">
+                                        <Grid Height="80">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.4*" />
+                                                <RowDefinition Height="0.3*" />
+                                                <RowDefinition Height="0.3*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Fill="White" Grid.RowSpan="3" Grid.ColumnSpan="3" ></Rectangle>
+                                            <TextBlock Margin="3,3,6,3" Text="지출" FontSize="14" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="현금" FontSize="14" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="카드" FontSize="14" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="{Binding Item.CostString}" FontSize="14" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Foreground="#FF0221EA" FontWeight="Bold" />
+                                            <TextBlock Margin="3,3,6,3" Text="{Binding Item.CashCostString}" FontSize="14" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="{Binding Item.CardCostString}" FontSize="14" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="원" FontSize="14" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="원" FontSize="14" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                            <TextBlock Margin="3,3,6,3" Text="원" FontSize="14" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </syncfusion:StackingColumnSeries.TooltipTemplate>
+                        </syncfusion:StackingColumnSeries>
                         <syncfusion:SfChart.Behaviors>
                             <syncfusion:ChartSelectionBehavior EnableSegmentSelection="True" SelectionMode="MouseClick" SelectionStyle="Single"  />
                         </syncfusion:SfChart.Behaviors>

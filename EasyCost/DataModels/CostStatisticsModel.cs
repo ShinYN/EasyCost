@@ -37,6 +37,30 @@ namespace EasyCost.DataModels
                 return CostInfo.Where(elem => elem.CostType == "현금").Sum(elem => elem.Cost);
             }
         }
+
+        public string CostString
+        {
+            get
+            {
+                return Cost.ToString("#,##0");
+            }
+        }
+        public string CardCostString
+        {
+            get
+            {
+                return CardCost.ToString("#,##0");
+            }
+        }
+        public string CashCostString
+        {
+            get
+            {
+                return CashCost.ToString("#,##0");
+            }
+        }
+
+
         public List<CostInfo> CostInfo { get; set; } = new List<CostInfo>();
     }
 }
