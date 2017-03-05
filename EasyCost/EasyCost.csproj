@@ -115,6 +115,9 @@
     <Compile Include="Controls\ViewCostHistoryControl.xaml.cs">
       <DependentUpon>ViewCostHistoryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ViewCostRankConrol.xaml.cs">
+      <DependentUpon>ViewCostRankConrol.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Databases\DBConnHandler.cs" />
     <Compile Include="Databases\TableModels\CategoryMaster.cs" />
     <Compile Include="Databases\TableModels\CostInfo.cs" />
@@ -267,6 +270,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ViewCostHistoryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ViewCostRankConrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

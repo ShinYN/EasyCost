@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="using:Syncfusion.UI.Xaml.Charts"
+    xmlns:Controls="using:EasyCost.Controls"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -304,7 +305,9 @@
                             <RowDefinition Height="15" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <syncfusion:SfChart x:Name="topCostChart" Header="" Grid.Row="0" RequestedTheme="Light" Foreground="Gray" Margin="0,0,20,0" SelectionChanged="topCostChart_SelectionChanged">
+                        <Controls:ViewCostRankConrol x:Name="topCostChart" Grid.Row="0" />
+                        <Controls:ViewCostRankConrol x:Name="topSubCostChart" Grid.Row="2"/>
+                        <!--<syncfusion:SfChart x:Name="topCostChart" Header="" Grid.Row="0" RequestedTheme="Light" Foreground="Gray" Margin="0,0,20,0" SelectionChanged="topCostChart_SelectionChanged">
                             <syncfusion:SfChart.PrimaryAxis>
                                 <syncfusion:CategoryAxis Header="지출 분류" FontSize="12" Foreground="Gray"  LabelsIntersectAction="Auto"  ShowGridLines="False" />
                             </syncfusion:SfChart.PrimaryAxis>
@@ -318,8 +321,8 @@
                             <syncfusion:SfChart.Legend>
                                 <syncfusion:ChartLegend Visibility="Visible" IconVisibility="Collapsed" />
                             </syncfusion:SfChart.Legend>
-                        </syncfusion:SfChart>
-                        <syncfusion:SfChart x:Name="topSubCostChart" Header="" Grid.Row="2" RequestedTheme="Light" Foreground="Gray" Margin="0,0,20,0">
+                        </syncfusion:SfChart>-->
+                        <!--<syncfusion:SfChart x:Name="topSubCostChart" Header="" Grid.Row="2" RequestedTheme="Light" Foreground="Gray" Margin="0,0,20,0">
                             <syncfusion:SfChart.PrimaryAxis>
                                 <syncfusion:CategoryAxis Header="세부 분류" FontSize="12" Foreground="Gray"  LabelsIntersectAction="Auto"  ShowGridLines="False"/>
                             </syncfusion:SfChart.PrimaryAxis>
@@ -331,7 +334,7 @@
                                 <syncfusion:ChartLegend Visibility="Visible" IconVisibility="Collapsed"/>
                             </syncfusion:SfChart.Legend>
                             
-                        </syncfusion:SfChart>
+                        </syncfusion:SfChart> -->
                     </Grid>
                 </Grid>
             </SplitView.Content>

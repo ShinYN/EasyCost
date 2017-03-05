@@ -29,13 +29,21 @@ namespace EasyCost.Pages
             this.InitializeComponent();
             InitializeControls();
         }
-
+        
         private void InitializeControls()
         {
             _searchButtonList.Clear();
             _searchButtonList.Add(btnSearchWeek);
             _searchButtonList.Add(btnSearchMonth);
             _searchButtonList.Add(btnSearchYear);
+
+            topCostChart.Title = "항목별 지출 금액";
+
+            topSubCostChart.ItemSelectedEvent += delegate (CategoryCostModel costModel) { };
+            topCostChart.ItemSelectedEvent += delegate (CategoryCostModel costModel)
+                {
+                    DisplayCostSubCategory(costModel.Category);
+                };
 
             _currentButton = btnSearchWeek;
             SetSearchButtonColor(_currentButton);
@@ -84,7 +92,7 @@ namespace EasyCost.Pages
             cardColumn.ItemsSource = _statisticsModel;
             costHistoryXAxis.Header = "기간(일)";
 
-            DisplayTop5CostCategory(categoryCostDic);
+            DisplayCostCategory(categoryCostDic);
             DisplayTotalCostInfo();
 
             _currentInquiryType = InquiryType.Week;
@@ -133,7 +141,7 @@ namespace EasyCost.Pages
             cardColumn.ItemsSource = _statisticsModel;
             costHistoryXAxis.Header = "기간(일)";
 
-            DisplayTop5CostCategory(categoryCostDic);
+            DisplayCostCategory(categoryCostDic);
             DisplayTotalCostInfo();
 
             _currentInquiryType = InquiryType.Month;
@@ -177,7 +185,7 @@ namespace EasyCost.Pages
             cardColumn.ItemsSource = _statisticsModel;
             costHistoryXAxis.Header = "기간(월)";
 
-            DisplayTop5CostCategory(categoryCostDic);
+            DisplayCostCategory(categoryCostDic);
             DisplayTotalCostInfo();
 
             _currentInquiryType = InquiryType.Year;
@@ -219,27 +227,32 @@ namespace EasyCost.Pages
             costHistoryXAxis.Header = "기간(일)";
         }
 
-        private void DisplayTop5CostCategory(Dictionary<string, int> aCategoryCostDic)
+        private void DisplayCostCategory(Dictionary<string, int> aCategoryCostDic)
         {
+            int costSum = aCategoryCostDic.Values.Sum();
+            int index = 1;
             List<CategoryCostModel> categoryCostModels = new List<CategoryCostModel>();
-            foreach (KeyValuePair<string, int> categoryCostItem in aCategoryCostDic.OrderBy(x => x.Value))
+            foreach (KeyValuePair<string, int> categoryCostItem in aCategoryCostDic.OrderByDescending(x => x.Value))
             {
-                categoryCostModels.Add(new CategoryCostModel { Category = categoryCostItem.Key, Cost = categoryCostItem.Value });
-
-                if (categoryCostModels.Count == 5)
-                {
-                    break;
-                }
+                categoryCostModels.Add(new CategoryCostModel { Index = index,
+                                                               Category = categoryCostItem.Key,
+                                                               CostRatio = (categoryCostItem.Value * 100) / costSum,
+                                                               Cost = categoryCostItem.Value });
+                index++;
             }
 
-            topCategoryCostBar.ItemsSource = categoryCostModels;
+            topCostChart.Display(categoryCostModels);
 
-            if (categoryCostModels.Count != 0)
+            if (categoryCostModels.Count == 0)
             {
-                DisplayTop5CostSubCategory(categoryCostModels.Select(x => x.Category).Last());
+                topSubCostChart.Clear();
+            }
+            else
+            {
+                DisplayCostSubCategory(categoryCostModels.Select(x => x.Category).First());
             }
         }
-        private void DisplayTop5CostSubCategory(string aCategory)
+        private void DisplayCostSubCategory(string aCategory)
         {
             Dictionary<string, int> subCategoryCostDic = new Dictionary<string, int>();
             foreach (CostStatisticsModel item in _statisticsModel)
@@ -257,19 +270,19 @@ namespace EasyCost.Pages
                 }
             }
 
-            List<SubCategoryCostModel> subCategoryCostModes = new List<SubCategoryCostModel>();
-            foreach (KeyValuePair<string, int> subCategoryCostItem in subCategoryCostDic.OrderBy(x => x.Value))
+            int costSum = subCategoryCostDic.Values.Sum();
+            int index = 1;
+            List<CategoryCostModel> categoryCostModes = new List<CategoryCostModel>();
+            foreach (KeyValuePair<string, int> subCategoryCostItem in subCategoryCostDic.OrderByDescending(x => x.Value))
             {
-                subCategoryCostModes.Add(new SubCategoryCostModel() { Category = aCategory, SubCategory = subCategoryCostItem.Key, Cost = subCategoryCostItem.Value });
-
-                if (subCategoryCostModes.Count == 5)
-                {
-                    break;
-                }
+                categoryCostModes.Add(new CategoryCostModel() { Index = index,
+                                                                Category = subCategoryCostItem.Key,
+                                                                CostRatio = (subCategoryCostItem.Value * 100) / costSum,
+                                                                Cost = subCategoryCostItem.Value });
             }
 
-            topSubCategoryCostBar.ItemsSource = subCategoryCostModes;
-            topSubCategoryCostBar.Label = $"Top 5 세부 지출 - {aCategory}";
+            topSubCostChart.Display(categoryCostModes);
+            topSubCostChart.Title = $"세부 지출 리스트- {aCategory}";
         }
 
         private void DisplayTotalCostInfo()
@@ -342,8 +355,8 @@ namespace EasyCost.Pages
                 return;
             }
             
-            DisplayTop5CostSubCategory(((CategoryCostModel)e.SelectedSegment.Item).Category);
-            topSubCategoryCostBar.Interior = e.SelectedSegment.Interior;
+            DisplayCostSubCategory(((CategoryCostModel)e.SelectedSegment.Item).Category);
+            //topSubCategoryCostBar.Interior = e.SelectedSegment.Interior;
         }
 
         private void btnMoveNext_Click(object sender, RoutedEventArgs e)
