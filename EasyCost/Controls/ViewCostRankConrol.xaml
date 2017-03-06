@@ -61,10 +61,10 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Index}" FontSize="12" Grid.Column="0"/>
-                        <TextBlock Text="{Binding Category}" FontSize="12" Grid.Column="1"/>
-                        <TextBlock Text="{Binding CostRatio}" FontSize="12" Grid.Column="2"/>
-                        <TextBlock Text="{Binding CostString}" FontSize="12" Grid.Column="3" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding Index}" FontSize="13" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Category}" FontSize="13" Grid.Column="1"/>
+                        <TextBlock Text="{Binding CostRatioString}" FontSize="13" Grid.Column="2"/>
+                        <TextBlock Text="{Binding CostString}" FontSize="13" Grid.Column="3" HorizontalAlignment="Right"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

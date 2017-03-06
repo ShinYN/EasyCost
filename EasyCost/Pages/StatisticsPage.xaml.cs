@@ -236,7 +236,7 @@ namespace EasyCost.Pages
             {
                 categoryCostModels.Add(new CategoryCostModel { Index = index,
                                                                Category = categoryCostItem.Key,
-                                                               CostRatio = (categoryCostItem.Value * 100) / costSum,
+                                                               CostRatio = (categoryCostItem.Value * 100) / (double)costSum,
                                                                Cost = categoryCostItem.Value });
                 index++;
             }
@@ -277,8 +277,9 @@ namespace EasyCost.Pages
             {
                 categoryCostModes.Add(new CategoryCostModel() { Index = index,
                                                                 Category = subCategoryCostItem.Key,
-                                                                CostRatio = (subCategoryCostItem.Value * 100) / costSum,
+                                                                CostRatio = (subCategoryCostItem.Value * 100) / (double)costSum,
                                                                 Cost = subCategoryCostItem.Value });
+                index++;
             }
 
             topSubCostChart.Display(categoryCostModes);
