@@ -123,13 +123,13 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="340" />
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="120" Height="30" Grid.Column="1" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchDay_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
             <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchWeek_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
