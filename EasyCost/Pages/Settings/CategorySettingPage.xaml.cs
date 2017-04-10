@@ -25,17 +25,19 @@ namespace EasyCost.Pages.Settings
     /// </summary>
     public sealed partial class CategorySettingPage : Page
     {
-        public CategorySettingPage()
+        private string mCategoryType = string.Empty;
+        public CategorySettingPage(string aCategoryType)
         {
             this.InitializeComponent();
 
+            mCategoryType = aCategoryType;
             DisplayCategoryList();
         }
 
         private void DisplayCategoryList()
         {
             lsvCategory.Items.Clear();
-            SettingManager.GetCategoryList().ForEach(elem => lsvCategory.Items.Add(new { Category = elem.Category }));
+            SettingManager.GetCategoryList(mCategoryType).ForEach(elem => lsvCategory.Items.Add(new { Category = elem.Category }));
 
             if (lsvCategory.Items.Count() == 0)
             {
@@ -53,7 +55,7 @@ namespace EasyCost.Pages.Settings
             lsvSubCategory.Items.Clear();
             dynamic category = lsvCategory.SelectedValue;
             string categorystring = category.Category;
-            SettingManager.GetSubCategoryList(categorystring).ForEach(elem => lsvSubCategory.Items.Add(new { SubCategory = elem.SubCategory }));
+            SettingManager.GetSubCategoryList(mCategoryType, categorystring).ForEach(elem => lsvSubCategory.Items.Add(new { SubCategory = elem.SubCategory }));
         }
 
         private void btnRemoveCategory_Click(object sender, RoutedEventArgs e)
@@ -77,7 +79,7 @@ namespace EasyCost.Pages.Settings
 
             SettingManager.SaveCategory(new Databases.TableModels.CategoryMaster
             {
-                Category = txtCategory.Text.Trim(), Description = string.Empty
+                CategoryType = mCategoryType, Category = txtCategory.Text.Trim(), Description = string.Empty
             });
 
             DisplayCategoryList();
@@ -91,7 +93,7 @@ namespace EasyCost.Pages.Settings
                 dynamic category = lsvCategory.SelectedValue;
                 dynamic subCategory = lsvSubCategory.SelectedValue;
 
-                SettingManager.DeleteSubCategory(new SubCategoryMaster { Category = category.Category, SubCategory = subCategory.SubCategory });
+                SettingManager.DeleteSubCategory(new SubCategoryMaster { CategoryType = mCategoryType, Category = category.Category, SubCategory = subCategory.SubCategory });
                 DisplaySubCategoryList();
                 txtSubCategory.Text = string.Empty;
             }
@@ -107,7 +109,7 @@ namespace EasyCost.Pages.Settings
             dynamic category = lsvCategory.SelectedValue;
             SettingManager.SaveSubCategory(new Databases.TableModels.SubCategoryMaster
             {
-                Category = category.Category, SubCategory = txtSubCategory.Text.Trim(), Description = string.Empty
+                CategoryType = mCategoryType, Category = category.Category, SubCategory = txtSubCategory.Text.Trim(), Description = string.Empty
             });
 
             DisplaySubCategoryList();

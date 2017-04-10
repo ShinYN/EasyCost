@@ -20,10 +20,10 @@ namespace EasyCost.Databases.TableModels
         public string Description { get; set; } = string.Empty;
 
         /// <summary>
-        /// 0 : False
-        /// 1 : True
+        /// N : False
+        /// Y : True
         /// </summary>
-        public int IsRepeat { get; set; } = 0;
+        public string RepeatYN { get; set; } = "N";
         /// <summary>
         /// 반복 주기
         /// </summary>

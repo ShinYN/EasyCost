@@ -46,8 +46,7 @@ namespace EasyCost.Databases
                 DbConnection.CreateTable<DBVersionInfo>();
                 DbConnection.CreateTable<UserMaster>();
                 DbConnection.CreateTable<CostInfo>();
-                DbConnection.CreateTable<CategoryMaster>();
-                DbConnection.CreateTable<SubCategoryMaster>();
+                CreateCategoryTable();
 
                 CreateInitialCategory();
             }
@@ -86,15 +85,14 @@ namespace EasyCost.Databases
                 DbConnection.DropTable<CostInfo>();
                 DbConnection.DropTable<DBVersionInfo>();
 
-                DbConnection.Execute(@"CREATE TABLE IF NOT EXISTS CategoryMaster (CategoryType CHAR(1), Category VARCHAR(50), Description VARCHAR(100), PRIMARY KEY (CategoryType, Category))");
-                DbConnection.CreateTable<SubCategoryMaster>();
+                CreateCategoryTable();
                 DbConnection.CreateTable<CostInfo>();
                 DbConnection.CreateTable<DBVersionInfo>();
 
                 categoryMasterList.ForEach(x => x.CategoryType = CategoryType.Expense);
                 subCategoryMasterList.ForEach(x => {
                     x.CategoryType = CategoryType.Expense;
-                    x.IsRepeat = 0;
+                    x.RepeatYN = "N";
                     x.RepeatPeriod = RepeatPeriodType.None;
                     x.RepeatValue = 0;
                     });
@@ -103,33 +101,34 @@ namespace EasyCost.Databases
                 DbConnection.InsertAll(categoryMasterList);
                 DbConnection.InsertAll(subCategoryMasterList);
                 DbConnection.InsertAll(costInfoList);
-
                 DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 2");
             }
         }
 
         private static void CreateInitialCategory()
         {
-            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '교통비', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '교통비', '지하철', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '교통비', '버스', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '교통비', '택시', ''");
+            DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 2");
 
-            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '식비', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '식비', '아침', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '식비', '점심', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '식비', '저녁', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '식비', '커피', ''");
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'E', '교통비', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '교통비', '지하철', '', 'N', 0, '', 0");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '교통비', '버스', '', 'N', 0, '', 0");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '교통비', '택시', '', 'N', 0, '', 0");
 
-            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '공과금', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '공과금', '전기요금', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '공과금', '가스요금', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '공과금', '수도요금', ''");
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'E', '식비', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '식비', '아침', '', 'N', 0, '', 0");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '식비', '점심', '', 'N', 0, '', 0");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '식비', '저녁', '', 'N', 0, '', 0");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '식비', '커피', '', 'N', 0, '', 0");
 
-            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '취미', ''");
-            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '취미', '책', ''");
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'E', '공과금', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '공과금', '전기요금', '', 'N', 0, '', 0");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '공과금', '가스요금', '', 'N', 0, '', 0");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '공과금', '수도요금', '', 'N', 0, '', 0");
 
-            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '기타', ''");
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'E', '취미', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '취미', '책', '', 'N', 0, '', 0");
+
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'E', '기타', ''");
         }
 
         private static DBVersionType GetUserDBVersion()
@@ -150,6 +149,20 @@ namespace EasyCost.Databases
             {
                 return DBVersionType.Version1;
             }
+        }
+        private static void CreateCategoryTable()
+        {
+            DbConnection.Execute(@"CREATE TABLE IF NOT EXISTS CategoryMaster (CategoryType CHAR(1), Category VARCHAR(50), Description VARCHAR(100), PRIMARY KEY (CategoryType, Category))");
+            DbConnection.Execute(@"CREATE TABLE IF NOT EXISTS SubCategoryMaster 
+                                        (CategoryType CHAR(1), 
+                                         Category VARCHAR(50), 
+                                         SubCategory VARCHAR(50),
+                                         Description VARCHAR(100), 
+                                         RepeatYN CHAR(1),
+                                         RepeatPeriod INT,
+                                         RepeatDate VARCHAR(5),
+                                         RepeatValue INT,                                       
+                                        PRIMARY KEY (CategoryType, Category, SubCategory))");
         }
     }
 }

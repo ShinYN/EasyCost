@@ -64,7 +64,7 @@ namespace EasyCost.Pages
         {
             cboCategory.Items.Clear();
             cboCategory.Items.Add(string.Empty);
-            SettingManager.GetCategoryList().ForEach(elem => cboCategory.Items.Add(elem.Category));
+            SettingManager.GetCategoryList(CategoryType.Expense).ForEach(elem => cboCategory.Items.Add(elem.Category));
             cboCategory.SelectedIndex = 0;
         }
         private void InitSubCategoryCombo()
@@ -85,11 +85,11 @@ namespace EasyCost.Pages
         }
 
 
-        private void DisplaySubCategory(string aCategory)
+        private void DisplaySubCategory(string aCategoryType, string aCategory)
         {
             cboSubCategory.Items.Clear();
             cboSubCategory.Items.Add(string.Empty);
-            SettingManager.GetSubCategoryList(aCategory).ForEach(elem => cboSubCategory.Items.Add(elem.SubCategory));
+            SettingManager.GetSubCategoryList(aCategoryType, aCategory).ForEach(elem => cboSubCategory.Items.Add(elem.SubCategory));
             cboSubCategory.SelectedIndex = 0;
         }
 
@@ -244,7 +244,7 @@ namespace EasyCost.Pages
             }
             else
             {
-                DisplaySubCategory((string)cboCategory.SelectedValue);
+                DisplaySubCategory(CategoryType.Expense, (string)cboCategory.SelectedValue);
             }
         }
 

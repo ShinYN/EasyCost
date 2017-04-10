@@ -25678,14 +25678,14 @@
     "UAP,Version=v10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\go132\\.nuget\\packages\\": {}
+    "C:\\Users\\ShinYC\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "E:\\Program\\EasyCost\\GCost\\EasyCost\\EasyCost.csproj",
+      "projectUniqueName": "C:\\Programming\\GCost\\EasyCost\\EasyCost.csproj",
       "projectName": "EasyCost",
-      "projectPath": "E:\\Program\\EasyCost\\GCost\\EasyCost\\EasyCost.csproj",
-      "projectJsonPath": "E:\\Program\\EasyCost\\GCost\\EasyCost\\project.json",
+      "projectPath": "C:\\Programming\\GCost\\EasyCost\\EasyCost.csproj",
+      "projectJsonPath": "C:\\Programming\\GCost\\EasyCost\\project.json",
       "projectStyle": "ProjectJson"
     },
     "dependencies": {
