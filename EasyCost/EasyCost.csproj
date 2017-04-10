@@ -121,6 +121,7 @@
     <Compile Include="Databases\DBConnHandler.cs" />
     <Compile Include="Databases\TableModels\CategoryMaster.cs" />
     <Compile Include="Databases\TableModels\CostInfo.cs" />
+    <Compile Include="Databases\TableModels\DBVersionInfo.cs" />
     <Compile Include="Databases\TableModels\SubCategoryMaster.cs" />
     <Compile Include="Databases\TableModels\UserMaster.cs" />
     <Compile Include="DataModels\SubCategoryCostModel.cs" />
@@ -169,7 +170,10 @@
     <Compile Include="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Types\CategoryType.cs" />
+    <Compile Include="Types\DBVersionType.cs" />
     <Compile Include="Types\InquiryType.cs" />
+    <Compile Include="Types\RepeatPeriodType.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

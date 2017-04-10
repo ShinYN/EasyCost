@@ -41,7 +41,7 @@ namespace EasyCost
             {
                 mIsFirstConnection = true;
             }
-            //DBConnHandler.CreateDB();
+            DBConnHandler.CreateDB();
         }
 
         /// <summary>

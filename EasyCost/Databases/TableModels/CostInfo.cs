@@ -19,6 +19,10 @@ namespace EasyCost.Databases.TableModels
         /// <summary>
         /// 소비 대 분류
         /// </summary>
+        public string CategoryType { get; set; }
+        /// <summary>
+        /// 소비 대 분류
+        /// </summary>
         public string Category { get; set; }
         /// <summary>
         /// 소비 소 분류

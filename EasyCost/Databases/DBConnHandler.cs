@@ -13,6 +13,7 @@ namespace EasyCost.Databases
 {
     public static class DBConnHandler
     {
+        private static DBVersionType LATEST_DB_VERSION = DBVersionType.Version2;
         public static SQLiteConnection DbConnection
         {
             get
@@ -40,12 +41,28 @@ namespace EasyCost.Databases
 
         public static void CreateDB()
         {
-            DbConnection.CreateTable<UserMaster>();
-            DbConnection.CreateTable<CostInfo>();
-            DbConnection.CreateTable<CategoryMaster>();
-            DbConnection.Execute(@"CREATE TABLE IF NOT EXISTS SubCategoryMaster (Category VARCHAR(50), SubCategory VARCHAR(50), Description VARCHAR(100), PRIMARY KEY (Category, SubCategory))");
+            if (IsFirstConnection)
+            {
+                DbConnection.CreateTable<DBVersionInfo>();
+                DbConnection.CreateTable<UserMaster>();
+                DbConnection.CreateTable<CostInfo>();
+                DbConnection.CreateTable<CategoryMaster>();
+                DbConnection.CreateTable<SubCategoryMaster>();
 
-            CreateInitialCategory();
+                CreateInitialCategory();
+            }
+            else
+            {
+                DBVersionType userDBVersion = GetUserDBVersion();
+                if (userDBVersion == LATEST_DB_VERSION)
+                {
+                    return;
+                }
+                else
+                {
+                    MigrationDBData(userDBVersion);
+                }
+            }
         }
         public static void DropDB()
         {
@@ -53,6 +70,42 @@ namespace EasyCost.Databases
             DbConnection.DropTable<CategoryMaster>();
             DbConnection.DropTable<SubCategoryMaster>();
             DbConnection.DropTable<CostInfo>();
+            DbConnection.DropTable<DBVersionInfo>();
+        }
+
+        private static void MigrationDBData(DBVersionType aDBVersionType)
+        {
+            if (aDBVersionType == DBVersionType.Version1)
+            {
+                List<CategoryMaster> categoryMasterList = (from categoryMaster in DBConnHandler.DbConnection.Table<CategoryMaster>() select categoryMaster).ToList();
+                List<SubCategoryMaster> subCategoryMasterList = (from subcategoryMaster in DBConnHandler.DbConnection.Table<SubCategoryMaster>() select subcategoryMaster).ToList();
+                List<CostInfo> costInfoList = (from costInfo in DBConnHandler.DbConnection.Table<CostInfo>() select costInfo).ToList();
+
+                DbConnection.DropTable<CategoryMaster>();
+                DbConnection.DropTable<SubCategoryMaster>();
+                DbConnection.DropTable<CostInfo>();
+                DbConnection.DropTable<DBVersionInfo>();
+
+                DbConnection.Execute(@"CREATE TABLE IF NOT EXISTS CategoryMaster (CategoryType CHAR(1), Category VARCHAR(50), Description VARCHAR(100), PRIMARY KEY (CategoryType, Category))");
+                DbConnection.CreateTable<SubCategoryMaster>();
+                DbConnection.CreateTable<CostInfo>();
+                DbConnection.CreateTable<DBVersionInfo>();
+
+                categoryMasterList.ForEach(x => x.CategoryType = CategoryType.Expense);
+                subCategoryMasterList.ForEach(x => {
+                    x.CategoryType = CategoryType.Expense;
+                    x.IsRepeat = 0;
+                    x.RepeatPeriod = RepeatPeriodType.None;
+                    x.RepeatValue = 0;
+                    });
+                costInfoList.ForEach(x => x.CategoryType = CategoryType.Expense);
+
+                DbConnection.InsertAll(categoryMasterList);
+                DbConnection.InsertAll(subCategoryMasterList);
+                DbConnection.InsertAll(costInfoList);
+
+                DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 2");
+            }
         }
 
         private static void CreateInitialCategory()
@@ -77,6 +130,26 @@ namespace EasyCost.Databases
             DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT '취미', '책', ''");
 
             DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT '기타', ''");
+        }
+
+        private static DBVersionType GetUserDBVersion()
+        {
+            try
+            {
+                var dbData = (from Version in DBConnHandler.DbConnection.Table<DBVersionInfo>()
+                              select Version).Max();
+
+                if (dbData == null)
+                {
+                    return DBVersionType.Version1;
+                }
+
+                return dbData.Version;
+            }
+            catch
+            {
+                return DBVersionType.Version1;
+            }
         }
     }
 }

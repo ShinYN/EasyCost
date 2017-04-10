@@ -9,6 +9,7 @@ namespace EasyCost.DataModels
     public class CategoryCostModel
     {
         public int Index { get; set; } = 0;
+        public string CategoryType { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
         public double CostRatio { get; set; } = 0;
         public int Cost { get; set; } = 0; 
