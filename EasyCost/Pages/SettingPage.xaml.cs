@@ -1,4 +1,5 @@
 ﻿using EasyCost.Pages.Settings;
+using EasyCost.Types;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,20 +24,25 @@ namespace EasyCost.Pages
     /// </summary>
     public sealed partial class SettingPage : Page
     {
-        private const string MENU_CATEGORY = "카테고리 관리";
+        private const string MENU_INCOME_CATEGORY = "수입 카테고리 관리";
+        private const string MENU_EXPENSE_CATEGORY = "지출 카테고리 관리";
         private const string MENU_PROGRAMINFO = "프로그램 정보";
         private const string MENU_DATASYNC = "데이터 동기화";
+        private bool mIsIncomePage = false;
+
         public SettingPage()
         {
             this.InitializeComponent();
             InitSettingItems();
-            settingFrame.Navigate(typeof(CategorySettingPage));
+            settingFrame.Navigate(typeof(CategorySettingPage), CategoryType.Income);
+            mIsIncomePage = true;
         }
 
         private void InitSettingItems()
         {
             lsvSettingItem.Items.Clear();
-            lsvSettingItem.Items.Add(new { Item = MENU_CATEGORY });
+            lsvSettingItem.Items.Add(new { Item = MENU_INCOME_CATEGORY });
+            lsvSettingItem.Items.Add(new { Item = MENU_EXPENSE_CATEGORY });
             lsvSettingItem.Items.Add(new { Item = MENU_DATASYNC });
             lsvSettingItem.Items.Add(new { Item = MENU_PROGRAMINFO });
             lsvSettingItem.SelectedIndex = 0;
@@ -44,11 +50,20 @@ namespace EasyCost.Pages
 
         private void DisplaySettingPage(string aSelectedItemString)
         {
-            if (aSelectedItemString == MENU_CATEGORY)
+            if (aSelectedItemString == MENU_INCOME_CATEGORY)
             {
-                if (settingFrame.CurrentSourcePageType != typeof(CategorySettingPage))
+                if ((settingFrame.CurrentSourcePageType != typeof(CategorySettingPage)) || (mIsIncomePage == false))
                 {
-                    settingFrame.Navigate(typeof(CategorySettingPage));
+                    settingFrame.Navigate(typeof(CategorySettingPage), CategoryType.Income);
+                    mIsIncomePage = true;
+                }
+            }
+            else if (aSelectedItemString == MENU_EXPENSE_CATEGORY)
+            {
+                if ((settingFrame.CurrentSourcePageType != typeof(CategorySettingPage)) || (mIsIncomePage))
+                {
+                    settingFrame.Navigate(typeof(CategorySettingPage), CategoryType.Expense);
+                    mIsIncomePage = false;
                 }
             }
             else if (aSelectedItemString == MENU_PROGRAMINFO)

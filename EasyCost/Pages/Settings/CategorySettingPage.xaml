@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical" Grid.Column="0">
-                <TextBlock Text="지출 분류 관리" FontSize="20" />
+                <TextBlock Name="txtCategoryString" Text="지출 분류 관리" FontSize="20" />
                 <ListView x:Name="lsvCategory" Height="auto" ItemsSource="{Binding SomeCollection}" SelectionChanged="lsvCategory_SelectionChanged" Margin="0,20,0,0">
                     <ListView.ItemTemplate>
                         <DataTemplate>

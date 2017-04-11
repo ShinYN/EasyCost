@@ -1,6 +1,7 @@
 ﻿using EasyCost.Databases;
 using EasyCost.Databases.TableModels;
 using EasyCost.Helpers;
+using EasyCost.Types;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,12 +26,16 @@ namespace EasyCost.Pages.Settings
     /// </summary>
     public sealed partial class CategorySettingPage : Page
     {
-        private string mCategoryType = string.Empty;
-        public CategorySettingPage(string aCategoryType)
+        public string mCategoryType = string.Empty;
+        public CategorySettingPage()
         {
             this.InitializeComponent();
+        }
 
-            mCategoryType = aCategoryType;
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            mCategoryType = e.Parameter as string;
+            txtCategoryString.Text = (mCategoryType == CategoryType.Expense) ? "지출 분류 관리" : "수입 분류 관리";
             DisplayCategoryList();
         }
 
