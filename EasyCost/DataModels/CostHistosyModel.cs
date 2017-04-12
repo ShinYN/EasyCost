@@ -42,6 +42,14 @@ namespace EasyCost.DataModels
         /// </summary>
         public DateTime CostDateTime { get; set; }
         /// <summary>
+        /// 지출, 수비 분류
+        /// </summary>
+        public string CategoryType { get; set; }
+        /// <summary>
+        /// 지출, 수비 분류
+        /// </summary>
+        public string CategoryTypeString { get; set; }
+        /// <summary>
         /// 소비 대 분류
         /// </summary>
         public string Category { get; set; }

@@ -49,22 +49,22 @@ namespace EasyCost.Pages
             _currentButton = btnSearchDay;
             SetSearchButtonColor(_currentButton);
 
-            InitInputCostControls();
+            InitInputCostControls(GetCurrentCategoryType());
         }
-        private void InitInputCostControls()
+        private void InitInputCostControls(string aCategoryType)
         {
-            InitCategoryCombo();
+            InitCategoryCombo(aCategoryType);
             InitSubCategoryCombo();
 
             rbTypeCard.IsChecked = true;
             txtDetail.Text = string.Empty;
             txtCost.Text = string.Empty;
         }
-        private void InitCategoryCombo()
+        private void InitCategoryCombo(string aCategoryType)
         {
             cboCategory.Items.Clear();
             cboCategory.Items.Add(string.Empty);
-            SettingManager.GetCategoryList(CategoryType.Expense).ForEach(elem => cboCategory.Items.Add(elem.Category));
+            SettingManager.GetCategoryList(aCategoryType).ForEach(elem => cboCategory.Items.Add(elem.Category));
             cboCategory.SelectedIndex = 0;
         }
         private void InitSubCategoryCombo()
@@ -93,9 +93,24 @@ namespace EasyCost.Pages
             cboSubCategory.SelectedIndex = 0;
         }
 
-        private void DisplayInputCostForAdd()
+        private void DisplayInputCostForAdd(string aCategoryType)
         {
-            lblTitle.Text = "지출 내역 입력";
+            if (aCategoryType == CategoryType.Expense)
+            {
+                lblTitle.Text = "지출 내역 입력";
+                lblDetail.Text = "지출 내역";
+
+                rbTypeCard.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lblTitle.Text = "수입 내역 입력";
+                lblDetail.Text = "수입 내역";
+
+                rbTypeCard.Visibility = Visibility.Collapsed;
+                rbTypeCash.IsChecked = true;
+            }
+            
             costDatePicker.Date = DateTime.Now;
 
             btnInputCost.Visibility = Visibility.Visible;
@@ -171,6 +186,7 @@ namespace EasyCost.Pages
             CostInfo costInfo = new CostInfo();
             costInfo.UserID = LoginInfo.UserID;
             costInfo.CostDate = costDatePicker.Date.Value.DateTime;
+            costInfo.CategoryType = GetCurrentCategoryType();
             costInfo.Category = cboCategory.SelectedValue.ToString();
             costInfo.SubCategory = cboSubCategory.SelectedValue.ToString();
             costInfo.CostType = (rbTypeCard.IsChecked == true) ? "카드" : "현금";
@@ -180,16 +196,33 @@ namespace EasyCost.Pages
             return costInfo;
         }
 
-        private void btnViewAddCostPanel_Click(object sender, RoutedEventArgs e)
+        private string GetCurrentCategoryType()
         {
-            InitInputCostControls();
-            DisplayInputCostForAdd();
+            return (lblTitle.Text.StartsWith("지출") ? CategoryType.Expense : CategoryType.Income);
+        }
+
+        private void btnViewIncomePanel_Click(object sender, RoutedEventArgs e)
+        {
+            InitInputCostControls(CategoryType.Income);
+            DisplayInputCostForAdd(CategoryType.Income);
 
             if (inputCostMainSplitView.IsPaneOpen == false)
             {
                 inputCostMainSplitView.IsPaneOpen = true;
             }
         }
+
+        private void btnViewExpensePanel_Click(object sender, RoutedEventArgs e)
+        {
+            InitInputCostControls(CategoryType.Expense);
+            DisplayInputCostForAdd(CategoryType.Expense);
+
+            if (inputCostMainSplitView.IsPaneOpen == false)
+            {
+                inputCostMainSplitView.IsPaneOpen = true;
+            }
+        }
+
         private async void btnInputCost_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -244,7 +277,8 @@ namespace EasyCost.Pages
             }
             else
             {
-                DisplaySubCategory(CategoryType.Expense, (string)cboCategory.SelectedValue);
+                string categoryType = (lblTitle.Text.StartsWith("지출")) ? CategoryType.Expense : CategoryType.Income;
+                DisplaySubCategory(categoryType, (string)cboCategory.SelectedValue);
             }
         }
 
@@ -283,7 +317,7 @@ namespace EasyCost.Pages
 
         private void inputCostMainSplitView_PaneClosed(SplitView sender, object args)
         {
-            InitInputCostControls();
+            InitInputCostControls(GetCurrentCategoryType());
         }
 
         private void txtCost_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)

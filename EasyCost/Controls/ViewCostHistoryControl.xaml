@@ -5,9 +5,7 @@
     xmlns:local="using:EasyCost.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="100"
-    d:DesignWidth="300">
+    mc:Ignorable="d">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -30,7 +28,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="130"/>
-                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="100"/>
@@ -45,7 +43,7 @@
                             <TextBlock x:Uid="tbTime" Text="사용 날짜"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                         </Border>
                         <Border Grid.Column="2" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock x:Uid="tbCategoryType" Text="타입"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
+                            <TextBlock x:Uid="tbCategoryType" Text="지출/수입"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                         </Border>
                         <Border Grid.Column="3" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock x:Uid="tbCategory" Text="분류" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
@@ -54,7 +52,7 @@
                             <TextBlock x:Uid="tbSubCategory" Text="세부 분류" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                         </Border>
                         <Border Grid.Column="5" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock x:Uid="tbCostType" Text="타입" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
+                            <TextBlock x:Uid="tbCostType" Text="카드/현금" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                         </Border>
                         <Border Grid.Column="6" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock x:Uid="tbDescription" Text="지출 내역" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
@@ -77,7 +75,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="130"/>
-                            <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="100"/>
@@ -88,7 +86,7 @@
 
                         <TextBlock Text="{Binding Index}" FontSize="15" Grid.Column="0"/>
                         <TextBlock Text="{Binding CostDate}" FontSize="15" Grid.Column="1"/>
-                        <TextBlock Text="{Binding CategoryType}" FontSize="15" Grid.Column="2"/>
+                        <TextBlock Text="{Binding CategoryTypeString}" FontSize="15" Grid.Column="2"/>
                         <TextBlock Text="{Binding Category}" FontSize="15" Grid.Column="3"/>
                         <TextBlock Text="{Binding SubCategory}" FontSize="15" Grid.Column="4" />
                         <TextBlock Text="{Binding CostType}" FontSize="15" Grid.Column="5"/>
@@ -107,7 +105,15 @@
              StrokeThickness="1" Grid.Row="1"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0,0,10,0">
-            <TextBlock Text="최종 사용 금액:" FontSize="20" Grid.Row="1"/>
+            <TextBlock Text="총 수입 금액:" FontSize="20" Grid.Row="1"/>
+            <TextBlock Name="lblTotalIncomeCost" FontSize="20" Text="" Grid.Row="1" Margin="5,0,0,0" Foreground="Blue"/>
+            <TextBlock Text="원," FontSize="20" Grid.Row="1" Margin="0,0,20,0"/>
+
+            <TextBlock Text="총 지출 금액:" FontSize="20" Grid.Row="1"/>
+            <TextBlock Name="lblTotalExpenseCost" FontSize="20" Text="" Grid.Row="1" Margin="5,0,0,0" Foreground="Red"/>
+            <TextBlock Text="원," FontSize="20" Grid.Row="1" Margin="0,0,20,0"/>
+
+            <TextBlock Text="최종 금액:" FontSize="20" Grid.Row="1"/>
             <TextBlock Name="lblTotalCost" FontSize="20" Text="" Grid.Row="1" Margin="5,0,0,0"/>
             <TextBlock Text="원" FontSize="20" Grid.Row="1" />
         </StackPanel>

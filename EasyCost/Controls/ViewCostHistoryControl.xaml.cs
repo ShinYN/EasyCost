@@ -77,8 +77,10 @@ namespace EasyCost.Controls
             {
                 return;
             }
-
-            int totalCost = CostInfo.Sum(elem => elem.Cost);
+            
+            int totalIncomeCost = CostInfo.Where(elem => elem.CategoryType == CategoryType.Income).Sum(elem => elem.Cost);
+            int totalExpenseCost = CostInfo.Where(elem => elem.CategoryType == CategoryType.Expense).Sum(elem => elem.Cost);
+            int totalCost = totalIncomeCost - totalExpenseCost;
             int index = 1;
 
             var orderedCostInfo = (aSelectGroupBy) ? CostInfo.OrderByDescending(elem => elem.Cost) : CostInfo.OrderByDescending(elem => elem.CostDate);
@@ -91,6 +93,8 @@ namespace EasyCost.Controls
                         Id = elem.Id,
                         CostDate = elem.CostDate.ToString("yyyy-MM-dd"),
                         CostDateTime = elem.CostDate,
+                        CategoryType = elem.CategoryType,
+                        CategoryTypeString = (elem.CategoryType == CategoryType.Expense) ? "지출" : "수입",
                         Category = elem.Category,
                         SubCategory = elem.SubCategory,
                         CostType = elem.CostType,
@@ -104,6 +108,8 @@ namespace EasyCost.Controls
                 }
             );
 
+            lblTotalIncomeCost.Text = totalIncomeCost.ToString("#,##0");
+            lblTotalExpenseCost.Text = totalExpenseCost.ToString("#,##0");
             lblTotalCost.Text = totalCost.ToString("#,##0");
         }
 
