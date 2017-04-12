@@ -49,21 +49,6 @@ namespace EasyCost.Controls
                 }
             }
         }
-        //public List<CostHistoryModel> Items
-        //{
-        //    get
-        //    {
-        //        if (lsvHistory.SelectedItem == null)
-        //        {
-        //            return null;
-        //        }
-        //        else
-        //        {
-        //            return lsvHistory.Items.
-        //        }
-        //    }
-        //}
-
         public void Display(DateTime aDisplayDate, bool aSelectGroupBy = false)
         {
             lsvHistory.Items.Clear();

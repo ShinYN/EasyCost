@@ -30,6 +30,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="130"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="100"/>
@@ -44,21 +45,24 @@
                             <TextBlock x:Uid="tbTime" Text="사용 날짜"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                         </Border>
                         <Border Grid.Column="2" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock x:Uid="tbCategory" Text="지출 분류" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
+                            <TextBlock x:Uid="tbCategoryType" Text="타입"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                         </Border>
                         <Border Grid.Column="3" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock x:Uid="tbSubCategory" Text="세부 분류" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
+                            <TextBlock x:Uid="tbCategory" Text="분류" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                         </Border>
                         <Border Grid.Column="4" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock x:Uid="tbCostType" Text="타입" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
+                            <TextBlock x:Uid="tbSubCategory" Text="세부 분류" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                         </Border>
                         <Border Grid.Column="5" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock x:Uid="tbDescription" Text="지출 내역" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
+                            <TextBlock x:Uid="tbCostType" Text="타입" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                         </Border>
                         <Border Grid.Column="6" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
+                            <TextBlock x:Uid="tbDescription" Text="지출 내역" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
+                        </Border>
+                        <Border Grid.Column="7" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                             <TextBlock x:Uid="tbCost" Text="금액"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" />
                         </Border>
-                        <Border Grid.Column="7" BorderBrush="{StaticResource brush}" BorderThickness="0,0,0,0">
+                        <Border Grid.Column="8" BorderBrush="{StaticResource brush}" BorderThickness="0,0,0,0">
                             <TextBlock x:Uid="tbPercentage" Text="비율" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" />
                         </Border>
                     </Grid>
@@ -73,6 +77,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="130"/>
+                            <ColumnDefinition Width="130"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="100"/>
@@ -83,12 +88,13 @@
 
                         <TextBlock Text="{Binding Index}" FontSize="15" Grid.Column="0"/>
                         <TextBlock Text="{Binding CostDate}" FontSize="15" Grid.Column="1"/>
-                        <TextBlock Text="{Binding Category}" FontSize="15" Grid.Column="2"/>
-                        <TextBlock Text="{Binding SubCategory}" FontSize="15" Grid.Column="3" />
-                        <TextBlock Text="{Binding CostType}" FontSize="15" Grid.Column="4"/>
-                        <TextBlock Text="{Binding Description}" FontSize="15" Grid.Column="5" HorizontalAlignment="Left"/>
-                        <TextBlock Text="{Binding CostString}" FontSize="15" Grid.Column="6" HorizontalAlignment="Right"/>
-                        <TextBlock Text="{Binding Percentage}" FontSize="15" Grid.Column="7" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding CategoryType}" FontSize="15" Grid.Column="2"/>
+                        <TextBlock Text="{Binding Category}" FontSize="15" Grid.Column="3"/>
+                        <TextBlock Text="{Binding SubCategory}" FontSize="15" Grid.Column="4" />
+                        <TextBlock Text="{Binding CostType}" FontSize="15" Grid.Column="5"/>
+                        <TextBlock Text="{Binding Description}" FontSize="15" Grid.Column="6" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{Binding CostString}" FontSize="15" Grid.Column="7" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding Percentage}" FontSize="15" Grid.Column="8" HorizontalAlignment="Right"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

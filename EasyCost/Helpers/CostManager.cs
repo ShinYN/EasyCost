@@ -24,12 +24,13 @@ namespace EasyCost.Helpers
             {
                 return (from c in DBConnHandler.DbConnection.Table<CostInfo>()
                         where c.UserID == LoginInfo.UserID
-                        group c by new { CostDate = c.CostDate.ToString("yyyyMMdd"), c.Category, c.SubCategory, c.CostType }
+                        group c by new { CostDate = c.CostDate.ToString("yyyyMMdd"), c.CategoryType, c.Category, c.SubCategory, c.CostType }
                         into result
-                        orderby result.Key.Category, result.Key.SubCategory, result.Key.CostType
+                        orderby result.Key.CategoryType, result.Key.Category, result.Key.SubCategory, result.Key.CostType
                         select new CostInfo
                         {
                             CostDate = DateTime.ParseExact(result.Key.CostDate, "yyyyMMdd", null),
+                            CategoryType = result.Key.CategoryType,
                             Category = result.Key.Category,
                             SubCategory = result.Key.SubCategory,
                             CostType = result.Key.CostType,
@@ -111,21 +112,23 @@ namespace EasyCost.Helpers
                 IWorksheet worksheet = workbook.Worksheets[0];
 
                 worksheet.Range["A1"].Text = "사용 날짜";
-                worksheet.Range["B1"].Text = "지출 분류";
-                worksheet.Range["C1"].Text = "세부 분류";
-                worksheet.Range["D1"].Text = "타입";
-                worksheet.Range["E1"].Text = "지출 내역";
-                worksheet.Range["F1"].Text = "지출 금액";
+                worksheet.Range["B1"].Text = "타입";
+                worksheet.Range["C1"].Text = "분류";
+                worksheet.Range["D1"].Text = "세부 분류";
+                worksheet.Range["E1"].Text = "타입";
+                worksheet.Range["F1"].Text = "지출 내역";
+                worksheet.Range["G1"].Text = "지출 금액";
                 
                 int rowIndex = 2;
                 foreach (CostInfo costInfo in aCostInfoList)
                 {
                     worksheet.Range["A" + rowIndex].Text = costInfo.CostDate.ToString("yyyy-MM-dd HH:mm:ss");
-                    worksheet.Range["B" + rowIndex].Text = costInfo.Category;
-                    worksheet.Range["C" + rowIndex].Text = costInfo.SubCategory;
-                    worksheet.Range["D" + rowIndex].Text = costInfo.CostType;
-                    worksheet.Range["E" + rowIndex].Text = costInfo.Description;
-                    worksheet.Range["F" + rowIndex].Text = costInfo.Cost.ToString();
+                    worksheet.Range["B" + rowIndex].Text = costInfo.CategoryType;
+                    worksheet.Range["C" + rowIndex].Text = costInfo.Category;
+                    worksheet.Range["D" + rowIndex].Text = costInfo.SubCategory;
+                    worksheet.Range["E" + rowIndex].Text = costInfo.CostType;
+                    worksheet.Range["F" + rowIndex].Text = costInfo.Description;
+                    worksheet.Range["G" + rowIndex].Text = costInfo.Cost.ToString();
 
                     rowIndex++;
                 }
@@ -133,9 +136,10 @@ namespace EasyCost.Helpers
                 worksheet.Range[1, 1, aCostInfoList.Count, 1].ColumnWidth = 20;
                 worksheet.Range[1, 2, aCostInfoList.Count, 2].ColumnWidth = 15;
                 worksheet.Range[1, 3, aCostInfoList.Count, 3].ColumnWidth = 15;
-                worksheet.Range[1, 4, aCostInfoList.Count, 4].ColumnWidth = 10;
-                worksheet.Range[1, 5, aCostInfoList.Count, 5].ColumnWidth = 20;
-                worksheet.Range[1, 6, aCostInfoList.Count, 6].ColumnWidth = 15;
+                worksheet.Range[1, 4, aCostInfoList.Count, 4].ColumnWidth = 15;
+                worksheet.Range[1, 5, aCostInfoList.Count, 5].ColumnWidth = 10;
+                worksheet.Range[1, 6, aCostInfoList.Count, 6].ColumnWidth = 20;
+                worksheet.Range[1, 7, aCostInfoList.Count, 7].ColumnWidth = 15;
 
                 worksheet.Range["A1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
                 worksheet.Range["B1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
@@ -143,6 +147,7 @@ namespace EasyCost.Helpers
                 worksheet.Range["D1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
                 worksheet.Range["E1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
                 worksheet.Range["F1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
+                worksheet.Range["G1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
 
                 FileSavePicker savePicker = new FileSavePicker();
                 savePicker.SuggestedStartLocation = PickerLocationId.Desktop;
