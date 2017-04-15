@@ -56,7 +56,7 @@
         <SplitView x:Name="inputCostMainSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"  CompactPaneLength="0" OpenPaneLength="380" PanePlacement="Right" Grid.Row="3" Margin="0,0,0,20">
             <SplitView.Pane>
                 <StackPanel Orientation="Vertical" Background="White" BorderThickness="1,1,1,1" BorderBrush="#666666" Padding="10,10,0,0">
-                    <TextBlock Text="세부 지출 내역" FontSize="15"/>
+                    <TextBlock Text="세부 사용 내역" FontSize="15"/>
                     <Line X1="0" Y1="6" X2="335" Y2="6" Stroke="#FF535353" StrokeThickness="1" RelativePanel.Below="lblTitle"/>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <Ellipse Height="8" Width="8" Fill="#FFAEAEAE" VerticalAlignment="Center" Margin="0,0,5,0"/>
@@ -65,7 +65,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,00,0,0">
                         <Ellipse Height="8" Width="8" Fill="#FFAEAEAE" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <TextBlock Text="총 지출 금액:" Foreground="Gray" VerticalAlignment="Center"/>
+                        <TextBlock Text="총 금액:" Foreground="Gray" VerticalAlignment="Center"/>
                         <TextBlock Name="txtSubTotalCost" Text="123123" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF0221EA" />
                         <TextBlock Text="원" Foreground="Gray" VerticalAlignment="Center"/>
                     </StackPanel>
