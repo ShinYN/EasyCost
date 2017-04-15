@@ -22,33 +22,6 @@
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
             </ListView.ItemContainerStyle>
-            <!--<ListView.HeaderTemplate>
-                <DataTemplate>
-                    <Grid Height="20" Background="#006FB6">
-                        <Grid.Resources>
-                            <SolidColorBrush x:Key="brush" Color="White"/>
-                        </Grid.Resources>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock x:Uid="tbIndex" Text=""  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="White"/>
-                        </Border>
-                        <Border Grid.Column="1" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock x:Uid="tbCategory" Text="지출 분류" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="White"/>
-                        </Border>
-                        <Border Grid.Column="2" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock x:Uid="tbRate" Text="비율" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="White"/>
-                        </Border>
-                        <Border Grid.Column="3" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                            <TextBlock x:Uid="tbCost" Text="금액"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Foreground="White" />
-                        </Border>
-                    </Grid>
-                </DataTemplate>
-            </ListView.HeaderTemplate>-->
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="gridData">
                     <Grid Height="18">

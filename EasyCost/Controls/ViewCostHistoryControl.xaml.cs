@@ -53,21 +53,21 @@ namespace EasyCost.Controls
         {
             lsvHistory.Items.Clear();
 
-            CostInfo = CostManager.GetCostInfo(aDisplayDate, aSelectGroupBy);
+            CostInfo = CostManager.GetCostInfo(aDisplayDate, string.Empty, aSelectGroupBy);
             DisplayCostInfoToListView(aSelectGroupBy);
         }
         public void Display(InquiryType aInquiryType, bool aSelectGroupBy = false)
         {
             lsvHistory.Items.Clear();
 
-            CostInfo = CostManager.GetCostInfo(aInquiryType, aSelectGroupBy);
+            CostInfo = CostManager.GetCostInfo(aInquiryType, string.Empty, aSelectGroupBy);
             DisplayCostInfoToListView(aSelectGroupBy);
         }
         public void Display(DateTime aFromDate, DateTime aToDate, bool aSelectGroupBy = false)
         {
             lsvHistory.Items.Clear();
 
-            CostInfo = CostManager.GetCostInfo(aFromDate, aToDate, aSelectGroupBy);
+            CostInfo = CostManager.GetCostInfo(aFromDate, aToDate, string.Empty, aSelectGroupBy);
             DisplayCostInfoToListView(aSelectGroupBy);
         }
 

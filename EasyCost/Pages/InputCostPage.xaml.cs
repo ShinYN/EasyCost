@@ -119,13 +119,28 @@ namespace EasyCost.Pages
         }
         private void DisplayInputCostForUpdate(CostHistoryModel aCostHistoryModel)
         {
-            lblTitle.Text = "지출 내역 수정";
+            InitCategoryCombo(aCostHistoryModel.CategoryType);
+
+            if (aCostHistoryModel.CategoryType == CategoryType.Expense)
+            {
+                lblTitle.Text = "지출 내역 수정";
+                lblDetail.Text = "지출 내역";
+
+                rbTypeCard.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lblTitle.Text = "수입 내역 수정";
+                lblDetail.Text = "수입 내역";
+
+                rbTypeCard.Visibility = Visibility.Collapsed;
+                rbTypeCash.IsChecked = true;
+            }
+
             costDatePicker.Date = aCostHistoryModel.CostDateTime;
             cboCategory.SelectedValue = aCostHistoryModel.Category;
             cboSubCategory.SelectedValue = aCostHistoryModel.SubCategory;
             txtDetail.Text = aCostHistoryModel.Description;
-            rbTypeCard.IsChecked = (aCostHistoryModel.CostType == "카드") ? true : false;
-            rbTypeCash.IsChecked = !rbTypeCard.IsChecked;
             txtCost.Text = aCostHistoryModel.Cost.ToString();
 
             btnInputCost.Visibility = Visibility.Collapsed;

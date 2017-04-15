@@ -34,15 +34,15 @@ namespace EasyCost.Pages
         {
             this.InitializeComponent();
             InitSettingItems();
-            settingFrame.Navigate(typeof(CategorySettingPage), CategoryType.Income);
-            mIsIncomePage = true;
+            settingFrame.Navigate(typeof(CategorySettingPage), CategoryType.Expense);
+            mIsIncomePage = false;
         }
 
         private void InitSettingItems()
         {
             lsvSettingItem.Items.Clear();
-            lsvSettingItem.Items.Add(new { Item = MENU_INCOME_CATEGORY });
             lsvSettingItem.Items.Add(new { Item = MENU_EXPENSE_CATEGORY });
+            lsvSettingItem.Items.Add(new { Item = MENU_INCOME_CATEGORY });
             lsvSettingItem.Items.Add(new { Item = MENU_DATASYNC });
             lsvSettingItem.Items.Add(new { Item = MENU_PROGRAMINFO });
             lsvSettingItem.SelectedIndex = 0;

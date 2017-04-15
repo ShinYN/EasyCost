@@ -163,8 +163,8 @@
     <Compile Include="Pages\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Statistics\DailyStatisticsPage.xaml.cs">
-      <DependentUpon>DailyStatisticsPage.xaml</DependentUpon>
+    <Compile Include="Pages\Statistics\ViewStatisticsPage.xaml.cs">
+      <DependentUpon>ViewStatisticsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartPage.xaml.cs">
@@ -321,9 +321,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Statistics\DailyStatisticsPage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Pages\Statistics\ViewStatisticsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="StartPage.xaml">
       <SubType>Designer</SubType>
