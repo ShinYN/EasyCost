@@ -24,8 +24,8 @@ namespace EasyCost.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private const string MENU_WRITECOST = "지출 내역 관리";
-        private const string MENU_STATISTICS = "지출 통계 보기";
+        private const string MENU_WRITECOST = "수입,지출 내역 관리";
+        private const string MENU_STATISTICS = "통계 보기";
         private const string MENU_SETTINGS = "프로그램 설정";
 
         public MainPage()
@@ -38,8 +38,8 @@ namespace EasyCost.Pages
 
         private void InitializeMenu()
         {
-            menuList.Items.Add(new MenuItemModel { ImagePath = "ms-appx:///Assets/MenuIcons/menuWriteCost_D.png", menuText = "지출 내역 관리" });
-            menuList.Items.Add(new MenuItemModel { ImagePath = "ms-appx:///Assets/MenuIcons/menuStatistics_D.png", menuText = "지출 통계 보기" });
+            menuList.Items.Add(new MenuItemModel { ImagePath = "ms-appx:///Assets/MenuIcons/menuWriteCost_D.png", menuText = "수입,지출 내역 관리" });
+            menuList.Items.Add(new MenuItemModel { ImagePath = "ms-appx:///Assets/MenuIcons/menuStatistics_D.png", menuText = "통계 보기" });
             menuList.Items.Add(new MenuItemModel { ImagePath = "ms-appx:///Assets/MenuIcons/menuSetting_D.png", menuText = "프로그램 설정" });
         }
 

@@ -120,7 +120,7 @@ namespace EasyCost.Helpers
                 IWorksheet worksheet = workbook.Worksheets[0];
 
                 worksheet.Range["A1"].Text = "사용 날짜";
-                worksheet.Range["B1"].Text = "타입";
+                worksheet.Range["B1"].Text = "수입/지출";
                 worksheet.Range["C1"].Text = "분류";
                 worksheet.Range["D1"].Text = "세부 분류";
                 worksheet.Range["E1"].Text = "타입";

@@ -37,6 +37,7 @@ namespace EasyCost.Helpers
                 return;
             }
             DBConnHandler.DbConnection.Execute(string.Format("DELETE FROM CategoryMaster WHERE CategoryType = '{0}' and Category = '{1}'", aCategoryType, aCategory));
+            DeleteSubCategory(aCategoryType, aCategory);
         }
 
         public static List<SubCategoryMaster> GetSubCategoryList(string aCategoryType, string aCategory)

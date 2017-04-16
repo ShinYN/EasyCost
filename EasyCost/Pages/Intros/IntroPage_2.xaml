@@ -12,15 +12,12 @@
         <TextBlock x:Name="lblTitle2" Text="&quot;걱정 마세요. 10초면 됩니다.&quot;" FontWeight="Bold" Foreground="White" FontSize="25" RelativePanel.Below="lblTitle" RelativePanel.AlignLeftWith="lblTitle" Margin="0,-50,0,0"/>
         <StackPanel x:Name="pnDescription" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" >
             <TextBlock Text="1.카테고리 설정" Foreground="White" FontWeight="Bold" />
-            <TextBlock Text="프로그램을 처음 시작하면 입력할 지출의 분류를 설정해야 합니다. " Foreground="#FF665656" FontSize="12"/>
+            <TextBlock Text="프로그램을 처음 시작하면 입력할 수입과 지출의 분류를 설정해야 합니다. " Foreground="#FF665656" FontSize="12"/>
             <TextBlock Text="'설정' -> '카테고리' 메뉴로 이동해서 사용하실 분류를 설정해 주세요." Foreground="#FF665656" FontSize="12"/>
-            <TextBlock Text="2.지출 입력" Foreground="White" Margin="0,20,0,0"/>
+            <TextBlock Text="2.사용 내역 입력" Foreground="White" Margin="0,20,0,0"/>
             <TextBlock Text="모든 설명이 끝났습니다. 간단하죠?" Foreground="#FF665656" FontSize="12"/>
-            <TextBlock Text="이제 프로그램을 실행하셔서 공감 가계부와 함께 지출 정보를 관리해보세요." Foreground="#FF665656" FontSize="12"/>
+            <TextBlock Text="이제 프로그램을 실행하셔서 공감 가계부와 함께 정보를 관리해보세요." Foreground="#FF665656" FontSize="12"/>
         </StackPanel>
         <Button Name="btnStart" Content="시작합니다" RelativePanel.Below="pnDescription" Width="120" RelativePanel.AlignHorizontalCenterWithPanel="True" BorderThickness="1" Background="#FF0079FF" Foreground="White" Margin="0,0,0,-100" Click="btnStart_Click" />
     </RelativePanel>
-    <!--<StackPanel Background="#FFFFBB00">
-        <TextBlock Text="시작하기" Foreground="White" FontWeight="Bold"/>
-    </StackPanel>-->
 </Page>

@@ -100,7 +100,7 @@ namespace EasyCost.Controls
                         CostType = elem.CostType,
                         Cost = elem.Cost,
                         CostString = elem.Cost.ToString("#,##0").PadLeft(10, ' ') + "원",
-                        Percentage = ((double)elem.Cost * 100 / (double)totalCost).ToString("#0.#") + "%",
+                        Percentage = (elem.CategoryType == CategoryType.Expense) ? ((double)elem.Cost * 100 / (double)totalExpenseCost).ToString("#0.#") + "%" : string.Empty,
                         Description = elem.Description
                     });
 

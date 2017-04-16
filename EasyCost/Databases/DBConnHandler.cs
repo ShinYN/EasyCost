@@ -102,13 +102,20 @@ namespace EasyCost.Databases
                 DbConnection.InsertAll(subCategoryMasterList);
                 DbConnection.InsertAll(costInfoList);
                 DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 2");
+
+                UpdateInitIncomeData();
             }
         }
 
         private static void CreateInitialCategory()
         {
             DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 2");
-
+            
+            UpdateInitExpenseData();
+            UpdateInitExpenseData();
+        }
+        private static void UpdateInitExpenseData()
+        {
             DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'E', '교통비', ''");
             DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '교통비', '지하철', '', 'N', 0, '', 0");
             DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '교통비', '버스', '', 'N', 0, '', 0");
@@ -129,7 +136,24 @@ namespace EasyCost.Databases
             DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'E', '취미', '책', '', 'N', 0, '', 0");
 
             DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'E', '기타', ''");
+
         }
+        private static void UpdateInitIncomeData()
+        {
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'I', '회사', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'I', '회사', '월급', '', 'N', 0, '', 0");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'I', '회사', '성과급', '', 'N', 0, '', 0");
+
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'I', '집', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'I', '집', '용돈', '', 'N', 0, '', 0");
+
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'I', '은행', ''");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'I', '은행', '적금', '', 'N', 0, '', 0");
+            DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'I', '은행', '펀드', '', 'N', 0, '', 0");
+
+            DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'I', '기타', ''");
+        }
+        
 
         private static DBVersionType GetUserDBVersion()
         {

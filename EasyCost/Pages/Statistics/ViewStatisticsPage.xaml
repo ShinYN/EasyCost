@@ -115,9 +115,9 @@
             <SplitView.Content>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="20" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="330" />
                     </Grid.ColumnDefinitions>
                     <syncfusion:SfChart x:Name="costHistoryChart" Header="" Grid.Column="0" RequestedTheme="Light" Foreground="Gray" SelectionChanged="costHistoryChart_SelectionChanged">
                         <syncfusion:SfChart.PrimaryAxis>

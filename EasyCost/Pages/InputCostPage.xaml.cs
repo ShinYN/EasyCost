@@ -127,6 +127,7 @@ namespace EasyCost.Pages
                 lblDetail.Text = "지출 내역";
 
                 rbTypeCard.Visibility = Visibility.Visible;
+                rbTypeCash.IsChecked = (aCostHistoryModel.CostType == "현금") ? true : false;
             }
             else
             {

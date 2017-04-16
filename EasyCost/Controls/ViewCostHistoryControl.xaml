@@ -61,7 +61,7 @@
                             <TextBlock x:Uid="tbCost" Text="금액"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" />
                         </Border>
                         <Border Grid.Column="8" BorderBrush="{StaticResource brush}" BorderThickness="0,0,0,0">
-                            <TextBlock x:Uid="tbPercentage" Text="비율" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" Visibility="Collapsed" />
+                            <TextBlock x:Uid="tbPercentage" Text="비율" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" />
                         </Border>
                     </Grid>
                 </DataTemplate>
@@ -92,7 +92,7 @@
                         <TextBlock Text="{Binding CostType}" FontSize="15" Grid.Column="5"/>
                         <TextBlock Text="{Binding Description}" FontSize="15" Grid.Column="6" HorizontalAlignment="Left"/>
                         <TextBlock Text="{Binding CostString}" FontSize="15" Grid.Column="7" HorizontalAlignment="Right"/>
-                        <TextBlock Text="{Binding Percentage}" FontSize="15" Grid.Column="8" HorizontalAlignment="Right" Visibility="Collapsed" />
+                        <TextBlock Text="{Binding Percentage}" FontSize="15" Grid.Column="8" HorizontalAlignment="Right" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

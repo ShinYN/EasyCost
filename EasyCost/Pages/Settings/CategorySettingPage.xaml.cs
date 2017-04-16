@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -68,8 +69,8 @@ namespace EasyCost.Pages.Settings
             if (lsvCategory.SelectedItems.Count() != 0)
             {
                 dynamic category = lsvCategory.SelectedValue;
-
-                SettingManager.DeleteCategory(category.Category);
+                string categoryString = category.Category;
+                SettingManager.DeleteCategory(_categoryType, categoryString);
                 DisplayCategoryList();
                 txtCategory.Text = string.Empty;
             }
@@ -104,7 +105,7 @@ namespace EasyCost.Pages.Settings
             }
         }
 
-        private void btnAddSubCategory_Click(object sender, RoutedEventArgs e)
+        private async void btnAddSubCategory_Click(object sender, RoutedEventArgs e)
         {
             if (txtSubCategory.Text.Trim() == string.Empty)
             {
@@ -112,6 +113,15 @@ namespace EasyCost.Pages.Settings
             }
 
             dynamic category = lsvCategory.SelectedValue;
+            if (category == null)
+            {
+                var dialog = new MessageDialog("카테고리 정보를 선택해 주세요");
+                dialog.Title = "확인";
+                dialog.Commands.Add(new UICommand { Label = "예", Id = 0 });
+                var res = await dialog.ShowAsync();
+                return;
+            }
+
             SettingManager.SaveSubCategory(new Databases.TableModels.SubCategoryMaster
             {
                 CategoryType = _categoryType, Category = category.Category, SubCategory = txtSubCategory.Text.Trim(), Description = string.Empty
