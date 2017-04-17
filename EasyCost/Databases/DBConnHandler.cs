@@ -112,7 +112,7 @@ namespace EasyCost.Databases
             DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 2");
             
             UpdateInitExpenseData();
-            UpdateInitExpenseData();
+            UpdateInitIncomeData();
         }
         private static void UpdateInitExpenseData()
         {
