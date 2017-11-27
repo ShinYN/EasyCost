@@ -64,9 +64,10 @@ namespace EasyCost.Helpers
             }
             else if (aInquiryType == InquiryType.Week)
             {
-                costInfo = CostManager.GetCostInfo(aCategoryType, aSelectGroupBy).Where(elem =>
-                    cal.GetWeekOfYear(elem.CostDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday) ==
-                    cal.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday)).ToList();
+                costInfo = CostManager.GetCostInfo(aCategoryType, aSelectGroupBy).Where(elem => elem.CostDate.Year == DateTime.Now.Year)
+                                                                                 .Where(elem =>
+                                                                                    cal.GetWeekOfYear(elem.CostDate, CalendarWeekRule.FirstDay, DayOfWeek.Monday) ==
+                                                                                    cal.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday)).ToList();
             }
             else if (aInquiryType == InquiryType.Month)
             {
