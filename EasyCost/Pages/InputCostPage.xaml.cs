@@ -81,7 +81,7 @@ namespace EasyCost.Pages
             _currentButton = btnSearchCustom;
             SetSearchButtonColor(_currentButton);
 
-            costHistory.Display(aFromDate, aToDate, false);
+            costHistory.Display(aFromDate, aToDate);
         }
 
 

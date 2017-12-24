@@ -17,6 +17,9 @@
             <TextBlock Text="2.사용 내역 입력" Foreground="White" Margin="0,20,0,0"/>
             <TextBlock Text="모든 설명이 끝났습니다. 간단하죠?" Foreground="#FF665656" FontSize="12"/>
             <TextBlock Text="이제 프로그램을 실행하셔서 공감 가계부와 함께 정보를 관리해보세요." Foreground="#FF665656" FontSize="12"/>
+            <TextBlock Text="3.베타" Foreground="Red" Margin="0,20,0,0"/>
+            <TextBlock Text="공감 가계부는 아직 베타입니다." Foreground="#FF665656" FontSize="12"/>
+            <TextBlock Text="더 많은 기능 추가해서 빨리 정식 버전을 출시하겠습니다. :D" Foreground="#FF665656" FontSize="12"/>
         </StackPanel>
         <Button Name="btnStart" Content="시작합니다" RelativePanel.Below="pnDescription" Width="120" RelativePanel.AlignHorizontalCenterWithPanel="True" BorderThickness="1" Background="#FF0079FF" Foreground="White" Margin="0,0,0,-100" Click="btnStart_Click" />
     </RelativePanel>

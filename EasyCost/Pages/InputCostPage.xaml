@@ -177,15 +177,24 @@
                 <Controls:ViewCostHistoryControl x:Name="costHistory" Margin="10,10,10,0"/>
             </SplitView.Content>
         </SplitView>
-        <RelativePanel Grid.Row ="2" Margin="-25,0,25,0">
-            <Button x:Name="btnViewExpensePanel" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignRightWithPanel="True" Click="btnViewExpensePanel_Click">
-                <Image Source="ms-appx:///Assets/MenuIcons/removeItem_G.png"/>
+        <RelativePanel Grid.Row ="2" Margin="0,0,0,0">
+            <Button x:Name="btnViewExpensePanel" Background="Transparent" Foreground="Black" BorderThickness="1" BorderBrush="Gray" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Click="btnViewExpensePanel_Click" Margin="10,0,30,0" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE738;" Foreground="Red" Margin="0,2,5,0"/>
+                    <TextBlock Text="지출 등록" />
+                </StackPanel>
             </Button>
-            <Button x:Name="btnViewIncomePanel" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignLeftWith="btnViewExpensePanel" RelativePanel.AlignVerticalCenterWithPanel="True" Click="btnViewIncomePanel_Click" Margin="-60,0,0,0">
-                <Image Source="ms-appx:///Assets/MenuIcons/addItem_G.png"/>
+            <Button x:Name="btnViewIncomePanel" Background="Transparent" Foreground="Black" BorderThickness="1" BorderBrush="Gray" RelativePanel.LeftOf="btnViewExpensePanel" RelativePanel.AlignVerticalCenterWithPanel="True" Click="btnViewIncomePanel_Click" Margin="10,0,0,0" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE710;" Foreground="Blue" Margin="0,2,5,0"/>
+                    <TextBlock Text="수입 등록" />
+                </StackPanel>
             </Button>
-            <Button x:Name="btnExportExcel" Background="Transparent" Foreground="Transparent" BorderThickness="0" RelativePanel.AlignLeftWith="btnViewIncomePanel" RelativePanel.AlignVerticalCenterWithPanel="True" Click="btnExportExcel_Click" Margin="-120,0,0,0">
-                <Image Source="ms-appx:///Assets/MenuIcons/exportExcel.png"/>
+            <Button x:Name="btnExportExcel" Background="Transparent" Foreground="Black" BorderThickness="1" BorderBrush="Gray" RelativePanel.LeftOf="btnViewIncomePanel" RelativePanel.AlignVerticalCenterWithPanel="True" Click="btnExportExcel_Click" Margin="0,0,0,0" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8E5;" Foreground="Green" Margin="0,2,5,0"/>
+                    <TextBlock Text="엑셀 추출" />
+                </StackPanel>
             </Button>
         </RelativePanel>
     </Grid>
