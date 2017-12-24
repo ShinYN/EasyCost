@@ -1,1 +1,1 @@
-C:\Programming\GCost\EasyCost\bin\ARM\Release\Upload\EasyCost_1.1.5.0\EasyCost_1.1.5.0_x86_x64_arm.appxbundle
+D:\2.Private\1.Project\1.GGCost\GGCost\EasyCost\bin\x64\Release\Upload\EasyCost_1.1.6.0\EasyCost_1.1.6.0_x86_x64.appxbundle

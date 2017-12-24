@@ -1,2 +1,6 @@
-MainPackage=C:\Programming\GCost\EasyCost\bin\x64\Release\Upload\EasyCost_1.1.5.0_x64.appx
-SymbolPackage=C:\Programming\GCost\EasyCost\bin\x64\Release\Upload\EasyCost_1.1.5.0\EasyCost_1.1.5.0_x64.appxsym
+MainPackage=D:\2.Private\1.Project\1.GGCost\GGCost\EasyCost\bin\x64\Release\Upload\EasyCost_1.1.6.0_x64.appx
+SymbolPackage=D:\2.Private\1.Project\1.GGCost\GGCost\EasyCost\bin\x64\Release\Upload\EasyCost_1.1.6.0\EasyCost_1.1.6.0_x64.appxsym
+ResourcePack=D:\2.Private\1.Project\1.GGCost\GGCost\EasyCost\bin\x64\Release\EasyCost_1.1.6.0_scale-100.appx
+ResourcePack=D:\2.Private\1.Project\1.GGCost\GGCost\EasyCost\bin\x64\Release\EasyCost_1.1.6.0_scale-125.appx
+ResourcePack=D:\2.Private\1.Project\1.GGCost\GGCost\EasyCost\bin\x64\Release\EasyCost_1.1.6.0_scale-150.appx
+ResourcePack=D:\2.Private\1.Project\1.GGCost\GGCost\EasyCost\bin\x64\Release\EasyCost_1.1.6.0_scale-400.appx
