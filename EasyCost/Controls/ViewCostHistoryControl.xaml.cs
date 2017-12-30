@@ -1,24 +1,11 @@
-﻿using EasyCost.Databases;
-using EasyCost.Databases.TableModels;
+﻿using EasyCost.Databases.TableModels;
 using EasyCost.DataModels;
 using EasyCost.Helpers;
 using EasyCost.Types;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -108,6 +95,10 @@ namespace EasyCost.Controls
             if ((string)cboCostType.SelectedValue != string.Empty)
             {
                 tempCostInfo = tempCostInfo.Where(elem => elem.CostType == (string)cboCostType.SelectedValue);
+            }
+            if (string.IsNullOrWhiteSpace(txtSearchDescrtipion.Text) == false)
+            {
+                tempCostInfo = tempCostInfo.Where(elem => elem.Description.Contains(txtSearchDescrtipion.Text.Trim()));
             }
 
             var orderedCostInfo = tempCostInfo.OrderByDescending(elem => elem.CostDate);
@@ -221,6 +212,10 @@ namespace EasyCost.Controls
             DisplayCostInfoToListView();
         }
         private void cboCostType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayCostInfoToListView();
+        }
+        private void txtSearchDescrtipion_TextChanged(object sender, TextChangedEventArgs e)
         {
             DisplayCostInfoToListView();
         }

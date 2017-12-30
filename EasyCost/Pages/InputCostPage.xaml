@@ -124,18 +124,20 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="120" Height="30" Grid.Column="1" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchDay_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
-            <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="2" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchWeek_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
-            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="3"  Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchMonth_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
-            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="4" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchYear_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
-            <Button Name="btnSearchCustom" Content="기간" BorderThickness="0,1,1,1"  Width="120" Height="30" Grid.Column="5" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited">
+            <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="100" Height="30" Grid.Column="1" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchDay_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
+            <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="100" Height="30" Grid.Column="2" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchWeek_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
+            <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="100" Height="30" Grid.Column="3"  Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchMonth_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
+            <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="100" Height="30" Grid.Column="4" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchYear_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
+            <Button Name="btnSearchAll" Content="전체" BorderThickness="0,1,1,1"  Width="100" Height="30" Grid.Column="5" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchAll_Click"  PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
+            <Button Name="btnSearchCustom" Content="기간" BorderThickness="0,1,1,1"  Width="100" Height="30" Grid.Column="6" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited">
                 <Button.Flyout>
                     <Flyout x:Name="searchCustomFlyout" >
                         <Controls:DateSearchControl x:Name="dateSearchControl" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" BorderThickness="0" Padding="0" Margin="0"/>

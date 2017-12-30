@@ -13,9 +13,27 @@ namespace EasyCost.Pages.Settings
     /// </summary>
     public sealed partial class DataSyncPage : Page
     {
+        private string BACKUP_LOCATION_GOOGLE = "Google Drive";
+
         public DataSyncPage()
         {
             this.InitializeComponent();
+        }
+
+        private void InitDataBackupControls()
+        {
+            cboDataSyncFrom.Items.Clear();
+            cboDataSyncFrom.Items.Add(BACKUP_LOCATION_GOOGLE);
+            cboDataSyncFrom.SelectedIndex = 0;
+            
+            cboDataSyncTo.Items.Clear();
+            cboDataSyncTo.Items.Add(BACKUP_LOCATION_GOOGLE);
+            cboDataSyncTo.SelectedIndex = 0;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            InitDataBackupControls();
         }
 
         private async void btnInitData_Click(object sender, RoutedEventArgs e)
@@ -39,6 +57,16 @@ namespace EasyCost.Pages.Settings
 
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(StartPage));
+        }
+
+        private void btnBackupData_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnResotreData_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

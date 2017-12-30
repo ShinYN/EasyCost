@@ -43,6 +43,7 @@ namespace EasyCost.Pages
             _searchButtonList.Add(btnSearchWeek);
             _searchButtonList.Add(btnSearchMonth);
             _searchButtonList.Add(btnSearchYear);
+            _searchButtonList.Add(btnSearchAll);
             _searchButtonList.Add(btnSearchCustom);
 
             _lastInquiryType = InquiryType.Today;
@@ -328,6 +329,14 @@ namespace EasyCost.Pages
             SetSearchButtonColor(_currentButton);
 
             _lastInquiryType = InquiryType.Year;
+            costHistory.Display(_lastInquiryType);
+        }
+        private void btnSearchAll_Click(object sender, RoutedEventArgs e)
+        {
+            _currentButton = (Button)sender;
+            SetSearchButtonColor(_currentButton);
+
+            _lastInquiryType = InquiryType.All;
             costHistory.Display(_lastInquiryType);
         }
 

@@ -12,7 +12,6 @@
             <ColumnDefinition Width="190" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <!--<ListView x:Name="lsvSettingItem"  Grid.Column="0" Background="#F2F2F2" Tapped="lsvSettingItem_Tapped">-->
         <ListView x:Name="lsvSettingItem"  Grid.Column="0" Background="#F2F2F2" ItemClick="lsvSettingItem_ItemClick" IsItemClickEnabled="True">
             <ListView.ItemTemplate>
             <DataTemplate>

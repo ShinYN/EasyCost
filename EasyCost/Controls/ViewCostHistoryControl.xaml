@@ -14,16 +14,24 @@
             <RowDefinition Height="5" />
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" Margin="0,5,0,0">
-            <TextBlock Text="지출/수입" FontSize="15" Margin="0,0,10,0" VerticalAlignment="Center"/>
-            <ComboBox x:Name="cboCategoryType" Width="80" FontSize="15" BorderBrush="Gray" BorderThickness="1" SelectionChanged="cboCategoryType_SelectionChanged"/>
-            <TextBlock Text="분류" FontSize="15" VerticalAlignment="Center" Margin="10,0,10,0"/>
-            <ComboBox x:Name="cboCategory" Width="120" FontSize="15" BorderBrush="Gray" BorderThickness="1" SelectionChanged="cboCategory_SelectionChanged"/>
-            <TextBlock Text="세부 분류" FontSize="15" VerticalAlignment="Center" Margin="10,0,10,0"/>
-            <ComboBox x:Name="cboSubCategory" Width="150" FontSize="15" BorderBrush="Gray" BorderThickness="1" SelectionChanged="cboSubCategory_SelectionChanged"/>
-            <TextBlock Text="카드/현금" FontSize="15" VerticalAlignment="Center" Margin="10,0,10,0"/>
-            <ComboBox x:Name="cboCostType" Width="80" FontSize="15" BorderBrush="Gray" BorderThickness="1" SelectionChanged="cboCostType_SelectionChanged"/>
-        </StackPanel>
+        <Grid Grid.Row="0" Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center" >
+                <TextBlock Text="지출/수입" FontSize="15" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cboCategoryType" Width="80" FontSize="15" BorderBrush="Gray" BorderThickness="1" SelectionChanged="cboCategoryType_SelectionChanged"/>
+                <TextBlock Text="분류" FontSize="15" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                <ComboBox x:Name="cboCategory" Width="120" FontSize="15" BorderBrush="Gray" BorderThickness="1" SelectionChanged="cboCategory_SelectionChanged"/>
+                <TextBlock Text="세부 분류" FontSize="15" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                <ComboBox x:Name="cboSubCategory" Width="150" FontSize="15" BorderBrush="Gray" BorderThickness="1" SelectionChanged="cboSubCategory_SelectionChanged"/>
+                <TextBlock Text="카드/현금" FontSize="15" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                <ComboBox x:Name="cboCostType" Width="80" FontSize="15" BorderBrush="Gray" BorderThickness="1" SelectionChanged="cboCostType_SelectionChanged"/>
+                <TextBlock Text="내역" FontSize="15" VerticalAlignment="Center" Margin="10,0,10,0"/>
+            </StackPanel>
+            <TextBox x:Name="txtSearchDescrtipion" FontSize="15" Grid.Column="1"  BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Center" Margin="0,0,20,0" TextChanged="txtSearchDescrtipion_TextChanged"/>
+        </Grid>
         <ListView x:Name="lsvHistory" Grid.Row="1" ItemsSource="{Binding SomeCollection}" IsItemClickEnabled="True" ItemClick="lsvHistory_ItemClick" Margin="0,10,0,0">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">

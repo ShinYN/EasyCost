@@ -27,7 +27,7 @@ namespace EasyCost.Pages
         private const string MENU_INCOME_CATEGORY = "수입 카테고리 관리";
         private const string MENU_EXPENSE_CATEGORY = "지출 카테고리 관리";
         private const string MENU_PROGRAMINFO = "프로그램 정보";
-        private const string MENU_DATASYNC = "데이터 동기화";
+        private const string MENU_DATASYNC = "데이터 관리";
         private bool mIsIncomePage = false;
 
         public SettingPage()
