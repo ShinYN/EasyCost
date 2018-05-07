@@ -11,6 +11,7 @@ namespace EasyCost.DataModels
         public int Index { get; set; } = 0;
         public string CategoryType { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
+        public int ItemCount { get; set; } = 0;
         public double CostRatio { get; set; } = 0;
         public int Cost { get; set; } = 0; 
         public string CostString
@@ -25,6 +26,20 @@ namespace EasyCost.DataModels
             get
             {
                 return CostRatio.ToString("N2") + " %";
+            }
+        }
+        public string CategoryWithCount
+        {
+            get
+            {
+                if (ItemCount == 0)
+                {
+                    return Category;
+                }
+                else
+                {
+                    return $"{Category}({ItemCount})";
+                }
             }
         }
     }

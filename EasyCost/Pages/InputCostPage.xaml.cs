@@ -61,6 +61,14 @@ namespace EasyCost.Pages
             txtDetail.Text = string.Empty;
             txtCost.Text = string.Empty;
         }
+        private void InitInputCostControlsForContinue()
+        {
+            cboCategory.SelectedIndex = 0;
+            txtDetail.Text = string.Empty;
+            txtCost.Text = string.Empty;
+
+            cboCategory.Focus(FocusState.Keyboard);
+        }
         private void InitCategoryCombo(string aCategoryType)
         {
             cboCategory.Items.Clear();
@@ -115,6 +123,7 @@ namespace EasyCost.Pages
             costDatePicker.Date = DateTime.Now;
 
             btnInputCost.Visibility = Visibility.Visible;
+            btnInputCostContinue.Visibility = Visibility.Visible;
             btnDeleteCost.Visibility = Visibility.Collapsed;
             btnUpdateCost.Visibility = Visibility.Collapsed;
         }
@@ -146,6 +155,7 @@ namespace EasyCost.Pages
             txtCost.Text = aCostHistoryModel.Cost.ToString();
 
             btnInputCost.Visibility = Visibility.Collapsed;
+            btnInputCostContinue.Visibility = Visibility.Collapsed;
             btnDeleteCost.Visibility = Visibility.Visible;
             btnUpdateCost.Visibility = Visibility.Visible;
 
@@ -255,6 +265,24 @@ namespace EasyCost.Pages
                 await dialog.ShowAsync();
             }
         }
+
+        private async void btnInputCostContinue_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SaveCostInfo();
+                DisplayCostHistory();
+                inputCostMainSplitView.IsPaneOpen = true;
+                InitInputCostControlsForContinue();
+            }
+            catch (Exception ex)
+            {
+                var dialog = new MessageDialog(ex.Message, "확인");
+                dialog.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
+                await dialog.ShowAsync();
+            }
+        }
+
         private async void btnUpdateCost_Click(object sender, RoutedEventArgs e)
         {
             try

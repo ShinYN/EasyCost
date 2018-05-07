@@ -4,5 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:EasyCost"
     RequestedTheme="Light">
-
+    <Application.Resources>
+        <FontFamily x:Key="BMJuaFont">ms-appx:/Assets/Fonts/BMJUA_ttf.ttf#BM JUA_TTF</FontFamily>
+    </Application.Resources>
 </Application>

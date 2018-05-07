@@ -30,14 +30,16 @@
                         </Grid.Resources>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="0"/>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Index}" FontSize="13" Grid.Column="0"/>
                         <TextBlock Text="{Binding Category}" FontSize="13" Grid.Column="1"/>
-                        <TextBlock Text="{Binding CostRatioString}" FontSize="13" Grid.Column="2"/>
-                        <TextBlock Text="{Binding CostString}" FontSize="13" Grid.Column="3" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding CategoryWithCount}" FontSize="13" Grid.Column="2"/>
+                        <TextBlock Text="{Binding CostRatioString}" FontSize="13" Grid.Column="3"/>
+                        <TextBlock Text="{Binding CostString}" FontSize="13" Grid.Column="5" HorizontalAlignment="Right"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

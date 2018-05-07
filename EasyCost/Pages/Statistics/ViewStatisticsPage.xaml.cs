@@ -40,8 +40,6 @@ namespace EasyCost.Pages.Statistics
             // Add 
         }
 
-       
-
         private void InitializeControls()
         {
             if (_categoryType == CategoryType.Expense)
@@ -248,7 +246,7 @@ namespace EasyCost.Pages.Statistics
             costHistoryXAxis.Header = "기간(일)";
         }
 
-        private void DisplayCostCategory(Dictionary<string, int> aCategoryCostDic)
+        private void DisplayCostCategory(Dictionary<string, int> aCategoryCostDic, string aTitle = "")
         {
             int costSum = aCategoryCostDic.Values.Sum();
             int index = 1;
@@ -263,6 +261,19 @@ namespace EasyCost.Pages.Statistics
             }
 
             topCostChart.Display(categoryCostModels);
+            if (_categoryType == CategoryType.Expense)
+            {
+                topCostChart.Title = "항목별 지출 금액";
+            }
+            else
+            {
+                topCostChart.Title = "항목별 수입 금액";
+            }
+
+            if (aTitle != string.Empty)
+            {
+                topCostChart.Title += "- " + aTitle;
+            }
 
             if (categoryCostModels.Count == 0)
             {
@@ -273,20 +284,53 @@ namespace EasyCost.Pages.Statistics
                 DisplayCostSubCategory(categoryCostModels.Select(x => x.Category).First());
             }
         }
+        private string GetCostChartTitle()
+        {
+            if (_categoryType == CategoryType.Expense)
+            {
+                return "항목별 지출 금액";
+            }
+            else
+            {
+                return "항목별 수입 금액";
+            }
+        }
         private void DisplayCostSubCategory(string aCategory)
         {
+            var inquiryDate = string.Empty;
+            var tempHeaderTitleSplit = topCostChart.Title.Split(new char[] { '-' });
+            if (tempHeaderTitleSplit.Length == 3)
+            {
+                inquiryDate = $"{tempHeaderTitleSplit[1].Trim()}{tempHeaderTitleSplit[2].Trim()}";
+            }
+            else if (tempHeaderTitleSplit.Length == 4)
+            {
+                inquiryDate = $"{tempHeaderTitleSplit[1].Trim()}{tempHeaderTitleSplit[2].Trim()}{tempHeaderTitleSplit[3].Trim()}";
+            }
+
             Dictionary<string, int> subCategoryCostDic = new Dictionary<string, int>();
+            Dictionary<string, int> subCategoryCount = new Dictionary<string, int>();
             foreach (CostStatisticsModel item in _statisticsModel)
             {
                 foreach (CostInfo costInfo in item.CostInfo.Where(elem => elem.CategoryType == _categoryType && elem.Category == aCategory))
                 {
+                    if (inquiryDate != string.Empty)
+                    {
+                        if (costInfo.CostDate.ToString("yyyyMMdd").StartsWith(inquiryDate) == false)
+                        {
+                            continue;
+                        }
+                    }
+
                     if (subCategoryCostDic.ContainsKey(costInfo.SubCategory))
                     {
                         subCategoryCostDic[costInfo.SubCategory] += costInfo.Cost;
+                        subCategoryCount[costInfo.SubCategory]++;
                     }
                     else
                     {
                         subCategoryCostDic.Add(costInfo.SubCategory, costInfo.Cost);
+                        subCategoryCount.Add(costInfo.SubCategory, 1);
                     }
                 }
             }
@@ -299,7 +343,8 @@ namespace EasyCost.Pages.Statistics
                 categoryCostModes.Add(new CategoryCostModel() { Index = index,
                                                                 Category = subCategoryCostItem.Key,
                                                                 CostRatio = (subCategoryCostItem.Value * 100) / (double)costSum,
-                                                                Cost = subCategoryCostItem.Value });
+                                                                Cost = subCategoryCostItem.Value,
+                                                                ItemCount = subCategoryCount[subCategoryCostItem.Key]});
                 index++;
             }
 
@@ -312,28 +357,6 @@ namespace EasyCost.Pages.Statistics
             txtTotalCost.Text = _statisticsModel.Sum(x => x.Cost).ToString("#,##0");
             txtCardCost.Text = _statisticsModel.Sum(x => x.CardCost).ToString("#,##0");
             txtCashCost.Text = _statisticsModel.Sum(x => x.CashCost).ToString("#,##0");
-        }
-
-        private void DisplayDetailStatisticsData(CostStatisticsModel aCostStatisticsModel)
-        {
-            if (aCostStatisticsModel.InquiryType == InquiryType.Today)
-            {
-                txtSubInquriyDate.Text = aCostStatisticsModel.FromDate.ToString("yyyy-MM-dd");
-            }
-            else  // Case of month
-            {
-                txtSubInquriyDate.Text = aCostStatisticsModel.FromDate.ToString("yyyy-MM-dd")
-                                       + " ~ "
-                                       + aCostStatisticsModel.ToDate.ToString("yyyy-MM-dd");
-            }
-            txtSubTotalCost.Text = aCostStatisticsModel.Cost.ToString("#,##0");
-            txtSubCardCost.Text = aCostStatisticsModel.CardCost.ToString("#,##0");
-            txtSubCashCost.Text = aCostStatisticsModel.CashCost.ToString("#,##0");
-
-            subCostCategoryChart.ItemsSource = aCostStatisticsModel.CostInfo.GroupBy(x => new { x.Category })
-                                                                            .Select(x => new { Category = x.Key.Category, Cost = x.Sum(y => y.Cost) })
-                                                                            .OrderBy(x => x.Cost)
-                                                                            .ToList();
         }
 
         private void btnSearchWeek_Click(object sender, RoutedEventArgs e)
@@ -362,13 +385,64 @@ namespace EasyCost.Pages.Statistics
             DisplayStatisticsDataBySpecificDate();
         }
 
+        private void costHistoryChart_PointerPressed(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            var selectedType = e.OriginalSource.GetType();
+            if (selectedType.FullName == "Windows.UI.Xaml.Controls.Grid")
+            {
+                if (_currentInquiryType == InquiryType.Week)
+                {
+                    DisplayStatisticsDataByWeek(_statisticsModel[0].FromDate.StartOfWeek(DayOfWeek.Monday));
+                }
+                else if (_currentInquiryType == InquiryType.Month)
+                {
+                    DisplayStatisticsDataByMonth(_statisticsModel[0].FromDate);
+                }
+                else if (_currentInquiryType == InquiryType.Year)
+                {
+                    DisplayStatisticsDataByYear(_statisticsModel[0].FromDate);
+                }
+            }
+        }
         private void costHistoryChart_SelectionChanged(object sender, Syncfusion.UI.Xaml.Charts.ChartSelectionChangedEventArgs e)
         {
-            inputCostMainSplitView.IsPaneOpen = !inputCostMainSplitView.IsPaneOpen;
-            if (inputCostMainSplitView.IsPaneOpen && e.SelectedSegment != null)
+            List<CostInfo> selectedItemCostInfo;
+            if (e.SelectedSegment == null)
             {
-                DisplayDetailStatisticsData((CostStatisticsModel)e.SelectedSegment.Item);
+                selectedItemCostInfo = ((CostStatisticsModel)e.OldPointInfo).CostInfo;
             }
+            else
+            {
+                selectedItemCostInfo = ((CostStatisticsModel)e.SelectedSegment.Item).CostInfo;
+            }
+            
+            var categoryTitle = string.Empty;
+            if (selectedItemCostInfo.Count > 0)
+            {
+                if (_currentInquiryType == InquiryType.Week || _currentInquiryType == InquiryType.Month)
+                {
+                    categoryTitle = selectedItemCostInfo[0].CostDate.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    categoryTitle = selectedItemCostInfo[0].CostDate.ToString("yyyy-MM");
+                }
+            }
+
+            var categoryCostDic = new Dictionary<string, int>();
+            foreach (CostInfo costInfo in selectedItemCostInfo)
+            {
+                if (categoryCostDic.ContainsKey(costInfo.Category))
+                {
+                    categoryCostDic[costInfo.Category] += costInfo.Cost;
+                }
+                else
+                {
+                    categoryCostDic.Add(costInfo.Category, costInfo.Cost);
+                }
+            }            
+
+            DisplayCostCategory(categoryCostDic, categoryTitle );
         }
         private void topCostChart_SelectionChanged(object sender, Syncfusion.UI.Xaml.Charts.ChartSelectionChangedEventArgs e)
         {
@@ -437,6 +511,69 @@ namespace EasyCost.Pages.Statistics
                     button.Background = new SolidColorBrush(Windows.UI.Colors.White);
                     button.Foreground = MyColorHelper.GetSolidColorBrush(main_color);
                 }
+            }
+        }
+
+        private void topSubCostChart_ItemSelectedEvent(CategoryCostModel costModel)
+        {
+            if (inputCostMainSplitView.IsPaneOpen == false)
+            {
+                DisplayCostInfoToListView(costModel.Category);
+            }
+            inputCostMainSplitView.IsPaneOpen = !inputCostMainSplitView.IsPaneOpen;
+        }
+
+        private void DisplayCostInfoToListView(string aSubCategory)
+        {
+            var category = topSubCostChart.Title.Split(new char[] { '-' })[1].Trim();
+            var inquiryDate = string.Empty;
+            var tempHeaderTitleSplit = topCostChart.Title.Split(new char[] { '-' });
+            if (tempHeaderTitleSplit.Length == 3)
+            {
+                inquiryDate = $"{tempHeaderTitleSplit[1].Trim()}{tempHeaderTitleSplit[2].Trim()}";
+            }
+            else if (tempHeaderTitleSplit.Length == 4)
+            {
+                inquiryDate = $"{tempHeaderTitleSplit[1].Trim()}{tempHeaderTitleSplit[2].Trim()}{tempHeaderTitleSplit[3].Trim()}";
+            }
+
+            var costInfoList = new List<CostInfo>();
+            IEnumerable<CostInfo> tempResult;
+            foreach (var item in _statisticsModel)
+            {
+                tempResult = item.CostInfo.Where(y => y.Category == category)
+                                          .Where(y => y.SubCategory == aSubCategory)
+                                          .Where(y => y.CategoryType == _categoryType);
+
+                if (inquiryDate != string.Empty)
+                {
+                    tempResult = tempResult.Where(x => x.CostDate.ToString("yyyyMMdd").StartsWith(inquiryDate));
+                }
+
+                costInfoList.AddRange(tempResult);
+            }
+
+            costInfoList = costInfoList.OrderBy(x => x.CostDate).ToList();
+            
+            var index = 1;
+            lsvHistory.Items.Clear();
+            txtSubCostDetailName.Text = $"{category} - {aSubCategory}";
+            foreach (CostInfo item in costInfoList)
+            {
+                lsvHistory.Items.Add(new CostHistoryModel
+                {
+                    Index = index,
+                    CostDate = item.CostDate.ToString("yyyy-MM-dd"),
+                    CostDateTime = item.CostDate,
+                    CategoryType = item.CategoryType,
+                    CategoryTypeString = (_categoryType == CategoryType.Expense) ? "지출" : "수입",
+                    Cost = item.Cost,
+                    CostType = item.CostType,
+                    CostString = item.Cost.ToString("#,##0").PadLeft(10, ' ') + "원",
+                    Description = item.Description
+                });
+
+                index++;
             }
         }
     }

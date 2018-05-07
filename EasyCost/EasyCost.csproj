@@ -98,6 +98,12 @@
     <Content Include="Assets\MenuIcons\exportExcel_GR.png" />
     <Content Include="Assets\MenuIcons\exportExcel.png" />
     <Content Include="Assets\NewStoreLogo.scale-400.png" />
+    <Content Include="Assets\Fonts\BMJUA_ttf.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Fonts\BMYEONSUNG_ttf.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="EasyCost_StoreKey.pfx" />
     <None Include="project.json" />
   </ItemGroup>
@@ -131,6 +137,7 @@
     <Compile Include="DataModels\MenuItemModel.cs" />
     <Compile Include="Helpers\CostManager.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\GoogleDriveHelper.cs" />
     <Compile Include="Helpers\MyColorHelper.cs" />
     <Compile Include="Helpers\SettingManager.cs" />
     <Compile Include="Pages\Intros\IntroPage_1.xaml.cs">

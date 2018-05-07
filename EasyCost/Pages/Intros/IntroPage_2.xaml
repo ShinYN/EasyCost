@@ -6,10 +6,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="MainTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource BMJuaFont}" />
+        </Style>
+    </Page.Resources>
 
     <RelativePanel Background="#FFFFBB00" Margin="0,0,0,0">
-        <TextBlock x:Name="lblTitle" Text="&quot;처음이시네요. 간단히 사용법을 설명드리겠습니다.&quot;" FontWeight="Bold" Foreground="White" FontSize="25" RelativePanel.Above="pnDescription" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,-80,0,0"/>
-        <TextBlock x:Name="lblTitle2" Text="&quot;걱정 마세요. 10초면 됩니다.&quot;" FontWeight="Bold" Foreground="White" FontSize="25" RelativePanel.Below="lblTitle" RelativePanel.AlignLeftWith="lblTitle" Margin="0,-50,0,0"/>
+        <TextBlock x:Name="lblTitle" Text="&quot;처음이시네요. 간단히 사용법을 설명드리겠습니다.&quot;" Foreground="White" FontSize="25" Style="{StaticResource MainTitleStyle}"
+                   RelativePanel.Above="pnDescription" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,-80,0,0"/>
+        <TextBlock x:Name="lblTitle2" Text="&quot;걱정 마세요. 10초면 됩니다.&quot;"  Foreground="White" FontSize="25" Style="{StaticResource MainTitleStyle}"
+                   RelativePanel.Below="lblTitle" RelativePanel.AlignLeftWith="lblTitle" Margin="0,-50,0,0"/>
         <StackPanel x:Name="pnDescription" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" >
             <TextBlock Text="1.카테고리 설정" Foreground="White" FontWeight="Bold" />
             <TextBlock Text="프로그램을 처음 시작하면 입력할 수입과 지출의 분류를 설정해야 합니다. " Foreground="#FF665656" FontSize="12"/>

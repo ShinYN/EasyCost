@@ -1,4 +1,5 @@
 ﻿using EasyCost.Databases;
+using EasyCost.Helpers;
 using System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -23,10 +24,12 @@ namespace EasyCost.Pages.Settings
         private void InitDataBackupControls()
         {
             cboDataSyncFrom.Items.Clear();
+            cboDataSyncFrom.Items.Add(string.Empty);
             cboDataSyncFrom.Items.Add(BACKUP_LOCATION_GOOGLE);
             cboDataSyncFrom.SelectedIndex = 0;
             
             cboDataSyncTo.Items.Clear();
+            cboDataSyncTo.Items.Add(string.Empty);
             cboDataSyncTo.Items.Add(BACKUP_LOCATION_GOOGLE);
             cboDataSyncTo.SelectedIndex = 0;
         }
@@ -59,14 +62,64 @@ namespace EasyCost.Pages.Settings
             rootFrame.Navigate(typeof(StartPage));
         }
 
-        private void btnBackupData_Click(object sender, RoutedEventArgs e)
+        private async void btnBackupData_Click(object sender, RoutedEventArgs e)
         {
+            var selectedItem = cboDataSyncFrom.SelectedValue.ToString();
+            if (string.IsNullOrEmpty(selectedItem))
+            {
+                return;
+            }
 
+            var dialog = new MessageDialog($"{selectedItem}으로 현재 데이터를 백업하시겠습니까?");
+            dialog.Title = "확인";
+            dialog.Commands.Add(new UICommand { Label = "예", Id = 0 });
+            dialog.Commands.Add(new UICommand { Label = "아니요", Id = 1 });
+
+            var res = await dialog.ShowAsync();
+
+            if ((int)res.Id == 0)
+            {
+                var result = await GoogleDriveHelper.SaveFileAsync();
+                var resultMessage = string.Empty;
+                if (result == System.Net.HttpStatusCode.OK)
+                {
+                    resultMessage = "정상적으로 백업되었습니다";
+                }
+                else if (result == System.Net.HttpStatusCode.NoContent)
+                {
+                    resultMessage = "백업 중 오류가 발생했습니다. 백업할 파일을 찾지 못했습니다";
+                }
+                else
+                {
+                    resultMessage = "백업 중 오류가 발생했습니다. 다시 시도 부탁 드립니다";
+                }
+
+                dialog = new MessageDialog(resultMessage);
+                dialog.Title = "백업 결과";
+                dialog.Commands.Add(new UICommand { Label = "예", Id = 0 });
+                await dialog.ShowAsync();
+            }
         }
 
-        private void btnResotreData_Click(object sender, RoutedEventArgs e)
+        private async void btnResotreData_Click(object sender, RoutedEventArgs e)
         {
+            var selectedItem = cboDataSyncTo.SelectedValue.ToString();
+            if (string.IsNullOrEmpty(selectedItem))
+            {
+                return;
+            }
 
+            var dialog = new MessageDialog($"{selectedItem}에서 저장된 데이터를 가져오시겠습니까?");
+            dialog.Title = "확인";
+            dialog.Commands.Add(new UICommand { Label = "예", Id = 0 });
+            dialog.Commands.Add(new UICommand { Label = "아니요", Id = 1 });
+
+            var res = await dialog.ShowAsync();
+
+            if ((int)res.Id == 0)
+            {
+                var fileData = await GoogleDriveHelper.LoadFileAsync();
+            }
         }
     }
 }

@@ -53,63 +53,73 @@
             <TextBlock Name="txtCashCost" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0"/>
             <TextBlock Text="원" Foreground="#666666" VerticalAlignment="Center"/>
         </StackPanel>
-        <SplitView x:Name="inputCostMainSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"  CompactPaneLength="0" OpenPaneLength="380" PanePlacement="Right" Grid.Row="3" Margin="0,0,0,20">
+        <SplitView x:Name="inputCostMainSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"  CompactPaneLength="0" OpenPaneLength="800" PanePlacement="Left" Grid.Row="3" Margin="0,0,0,20">
             <SplitView.Pane>
                 <StackPanel Orientation="Vertical" Background="White" BorderThickness="1,1,1,1" BorderBrush="#666666" Padding="10,10,0,0">
-                    <TextBlock Text="세부 사용 내역" FontSize="15"/>
-                    <Line X1="0" Y1="6" X2="335" Y2="6" Stroke="#FF535353" StrokeThickness="1" RelativePanel.Below="lblTitle"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <Ellipse Height="8" Width="8" Fill="#FFAEAEAE" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <TextBlock Text="조회 기간:" Foreground="Gray" VerticalAlignment="Center"/>
-                        <TextBlock Name="txtSubInquriyDate" Text="2016.08.01 ~ 2016.08.02" FontWeight="Bold" Foreground="#FF0221EA" VerticalAlignment="Center" Margin="10,0,0,0" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,00,0,0">
-                        <Ellipse Height="8" Width="8" Fill="#FFAEAEAE" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <TextBlock Text="총 금액:" Foreground="Gray" VerticalAlignment="Center"/>
-                        <TextBlock Name="txtSubTotalCost" Text="123123" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="#FF0221EA" />
-                        <TextBlock Text="원" Foreground="Gray" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" >
-                        <Ellipse Height="8" Width="8" Fill="#FFAEAEAE" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <TextBlock Text="카드:" Foreground="Gray" VerticalAlignment="Center"/>
-                        <TextBlock Name="txtSubCardCost" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                        <TextBlock Text="원" Foreground="Gray" VerticalAlignment="Center"/>
-                    </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Ellipse Height="8" Width="8" Fill="#FFAEAEAE" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                        <TextBlock Text="현금:" Foreground="Gray" VerticalAlignment="Center"/>
-                        <TextBlock Name="txtSubCashCost" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                        <TextBlock Text="원" Foreground="Gray" VerticalAlignment="Center"/>
+                        <TextBlock Text="세부 사용 내역 : " FontSize="15"/>
+                        <TextBlock Name="txtSubCostDetailName" Text="" FontSize="15"/>
                     </StackPanel>
-                    <syncfusion:SfChart HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" BorderThickness="0" AreaBorderBrush="{x:Null}">
-                        <syncfusion:DoughnutSeries x:Name="subCostCategoryChart" XBindingPath="Category" YBindingPath="Cost" ItemsSource="{Binding chartData}" Palette="Metro" >
-                            <syncfusion:DoughnutSeries.AdornmentsInfo>
-                                <syncfusion:ChartAdornmentInfo ShowLabel="True" Foreground="White" FontSize="15" UseSeriesPalette="True" ShowConnectorLine="True" ConnectorHeight="10">
-                                </syncfusion:ChartAdornmentInfo>
-                            </syncfusion:DoughnutSeries.AdornmentsInfo>
-                        </syncfusion:DoughnutSeries>
-                        <syncfusion:SfChart.Behaviors>
-                            <syncfusion:ChartSelectionBehavior EnableSegmentSelection="True" SelectionMode="MouseClick" SelectionStyle="Single"  />
-                        </syncfusion:SfChart.Behaviors>
-                        <syncfusion:SfChart.Legend>
-                            <syncfusion:ChartLegend DockPosition="Left">
-                                <syncfusion:ChartLegend.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Grid Margin="10,0,0,0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition/>
-                                                </Grid.ColumnDefinitions>
-                                                <Ellipse Width="15" Height="15" Fill="{Binding Interior}" />
-                                                <TextBlock Margin="5,0,0,0" FontSize="15" Grid.Column="1" Foreground="Black" Text="{Binding Label}"></TextBlock>
-                                            </Grid>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </syncfusion:ChartLegend.ItemTemplate>
-                            </syncfusion:ChartLegend>
-                        </syncfusion:SfChart.Legend>
-                    </syncfusion:SfChart>
+                    <ListView x:Name="lsvHistory" Grid.Row="1" ItemsSource="{Binding SomeCollection}" IsItemClickEnabled="False" Margin="0,10,0,29" Grid.RowSpan="3">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid Height="30" Background="#FF09B1CE">
+                                    <Grid.Resources>
+                                        <SolidColorBrush x:Key="brush" Color="White"/>
+                                    </Grid.Resources>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="130"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
+                                        <TextBlock x:Uid="tbIndex" Text=""  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
+                                    </Border>
+                                    <Border Grid.Column="1" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
+                                        <TextBlock x:Uid="tbTime" Text="날짜"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
+                                    </Border>
+                                    <Border Grid.Column="2" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
+                                        <TextBlock x:Uid="tbCost" Text="금액"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
+                                    </Border>
+                                    <Border Grid.Column="3" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
+                                        <TextBlock x:Uid="tbCostType" Text="카드/현금"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
+                                    </Border>
+                                    <Border Grid.Column="4" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
+                                        <TextBlock x:Uid="tbCategoryType" Text="내역"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:Name="gridData">
+                                <Grid Height="30">
+                                    <Grid.Resources>
+                                        <SolidColorBrush x:Key="brush" Color="White"/>
+                                    </Grid.Resources>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="130"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding Index}" FontSize="14" Grid.Column="0"/>
+                                    <TextBlock Text="{Binding CostDate}" FontSize="14" Grid.Column="1"/>
+                                    <TextBlock Text="{Binding CostString}" FontSize="14" Grid.Column="2" />
+                                    <TextBlock Text="{Binding CostType}" FontSize="14" Grid.Column="3" />
+                                    <TextBlock Text="{Binding Description}" FontSize="14" Grid.Column="4"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
@@ -119,7 +129,7 @@
                         <ColumnDefinition Width="20" />
                         <ColumnDefinition Width="330" />
                     </Grid.ColumnDefinitions>
-                    <syncfusion:SfChart x:Name="costHistoryChart" Header="" Grid.Column="0" RequestedTheme="Light" Foreground="Gray" SelectionChanged="costHistoryChart_SelectionChanged">
+                    <syncfusion:SfChart x:Name="costHistoryChart" Header="" Grid.Column="0" RequestedTheme="Light" Foreground="Gray" SelectionChanged="costHistoryChart_SelectionChanged" PointerPressed="costHistoryChart_PointerPressed">
                         <syncfusion:SfChart.PrimaryAxis>
                             <syncfusion:CategoryAxis x:Name="costHistoryXAxis" Header="기간" FontSize="12" Foreground="Gray"  LabelsIntersectAction="Auto"  ShowGridLines="False" />
                         </syncfusion:SfChart.PrimaryAxis>
@@ -199,8 +209,8 @@
                             <RowDefinition Height="15" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Controls:ViewCostRankConrol x:Name="topCostChart" Grid.Row="0" />
-                        <Controls:ViewCostRankConrol x:Name="topSubCostChart" Grid.Row="2"/>
+                        <Controls:ViewCostRankConrol x:Name="topCostChart" Grid.Row="0" Margin="0,-14,0,14" />
+                        <Controls:ViewCostRankConrol x:Name="topSubCostChart" Grid.Row="2" ItemSelectedEvent="topSubCostChart_ItemSelectedEvent" />
                     </Grid>
                 </Grid>
             </SplitView.Content>
