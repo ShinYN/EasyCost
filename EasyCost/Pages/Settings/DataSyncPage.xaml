@@ -18,13 +18,13 @@
                 <TextBlock Text="데이터 초기화" FontSize="15" VerticalAlignment="Center"/>
                 <Button Name="btnInitData" Content="선택" Margin="50,0,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="100" Click="btnInitData_Click"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10,30,0,0" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal" Margin="10,30,0,0" >
                 <TextBlock Text="데이터 동기화" FontSize="15" VerticalAlignment="Center"/>
                 <ComboBox x:Name="cboDataSyncFrom" Width="200" Margin="50,0,0,0" />
                 <TextBlock Text="로 데이터 백업하기" FontSize="15" Margin="10,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="btnBackupData" Content="선택" Margin="50,0,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="100" Click="btnBackupData_Click"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
                 <ComboBox x:Name="cboDataSyncTo" Width="200"  Margin="146,0,0,0" />
                 <TextBlock Text="에서 데이터 가져오기" FontSize="15" Margin="10,0,0,0" VerticalAlignment="Center"/>
                 <Button Name="btnResotreData" Content="선택" Margin="35,0,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="100" Click="btnResotreData_Click"/>

@@ -10,109 +10,130 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <Style TargetType="Button" x:Key="CustomButtonStyle">
-            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
-            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}" />
-            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}" />
-            <Setter Property="Padding" Value="0,0,0,0" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
+        <Style TargetType="Button" x:Key="BaseButtonStyle">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Black" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-            <Setter Property="FontWeight" Value="Normal" />
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-            <Setter Property="UseSystemFocusVisuals" Value="True" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="{StaticResource BMJuaFont}" />
+        </Style>
+        <Style TargetType="Button" x:Key="ExecuteButtonStyle" BasedOn="{StaticResource BaseButtonStyle}" >
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Width" Value="150" />
+            <Setter Property="Height" Value="35" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Grid x:Name="RootGrid" 
-                          Background="{TemplateBinding Background}">
+                        <Border x:Name="border" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center" 
+                                CornerRadius="3" >
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                     Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                     Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                     Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOver">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                     Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                     Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                     Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
-                                        </Storyboard>
-                                    </VisualState>
+                                    <VisualState x:Name="Normal"/>
                                     <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                     Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                     Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#006FB6" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                     Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
-                                        </Storyboard>
+                                        <VisualState.Setters>
+                                            <Setter Target="border.(Border.Background)" Value="{StaticResource YellowColor}"/>
+                                        </VisualState.Setters>
                                     </VisualState>
-                                    <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
-                                                     Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                     Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                     Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledTransparentBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
+                                    <VisualState x:Name="Disabled"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="border.(Border.Background)" Value="{StaticResource YellowColor}"/>
+                                        </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter x:Name="ContentPresenter"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Content="{TemplateBinding Content}"
-                            ContentTransitions="{TemplateBinding ContentTransitions}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                            Padding="{TemplateBinding Padding}"
-                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                            AutomationProperties.AccessibilityView="Raw"/>
-                        </Grid>
+                            <ContentPresenter x:Name="contentPresenter" FontSize="{TemplateBinding FontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                              Width="{TemplateBinding Width}"
+                                              HorizontalContentAlignment="Center"/>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="Button" x:Key="SaveButtonStyle" BasedOn="{StaticResource BaseButtonStyle}" >
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center" 
+                                CornerRadius="3" >
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="border.(Border.Background)" Value="{StaticResource LightBlueColor}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="border.(Border.Background)" Value="{StaticResource LightBlueColor}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="contentPresenter" FontSize="{TemplateBinding FontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="InquiryTypeButtonStyle" BasedOn="{StaticResource BaseButtonStyle}" >
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center" 
+                                CornerRadius="5,0,0,5" >
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="border.(Border.Background)" Value="{StaticResource LightBlueColor}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="border.(Border.Background)" Value="{StaticResource LightBlueColor}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="contentPresenter" FontSize="{TemplateBinding FontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,0">
@@ -132,7 +153,8 @@
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="btnSearchDay" Content="일" BorderThickness="1"  Width="100" Height="30" Grid.Column="1" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchDay_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
+            
+            <Button Name="btnSearchDay" Content="일" Style="{StaticResource InquiryTypeButtonStyle}" FontSize="18"  BorderThickness="1"  Width="100" Height="30" Grid.Column="1" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchDay_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
             <Button Name="btnSearchWeek" Content="주" BorderThickness="0,1,1,1"  Width="100" Height="30" Grid.Column="2" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchWeek_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
             <Button Name="btnSearchMonth" Content="월" BorderThickness="0,1,1,1"  Width="100" Height="30" Grid.Column="3"  Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchMonth_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
             <Button Name="btnSearchYear" Content="년" BorderThickness="0,1,1,1"  Width="100" Height="30" Grid.Column="4" Foreground="#006FB6" Background="White" BorderBrush="#006FB6" Click="btnSearchYear_Click" PointerEntered="btnSearchButton_PointerEntered" PointerExited="btnSearchButton_PointerExited"/>
@@ -151,12 +173,16 @@
                 </Button.Flyout>
             </Button>
         </Grid>
+        
+        <!--내역 입력 View-->
         <SplitView x:Name="inputCostMainSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"  CompactPaneLength="0" OpenPaneLength="350" PanePlacement="Right" Grid.Row="1" PaneClosed="inputCostMainSplitView_PaneClosed">
             <SplitView.Pane>
-                <RelativePanel Background="White" BorderThickness="1,1,1,1" BorderBrush="#006FB6">
-                    <TextBlock x:Name="lblTitle" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" Foreground="#FF404040" TextWrapping="Wrap" Text="지출 내역 입력" FontSize="15" FontWeight="Bold" Margin="10,10,0,0"/>
+                <RelativePanel Background="White" BorderThickness="1,1,1,1" BorderBrush="{StaticResource BlackColor}">
+                    <!--내역 입력 타이틀-->
+                    <TextBlock x:Name="lblTitle" FontFamily="{StaticResource BMJuaFont}" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" Foreground="#FF404040" TextWrapping="Wrap" Text="지출 내역 입력" FontSize="20" Margin="10,10,0,0"/>
                     <Line X1="10" Y1="6" X2="335" Y2="6" Stroke="Black" StrokeThickness="1" RelativePanel.Below="lblTitle"/>
-
+                    
+                    <!--내역 정보-->
                     <TextBlock x:Name="lblCostDate" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" TextWrapping="Wrap" Text="날짜" FontSize="15" Foreground="Gray" Margin="10,50,0,0" />
                     <CalendarDatePicker x:Name="costDatePicker" RelativePanel.AlignVerticalCenterWith="lblCostDate" RelativePanel.RightOf="lblCostDate" Margin="66,49,-116,-11" Height="32" Width="230" BorderThickness="1" DateFormat="{}{year.full}/{month.integer}/{day.integer}"/>
                     <TextBlock x:Name="lblCategory" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" TextWrapping="Wrap" Text="분류" FontSize="15" Foreground="Gray" Margin="10,90,0,0" />
@@ -170,35 +196,41 @@
                     <RadioButton x:Name="rbTypeCard" Content="카드"  FontSize="15" RelativePanel.RightOf="rbTypeCash" RelativePanel.AlignTopWith="rbTypeCash" Margin="-20,15,0,0"/>
                     <TextBlock x:Name="lblCost" Text="금액" FontSize="15" RelativePanel.AlignLeftWith="lblCategory" RelativePanel.Below="lblType" Margin="10,20,0,0" Foreground="Gray"/>
                     <TextBox x:Name="txtCost" Text="" FontSize="15" InputScope="Number" RelativePanel.RightOf="lblCost" RelativePanel.AlignVerticalCenterWith="lblCost" Width="230" Margin="66,18,0,0" BorderThickness="1" TextChanging="txtCost_TextChanging" />
-                    <Button x:Name="btnInputCost" Content="입력" FontSize="15" RelativePanel.AlignRightWith="txtCost" RelativePanel.Below="txtCost"  Margin="0,10,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="100" Click="btnInputCost_Click"/>
-                    <Button x:Name="btnDeleteCost" Content="삭제" FontSize="15" RelativePanel.LeftOf="btnInputCost" RelativePanel.Below="txtCost"  Margin="0,10,10,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="100" Click="btnDeleteCost_Click"/>
-                    <Button x:Name="btnUpdateCost" Content="수정" FontSize="15" RelativePanel.LeftOf="btnDeleteCost" RelativePanel.Below="txtCost"  Margin="0,10,10,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="100" Click="btnUpdateCost_Click"/>
-                    <Button x:Name="btnInputCostContinue" Content="계속 입력" FontSize="15" RelativePanel.AlignRightWith="txtCost" RelativePanel.Below="btnInputCost"  Margin="0,10,0,0" Background="#FF09B1CE" BorderBrush="#FF09B1CE" BorderThickness="0" Foreground="White" Width="100" Click="btnInputCostContinue_Click"/>
+                    
+                    <!--실적 등록-->
+                    <Button x:Name="btnInputCost" Content="입력" Style="{StaticResource SaveButtonStyle}" RelativePanel.AlignRightWith="txtCost" RelativePanel.Below="txtCost"  Margin="0,10,0,0" Click="btnInputCost_Click"/>
+                    <Button x:Name="btnDeleteCost" Content="삭제" Style="{StaticResource SaveButtonStyle}" RelativePanel.LeftOf="btnInputCost" RelativePanel.Below="txtCost"  Margin="0,10,10,0" Click="btnDeleteCost_Click"/>
+                    <Button x:Name="btnUpdateCost" Content="수정" Style="{StaticResource SaveButtonStyle}" RelativePanel.LeftOf="btnDeleteCost" RelativePanel.Below="txtCost"  Margin="0,10,10,0" Click="btnUpdateCost_Click"/>
+                    <Button x:Name="btnInputCostContinue" Content="계속 입력" Style="{StaticResource SaveButtonStyle}" RelativePanel.AlignRightWith="txtCost" RelativePanel.Below="btnInputCost"  Margin="0,10,0,0" Click="btnInputCostContinue_Click"/>
                 </RelativePanel>
             </SplitView.Pane>
             <SplitView.Content>
                 <Controls:ViewCostHistoryControl x:Name="costHistory" Margin="10,10,10,0"/>
             </SplitView.Content>
         </SplitView>
-        <RelativePanel Grid.Row ="2" Margin="0,0,0,0">
-            <Button x:Name="btnViewExpensePanel" Background="Transparent" Foreground="Black" BorderThickness="1" BorderBrush="Gray" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Click="btnViewExpensePanel_Click" Margin="10,0,30,0" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE738;" Foreground="Red" Margin="0,2,5,0"/>
-                    <TextBlock Text="지출 등록" />
-                </StackPanel>
+        
+        <!--하단 등록 버튼-->
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,15,0" Orientation="Horizontal">
+            <Button x:Name="btnExportExcel" 
+                    Content="엑셀 추출"
+                    Margin="0,0,20,0"
+                    Foreground="{StaticResource GreenColor}"
+                    Style="{StaticResource ExecuteButtonStyle}" 
+                    Click="btnExportExcel_Click" >
             </Button>
-            <Button x:Name="btnViewIncomePanel" Background="Transparent" Foreground="Black" BorderThickness="1" BorderBrush="Gray" RelativePanel.LeftOf="btnViewExpensePanel" RelativePanel.AlignVerticalCenterWithPanel="True" Click="btnViewIncomePanel_Click" Margin="10,0,0,0" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE710;" Foreground="Blue" Margin="0,2,5,0"/>
-                    <TextBlock Text="수입 등록" />
-                </StackPanel>
+            <Button x:Name="btnViewIncomePanel" 
+                    Content="수입 등록"
+                    Margin="0,0,20,0"
+                    Foreground="{StaticResource BlueColor}"
+                    Style="{StaticResource ExecuteButtonStyle}"
+                    Click="btnViewIncomePanel_Click">
             </Button>
-            <Button x:Name="btnExportExcel" Background="Transparent" Foreground="Black" BorderThickness="1" BorderBrush="Gray" RelativePanel.LeftOf="btnViewIncomePanel" RelativePanel.AlignVerticalCenterWithPanel="True" Click="btnExportExcel_Click" Margin="0,0,0,0" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8E5;" Foreground="Green" Margin="0,2,5,0"/>
-                    <TextBlock Text="엑셀 추출" />
-                </StackPanel>
+            <Button x:Name="btnViewExpensePanel" 
+                    Content="지출 등록"
+                    Foreground="{StaticResource RedColor}"
+                    Style="{StaticResource ExecuteButtonStyle}" 
+                    Click="btnViewExpensePanel_Click">
             </Button>
-        </RelativePanel>
+        </StackPanel>
     </Grid>
 </Page>

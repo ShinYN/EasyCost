@@ -5,6 +5,12 @@
     xmlns:local="using:EasyCost"
     RequestedTheme="Light">
     <Application.Resources>
-        <FontFamily x:Key="BMJuaFont">ms-appx:/Assets/Fonts/BMJUA_ttf.ttf#BM JUA_TTF</FontFamily>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/ResourceDirectory/Brush.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <FontFamily x:Key="BMJuaFont">ms-appx:/Assets/Fonts/BMJUA_ttf.ttf#BM JUA_TTF</FontFamily>
+            <FontFamily x:Key="BMHannaAirFont">ms-appx:/Assets/Fonts/BMHANNAAir_ttf#BM HannaAir_TTF</FontFamily>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

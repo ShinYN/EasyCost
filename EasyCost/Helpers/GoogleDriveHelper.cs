@@ -15,8 +15,8 @@ namespace EasyCost.Helpers
 {
     public static class GoogleDriveHelper
     {
-        private static string mBaseUri = "https://ggcostwebapi.azurewebsites.net/";
-        //private static string mBaseUri = "http://localhost:8546/";
+        //private static string mBaseUri = "https://ggcostwebapi.azurewebsites.net/";
+        private static string mBaseUri = "http://localhost:8546/";
         private static string mRequestUri = "api/googledrive";
 
         public static async Task<byte[]> LoadFileAsync()
