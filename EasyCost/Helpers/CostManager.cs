@@ -83,6 +83,10 @@ namespace EasyCost.Helpers
         {
             DBConnHandler.DbConnection.Update(aCostInfo);
         }
+        public static void UpdateCostInfoCardName(string aOrgCardName, string aNewCardName)
+        {
+            DBConnHandler.DbConnection.Execute($"UPDATE CostInfo SET CostCard = '{aNewCardName}' WHERE CostCard = '{aOrgCardName}' ");
+        }
         public static void DeleteCostInfo(CostInfo aCostInfo)
         {
             DBConnHandler.DbConnection.Delete(aCostInfo);

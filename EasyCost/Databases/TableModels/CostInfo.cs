@@ -33,6 +33,10 @@ namespace EasyCost.Databases.TableModels
         /// </summary>
         public string CostType { get; set; }
         /// <summary>
+        /// 지출 카드
+        /// </summary>
+        public string CostCard { get; set; }
+        /// <summary>
         /// 지출 금액
         /// </summary>
         public int Cost { get; set; }

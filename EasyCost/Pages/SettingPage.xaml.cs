@@ -26,6 +26,7 @@ namespace EasyCost.Pages
     {
         private const string MENU_INCOME_CATEGORY = "수입 카테고리 관리";
         private const string MENU_EXPENSE_CATEGORY = "지출 카테고리 관리";
+        private const string MENU_CARDMANAGEMENT = "카드 정보 관리";
         private const string MENU_PROGRAMINFO = "프로그램 정보";
         private const string MENU_DATASYNC = "데이터 관리";
         private bool mIsIncomePage = false;
@@ -43,8 +44,9 @@ namespace EasyCost.Pages
             lsvSettingItem.Items.Clear();
             lsvSettingItem.Items.Add(new { Item = MENU_EXPENSE_CATEGORY });
             lsvSettingItem.Items.Add(new { Item = MENU_INCOME_CATEGORY });
-            lsvSettingItem.Items.Add(new { Item = MENU_DATASYNC });
+            lsvSettingItem.Items.Add(new { Item = MENU_CARDMANAGEMENT });
             lsvSettingItem.Items.Add(new { Item = MENU_PROGRAMINFO });
+            //lsvSettingItem.Items.Add(new { Item = MENU_DATASYNC });
             lsvSettingItem.SelectedIndex = 0;
         }
 
@@ -64,6 +66,13 @@ namespace EasyCost.Pages
                 {
                     settingFrame.Navigate(typeof(CategorySettingPage), CategoryType.Expense);
                     mIsIncomePage = false;
+                }
+            }
+            else if (aSelectedItemString == MENU_CARDMANAGEMENT)
+            {
+                if (settingFrame.CurrentSourcePageType != typeof(CardManagementPage))
+                {
+                    settingFrame.Navigate(typeof(CardManagementPage));
                 }
             }
             else if (aSelectedItemString == MENU_PROGRAMINFO)

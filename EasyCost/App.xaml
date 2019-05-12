@@ -8,9 +8,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Assets/ResourceDirectory/Brush.xaml"/>
+                <ResourceDictionary Source="Assets/ResourceDirectory/Button.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="BMJuaFont">ms-appx:/Assets/Fonts/BMJUA_ttf.ttf#BM JUA_TTF</FontFamily>
-            <FontFamily x:Key="BMHannaAirFont">ms-appx:/Assets/Fonts/BMHANNAAir_ttf#BM HannaAir_TTF</FontFamily>
+            <FontFamily x:Key="BMDohyeonFont">ms-appx:/Assets/Fonts/BMDOHYEON_ttf.ttf#배달의민족 도현</FontFamily>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

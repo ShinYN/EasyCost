@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasyCost.DataModels
 {
     public class CostHistoryModel : INotifyPropertyChanged
-    {
-       
+    {       
         public event PropertyChangedEventHandler PropertyChanged;
         private void RaiseProperty(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         private bool selected;
@@ -19,7 +14,6 @@ namespace EasyCost.DataModels
             set { selected = value; RaiseProperty(nameof(Selected)); }
         }
 
-
         /// <summary>
         /// Grid에서 표현되는 순서 값
         /// </summary>
@@ -28,7 +22,6 @@ namespace EasyCost.DataModels
         /// CostInfo에서 Key ID 값
         /// </summary>
         public int Id { get; set; }
-
         /// <summary>
         /// 사용자 ID
         /// </summary>

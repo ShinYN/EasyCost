@@ -7,6 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="TotalTextStyle">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="{StaticResource BMJuaFont}" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -123,18 +132,18 @@
              Stroke="Black"
              StrokeThickness="1" Grid.Row="2"/>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,10,0">
-            <TextBlock Text="총 수입 금액:" FontSize="17" Grid.Row="1"/>
-            <TextBlock Name="lblTotalIncomeCost" FontSize="17" Text="" Grid.Row="1" Margin="5,0,0,0" Foreground="Blue"/>
-            <TextBlock Text="원," FontSize="17" Grid.Row="1" Margin="0,0,20,0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,10,0" >
+            <TextBlock Text="총 수입 금액:" Grid.Row="1" Style="{StaticResource TotalTextStyle}"/>
+            <TextBlock Name="lblTotalIncomeCost" Grid.Row="1" Text="" Style="{StaticResource TotalTextStyle}" Margin="5,0,0,0" Foreground="Blue"/>
+            <TextBlock Text="원," Grid.Row="1" Style="{StaticResource TotalTextStyle}" Margin="0,0,20,0"/>
 
-            <TextBlock Text="총 지출 금액:" FontSize="17" Grid.Row="1"/>
-            <TextBlock Name="lblTotalExpenseCost" FontSize="17" Text="" Grid.Row="1" Margin="5,0,0,0" Foreground="Red"/>
-            <TextBlock Text="원," FontSize="17" Grid.Row="1" Margin="0,0,20,0"/>
+            <TextBlock Text="총 지출 금액:" Grid.Row="1" Style="{StaticResource TotalTextStyle}"/>
+            <TextBlock Name="lblTotalExpenseCost" Grid.Row="1" Text="" Style="{StaticResource TotalTextStyle}" Margin="5,0,0,0" Foreground="Red"/>
+            <TextBlock Text="원," Grid.Row="1" Style="{StaticResource TotalTextStyle}" Margin="0,0,20,0"/>
 
-            <TextBlock Text="최종 금액:" FontSize="17" Grid.Row="1"/>
-            <TextBlock Name="lblTotalCost" FontSize="17" Text="" Grid.Row="1" Margin="5,0,0,0"/>
-            <TextBlock Text="원" FontSize="17" Grid.Row="1" />
+            <TextBlock Text="최종 금액:" Grid.Row="1" Style="{StaticResource TotalTextStyle}" />
+            <TextBlock Name="lblTotalCost" Grid.Row="1" Text="" Style="{StaticResource TotalTextStyle}" Margin="5,0,0,0"/>
+            <TextBlock Text="원" Grid.Row="1" Style="{StaticResource TotalTextStyle}" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,19 +1,15 @@
-﻿using EasyCost.Bases.Login;
-using EasyCost.Databases.TableModels;
+﻿using EasyCost.Databases.TableModels;
 using EasyCost.Types;
 using SQLite;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasyCost.Databases
 {
     public static class DBConnHandler
     {
-        private static DBVersionType LATEST_DB_VERSION = DBVersionType.Version2;
+        private static DBVersionType LATEST_DB_VERSION = DBVersionType.Version3;
         public static SQLiteConnection DbConnection
         {
             get
@@ -46,6 +42,7 @@ namespace EasyCost.Databases
                 DbConnection.CreateTable<DBVersionInfo>();
                 DbConnection.CreateTable<UserMaster>();
                 DbConnection.CreateTable<CostInfo>();
+                DbConnection.CreateTable<CardMaster>();
                 CreateCategoryTable();
 
                 CreateInitialCategory();
@@ -70,6 +67,7 @@ namespace EasyCost.Databases
             DbConnection.DropTable<SubCategoryMaster>();
             DbConnection.DropTable<CostInfo>();
             DbConnection.DropTable<DBVersionInfo>();
+            DbConnection.DropTable<CardMaster>();
         }
 
         private static void MigrationDBData(DBVersionType aDBVersionType)
@@ -87,29 +85,46 @@ namespace EasyCost.Databases
 
                 CreateCategoryTable();
                 DbConnection.CreateTable<CostInfo>();
+                DbConnection.CreateTable<CardMaster>();
                 DbConnection.CreateTable<DBVersionInfo>();
 
                 categoryMasterList.ForEach(x => x.CategoryType = CategoryType.Expense);
-                subCategoryMasterList.ForEach(x => {
+                subCategoryMasterList.ForEach(x =>
+                {
                     x.CategoryType = CategoryType.Expense;
                     x.RepeatYN = "N";
                     x.RepeatPeriod = RepeatPeriodType.None;
                     x.RepeatValue = 0;
-                    });
+                });
                 costInfoList.ForEach(x => x.CategoryType = CategoryType.Expense);
 
                 DbConnection.InsertAll(categoryMasterList);
                 DbConnection.InsertAll(subCategoryMasterList);
                 DbConnection.InsertAll(costInfoList);
-                DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 2");
+                DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 3");
 
                 UpdateInitIncomeData();
+            }
+            else if (aDBVersionType == DBVersionType.Version2)
+            {
+                List<CostInfo> costInfoList = (from costInfo in DBConnHandler.DbConnection.Table<CostInfo>() select costInfo).ToList();
+                costInfoList.ForEach(x => x.CostCard = string.Empty);
+
+                DbConnection.DropTable<CostInfo>();
+                DbConnection.DropTable<DBVersionInfo>();
+
+                DbConnection.CreateTable<CostInfo>();
+                DbConnection.CreateTable<CardMaster>();
+                DbConnection.CreateTable<DBVersionInfo>();
+
+                DbConnection.InsertAll(costInfoList);
+                DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 3");
             }
         }
 
         private static void CreateInitialCategory()
         {
-            DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 2");
+            DbConnection.Execute(@"INSERT INTO DBVersionInfo SELECT 3");
             
             UpdateInitExpenseData();
             UpdateInitIncomeData();
@@ -154,7 +169,6 @@ namespace EasyCost.Databases
             DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'I', '기타', ''");
         }
         
-
         private static DBVersionType GetUserDBVersion()
         {
             try

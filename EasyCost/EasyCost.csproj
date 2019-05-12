@@ -104,6 +104,9 @@
     <Content Include="Assets\Fonts\BMYEONSUNG_ttf.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Fonts\BMDOHYEON_ttf.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="EasyCost_StoreKey.pfx" />
     <None Include="project.json" />
   </ItemGroup>
@@ -125,16 +128,19 @@
       <DependentUpon>ViewCostRankConrol.xaml</DependentUpon>
     </Compile>
     <Compile Include="Databases\DBConnHandler.cs" />
+    <Compile Include="Databases\TableModels\CardMaster.cs" />
     <Compile Include="Databases\TableModels\CategoryMaster.cs" />
     <Compile Include="Databases\TableModels\CostInfo.cs" />
     <Compile Include="Databases\TableModels\DBVersionInfo.cs" />
     <Compile Include="Databases\TableModels\SubCategoryMaster.cs" />
     <Compile Include="Databases\TableModels\UserMaster.cs" />
+    <Compile Include="DataModels\CardItemModel.cs" />
     <Compile Include="DataModels\SubCategoryCostModel.cs" />
     <Compile Include="DataModels\CategoryCostModel.cs" />
     <Compile Include="DataModels\CostHistosyModel.cs" />
     <Compile Include="DataModels\CostStatisticsModel.cs" />
     <Compile Include="DataModels\MenuItemModel.cs" />
+    <Compile Include="Helpers\CardManager.cs" />
     <Compile Include="Helpers\CostManager.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\GoogleDriveHelper.cs" />
@@ -157,6 +163,9 @@
     </Compile>
     <Compile Include="Pages\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\CardManagementPage.xaml.cs">
+      <DependentUpon>CardManagementPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\CategorySettingPage.xaml.cs">
       <DependentUpon>CategorySettingPage.xaml</DependentUpon>
@@ -276,6 +285,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Assets\ResourceDirectory\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\DateSearchControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -313,6 +326,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\CardManagementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
