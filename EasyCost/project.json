@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
-    "sqlite-net-pcl": "1.4.118"
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.8",
+    "sqlite-net-pcl": "1.5.231"
   },
   "frameworks": {
     "uap10.0.10240": {}
