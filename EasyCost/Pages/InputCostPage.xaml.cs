@@ -410,7 +410,8 @@ namespace EasyCost.Pages
             {
                 if (button == _currentButton || button == aMouseOverButton)
                 {
-                    button.Background = MyColorHelper.GetSolidColorBrush(main_color);
+                    //button.Background = MyColorHelper.GetSolidColorBrush(main_color);
+                    button.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     button.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
                 }
                 else

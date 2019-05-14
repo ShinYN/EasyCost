@@ -49,6 +49,7 @@
             </ListView.ItemContainerStyle>
             <ListView.HeaderTemplate>
                 <DataTemplate>
+                    <!--LightBlueColor  #006FB6 -->
                     <Grid Height="30" Background="#006FB6">
                         <Grid.Resources>
                             <SolidColorBrush x:Key="brush" Color="White"/>
