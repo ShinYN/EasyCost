@@ -10,10 +10,17 @@
     mc:Ignorable="d">
 
     <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="CostItemLabelTextStyle">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
         <Style TargetType="Button" x:Key="ExecuteButtonStyle" BasedOn="{StaticResource RoundFontButtonStyle}" >
             <Setter Property="FontSize" Value="17" />
             <Setter Property="Width" Value="150" />
             <Setter Property="Height" Value="35" />
+            <Setter Property="Background" Value="{StaticResource WhiteColor}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -22,6 +29,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center" 
                                 CornerRadius="3" >
@@ -50,12 +58,11 @@
             </Setter>
         </Style>
         
-        
-        
-        <Style TargetType="Button" x:Key="SaveButtonStyle" BasedOn="{StaticResource BaseButtonStyle}" >
+        <Style TargetType="Button" x:Key="SaveButtonStyle" BasedOn="{StaticResource RoundFontButtonStyle}" >
             <Setter Property="FontSize" Value="17" />
-            <Setter Property="Width" Value="100" />
+            <Setter Property="Width" Value="110" />
             <Setter Property="Height" Value="30" />
+            <Setter Property="Background" Value="White" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -64,6 +71,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center" 
                                 CornerRadius="3" >
@@ -91,14 +99,13 @@
         </Style>
 
         <Style TargetType="Button" x:Key="InquiryTypeBaseButtonStyle" BasedOn="{StaticResource BaseFontButtonStyle}" >
-            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontSize" Value="17" />
             <Setter Property="Width" Value="100" />
             <Setter Property="Height" Value="30" />
             <Setter Property="Foreground" Value="{StaticResource BlueColor}" />
             <Setter Property="Background" Value="{StaticResource WhiteColor}" />
             <Setter Property="BorderBrush" Value="{StaticResource BlueColor}" />
         </Style>
-
         <Style TargetType="Button" x:Key="InquiryTypeLeftButtonStyle" BasedOn="{StaticResource InquiryTypeBaseButtonStyle}" >
             <Setter Property="Template">
                 <Setter.Value>
@@ -108,6 +115,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center" 
                                 CornerRadius="5,0,0,5" >
@@ -127,6 +135,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center" >
                             <ContentPresenter x:Name="contentPresenter" FontSize="{TemplateBinding FontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -145,6 +154,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center" 
                                 CornerRadius="0,5,5,0" >
@@ -198,32 +208,73 @@
         <!--내역 입력 View-->
         <SplitView x:Name="inputCostMainSplitView" DisplayMode="CompactOverlay" IsPaneOpen="False"  CompactPaneLength="0" OpenPaneLength="350" PanePlacement="Right" Grid.Row="1" PaneClosed="inputCostMainSplitView_PaneClosed">
             <SplitView.Pane>
-                <RelativePanel Background="White" BorderThickness="1,1,1,1" BorderBrush="{StaticResource BlackColor}">
-                    <!--내역 입력 타이틀-->
-                    <TextBlock x:Name="lblTitle" FontFamily="{StaticResource BMJuaFont}" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" Foreground="#FF404040" TextWrapping="Wrap" Text="지출 내역 입력" FontSize="20" Margin="10,10,0,0"/>
-                    <Line X1="10" Y1="6" X2="335" Y2="6" Stroke="Black" StrokeThickness="1" RelativePanel.Below="lblTitle"/>
-                    
-                    <!--내역 정보-->
-                    <TextBlock x:Name="lblCostDate" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" TextWrapping="Wrap" Text="날짜" FontSize="15" Foreground="Gray" Margin="10,50,0,0" />
-                    <CalendarDatePicker x:Name="costDatePicker" RelativePanel.AlignVerticalCenterWith="lblCostDate" RelativePanel.RightOf="lblCostDate" Margin="66,49,-116,-11" Height="32" Width="230" BorderThickness="1" DateFormat="{}{year.full}/{month.integer}/{day.integer}"/>
-                    <TextBlock x:Name="lblCategory" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" TextWrapping="Wrap" Text="분류" FontSize="15" Foreground="Gray" Margin="10,90,0,0" />
-                    <ComboBox x:Name="cboCategory" RelativePanel.AlignVerticalCenterWith="lblCategory" RelativePanel.RightOf="lblCategory" Width="230" FontSize="15" Margin="66,86,-115,-8" BorderThickness="1" SelectionChanged="cboCategory_SelectionChanged" Height="32" />
-                    <TextBlock x:Name="lblSubCategory" RelativePanel.AlignLeftWith="lblCategory" RelativePanel.Below="lblCategory" TextWrapping="Wrap" Text="세부 분류" FontSize="15" Foreground="Gray" Margin="10,20,0,0" />
-                    <ComboBox x:Name="cboSubCategory" RelativePanel.AlignVerticalCenterWith="lblSubCategory" RelativePanel.RightOf="lblSubCategory" Width="230" FontSize="15" Margin="30,16,-96,-5" BorderThickness="1" Height="32" />
-                    <TextBlock x:Name="lblDetail" Text="지출 내역" RelativePanel.AlignLeftWith="lblCategory" RelativePanel.Below="lblSubCategory" FontSize="15" Foreground="Gray" Margin="10,20,0,0" />
-                    <TextBox x:Name="txtDetail"  Width="230" RelativePanel.AlignVerticalCenterWith="lblDetail" RelativePanel.RightOf="lblDetail" FontSize="15" Margin="30,29,0,9" Height="20" BorderThickness="1" />
-                    <TextBlock x:Name="lblType"  Text="타입" FontSize="15" Foreground="Gray" RelativePanel.AlignLeftWith="lblCategory" RelativePanel.Below="lblDetail" Margin="10,20,0,0"/>
-                    <RadioButton x:Name="rbTypeCash" Content="현금"  FontSize="15" RelativePanel.RightOf="lblType" RelativePanel.AlignTopWith="lblType" Margin="65,15,0,0" Width="auto" />
-                    <RadioButton x:Name="rbTypeCard" Content="카드"  FontSize="15" RelativePanel.RightOf="rbTypeCash" RelativePanel.AlignTopWith="rbTypeCash" Margin="-20,15,0,0"/>
-                    <TextBlock x:Name="lblCost" Text="금액" FontSize="15" RelativePanel.AlignLeftWith="lblCategory" RelativePanel.Below="lblType" Margin="10,20,0,0" Foreground="Gray"/>
-                    <TextBox x:Name="txtCost" Text="" FontSize="15" InputScope="Number" RelativePanel.RightOf="lblCost" RelativePanel.AlignVerticalCenterWith="lblCost" Width="230" Margin="66,18,0,0" BorderThickness="1" TextChanging="txtCost_TextChanging" />
-                    
-                    <!--실적 등록-->
-                    <Button x:Name="btnInputCost" Content="입력" Style="{StaticResource SaveButtonStyle}" RelativePanel.AlignRightWith="txtCost" RelativePanel.Below="txtCost"  Margin="0,10,0,0" Click="btnInputCost_Click"/>
-                    <Button x:Name="btnDeleteCost" Content="삭제" Style="{StaticResource SaveButtonStyle}" RelativePanel.LeftOf="btnInputCost" RelativePanel.Below="txtCost"  Margin="0,10,10,0" Click="btnDeleteCost_Click"/>
-                    <Button x:Name="btnUpdateCost" Content="수정" Style="{StaticResource SaveButtonStyle}" RelativePanel.LeftOf="btnDeleteCost" RelativePanel.Below="txtCost"  Margin="0,10,10,0" Click="btnUpdateCost_Click"/>
-                    <Button x:Name="btnInputCostContinue" Content="계속 입력" Style="{StaticResource SaveButtonStyle}" RelativePanel.AlignRightWith="txtCost" RelativePanel.Below="btnInputCost"  Margin="0,10,0,0" Click="btnInputCostContinue_Click"/>
-                </RelativePanel>
+                <StackPanel Background="White" 
+                            BorderThickness="1,1,0,1" 
+                            BorderBrush="{StaticResource BlackColor}" 
+                            CornerRadius="5,0,0,5"
+                            Padding="10,10,10,0">
+                    <TextBlock x:Name="lblTitle" Text="지출 내역 입력" FontSize="18" />
+                    <Line X1="0" Y1="6" X2="335" Y2="6" Stroke="Black" StrokeThickness="1" />
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="230" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblCostDate" Grid.Column="0" Text="날짜" Style="{StaticResource CostItemLabelTextStyle}" />
+                        <CalendarDatePicker x:Name="costDatePicker" Grid.Column="1" Height="32" Width="230" BorderThickness="1" BorderBrush="Black" DateFormat="{}{year.full}/{month.integer}/{day.integer}"/>
+                    </Grid>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="230" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblCategory" Grid.Column="0" Text="분류" Style="{StaticResource CostItemLabelTextStyle}" />
+                        <ComboBox x:Name="cboCategory" Grid.Column="1" Width="230" FontSize="15" BorderThickness="1" BorderBrush="Black" SelectionChanged="cboCategory_SelectionChanged" />
+                    </Grid>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="230" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblSubCategory" Grid.Column="0" Text="세부 분류" Style="{StaticResource CostItemLabelTextStyle}" />
+                        <ComboBox x:Name="cboSubCategory" Grid.Column="1" Width="230" FontSize="15" BorderThickness="1" BorderBrush="Black" />
+                    </Grid>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="230" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblDetail" Grid.Column="0" Text="지출 내역" Style="{StaticResource CostItemLabelTextStyle}" />
+                        <TextBox x:Name="txtDetail"  Grid.Column="1" Width="230" FontSize="15" BorderThickness="1" BorderBrush="Black"/>
+                    </Grid>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="230" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblType" Grid.Column="0" Text="타입" Style="{StaticResource CostItemLabelTextStyle}" />
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <RadioButton x:Name="rbTypeCash" Content="현금"  FontSize="15" />
+                            <RadioButton x:Name="rbTypeCard" Content="카드"  FontSize="15" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="230" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="lblCost" Grid.Column="0" Text="금액" Style="{StaticResource CostItemLabelTextStyle}" />
+                        <TextBox x:Name="txtCost" Grid.Column="1" FontSize="15" InputScope="Number" Width="230" BorderThickness="1" BorderBrush="Black" TextChanging="txtCost_TextChanging" />
+                    </Grid>
+                    <StackPanel x:Name="pnUpdateDeleteCard" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,10,0,0">
+                        <Button x:Name="btnDeleteCost" Content="삭제" Style="{StaticResource SaveButtonStyle}" Margin="0,0,10,0" Click="btnDeleteCost_Click"/>
+                        <Button x:Name="btnUpdateCost" Content="수정" Style="{StaticResource SaveButtonStyle}" Click="btnUpdateCost_Click"/>
+                    </StackPanel>
+                    <StackPanel x:Name="pnAddCard" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,0,0">
+                        <Button x:Name="btnInputCost" Content="입력" Style="{StaticResource SaveButtonStyle}" Margin="0,0,0,10" Click="btnInputCost_Click"/>
+                        <Button x:Name="btnInputCostContinue" Content="계속 입력" Style="{StaticResource SaveButtonStyle}" Click="btnInputCostContinue_Click"/>
+                    </StackPanel>
+                </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
                 <Controls:ViewCostHistoryControl x:Name="costHistory" Margin="10,10,10,0"/>
