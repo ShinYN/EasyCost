@@ -55,6 +55,10 @@ namespace EasyCost.DataModels
         /// </summary>
         public string CostType { get; set; }
         /// <summary>
+        /// 사용 카드 종류
+        /// </summary>
+        public string CostCard { get; set; }
+        /// <summary>
         /// 지출 금액
         /// </summary>
         public int Cost { get; set; }

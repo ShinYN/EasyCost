@@ -80,6 +80,13 @@ namespace EasyCost.Pages
         {
             cboSubCategory.Items.Clear();
         }
+        private void InitCardCombo()
+        {
+            cboCard.Items.Clear();
+            cboCard.Items.Add(string.Empty);
+            CardManager.GetCardList().ForEach(elem => cboCard.Items.Add(elem.CardName));
+            cboCard.SelectedIndex = 0;
+        }
 
         private void DisplayCostHistory()
         {
@@ -108,16 +115,11 @@ namespace EasyCost.Pages
             {
                 lblTitle.Text = "지출 내역 입력";
                 lblDetail.Text = "지출 내역";
-
-                rbTypeCard.Visibility = Visibility.Visible;
             }
             else
             {
                 lblTitle.Text = "수입 내역 입력";
                 lblDetail.Text = "수입 내역";
-
-                rbTypeCard.Visibility = Visibility.Collapsed;
-                rbTypeCash.IsChecked = true;
             }
             
             costDatePicker.Date = DateTime.Now;
@@ -135,17 +137,11 @@ namespace EasyCost.Pages
             {
                 lblTitle.Text = "지출 내역 수정";
                 lblDetail.Text = "지출 내역";
-
-                rbTypeCard.Visibility = Visibility.Visible;
-                rbTypeCash.IsChecked = (aCostHistoryModel.CostType == "현금") ? true : false;
             }
             else
             {
                 lblTitle.Text = "수입 내역 수정";
                 lblDetail.Text = "수입 내역";
-
-                rbTypeCard.Visibility = Visibility.Collapsed;
-                rbTypeCash.IsChecked = true;
             }
 
             costDatePicker.Date = aCostHistoryModel.CostDateTime;
@@ -153,6 +149,16 @@ namespace EasyCost.Pages
             cboSubCategory.SelectedValue = aCostHistoryModel.SubCategory;
             txtDetail.Text = aCostHistoryModel.Description;
             txtCost.Text = aCostHistoryModel.Cost.ToString();
+
+            if (aCostHistoryModel.CostType == "현금")
+            {
+                rbTypeCash.IsChecked = true;
+            }
+            else
+            {
+                rbTypeCard.IsChecked = true;
+                cboCard.SelectedValue = aCostHistoryModel.CostCard;
+            }
 
             btnInputCost.Visibility = Visibility.Collapsed;
             btnInputCostContinue.Visibility = Visibility.Collapsed;
@@ -216,7 +222,8 @@ namespace EasyCost.Pages
             costInfo.CategoryType = GetCurrentCategoryType();
             costInfo.Category = cboCategory.SelectedValue.ToString();
             costInfo.SubCategory = cboSubCategory.SelectedValue.ToString();
-            costInfo.CostType = (rbTypeCard.IsChecked == true) ? "카드" : "현금";
+            costInfo.CostType = (rbTypeCard.IsChecked.Value) ? "카드" : "현금";
+            costInfo.CostCard = (rbTypeCard.IsChecked.Value) ? cboCard.SelectedValue.ToString() : string.Empty;
             costInfo.Cost = int.Parse(txtCost.Text.Trim());
             costInfo.Description = txtDetail.Text;
 
@@ -419,6 +426,18 @@ namespace EasyCost.Pages
                     button.Foreground = MyColorHelper.GetSolidColorBrush(main_color);
                 }
             }
+        }
+
+        private void rbTypeCash_Checked(object sender, RoutedEventArgs e)
+        {
+            cboCard.IsEnabled = false;
+            cboCard.Items.Clear();
+        }
+
+        private void rbTypeCard_Checked(object sender, RoutedEventArgs e)
+        {
+            cboCard.IsEnabled = true;
+            InitCardCombo();
         }
     }
 }
