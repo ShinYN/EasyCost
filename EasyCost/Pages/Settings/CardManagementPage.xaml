@@ -36,7 +36,7 @@
                    PanePlacement="Right" >
             <SplitView.Pane>
                 <StackPanel Background="{StaticResource WhiteColor}"
-                            BorderThickness="1,1,0,1"
+                            BorderThickness="2,2,0,2"
                             BorderBrush="{StaticResource BlackColor}"
                             CornerRadius="5,0,0,5"
                             Orientation="Vertical"
@@ -67,7 +67,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="230" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="카드 회사" Style="{StaticResource CardItemLabelTextStyle}"/>
+                        <TextBlock Grid.Column="0" Text="카드 회사 (*)" Style="{StaticResource CardItemLabelTextStyle}"/>
                         <TextBox Grid.Column="1" x:Name="txtCardCompany" Style="{StaticResource CardItemValueTextStyle}"/>
                     </Grid>
                     <Grid Margin="0,10,0,0">
@@ -87,12 +87,12 @@
                         <TextBox Grid.Column="1" x:Name="txtDescription" Style="{StaticResource CardItemValueTextStyle}"/>
                     </Grid>
                     <StackPanel x:Name="pnUpdateDeleteCard" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,10,0,0">
-                        <Button x:Name="btnDeleteCard" Content="삭제" Style="{StaticResource SaveItemButtonWithoutBorderStyle}" Margin="0,0,10,0" Click="btnDeleteCard_Click"/>
-                        <Button x:Name="btnUpdateCard" Content="수정" Style="{StaticResource SaveItemButtonWithoutBorderStyle}" Click="btnUpdateCard_Click"/>
+                        <Button x:Name="btnDeleteCard" Content="삭제" Style="{StaticResource SaveButtonStyle}" Margin="0,0,10,0" Click="btnDeleteCard_Click"/>
+                        <Button x:Name="btnUpdateCard" Content="수정" Style="{StaticResource SaveButtonStyle}" Click="btnUpdateCard_Click"/>
                     </StackPanel>
-                    <StackPanel x:Name="pnAddCard" Orientation="Vertical" HorizontalAlignment="Right" Margin="0,10,0,0">
-                        <Button x:Name="btnAddCard" Content="추가" Style="{StaticResource SaveItemButtonWithoutBorderStyle}" Margin="0,0,0,10" Click="btnAddCard_Click"/>
-                        <Button x:Name="btnAddCardContinue" Content="계속 추가" Style="{StaticResource SaveItemButtonWithoutBorderStyle}" Click="btnAddCardContinue_Click"/>
+                    <StackPanel x:Name="pnAddCard" Orientation="Vertical" HorizontalAlignment="Right" >
+                        <Button x:Name="btnAddCard" Content="추가" Style="{StaticResource SaveButtonStyle}" Margin="0,0,0,10" Click="btnAddCard_Click"/>
+                        <Button x:Name="btnAddCardContinue" Content="계속 추가" Style="{StaticResource SaveButtonStyle}" Click="btnAddCardContinue_Click"/>
                     </StackPanel>
                 </StackPanel>
             </SplitView.Pane>
@@ -113,7 +113,6 @@
                                     <ColumnDefinition Width="50"/>
                                     <ColumnDefinition Width="250"/>
                                     <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="180"/>
                                     <ColumnDefinition Width="250"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
@@ -127,12 +126,9 @@
                                     <TextBlock x:Uid="tbCardType" Text="타입"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                                 </Border>
                                 <Border Grid.Column="3" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                                    <TextBlock x:Uid="tbCompany" Text="카드 회사" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
+                                    <TextBlock x:Uid="tbCompany" Text="카드 정보" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                                 </Border>
                                 <Border Grid.Column="4" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
-                                    <TextBlock x:Uid="tbCardNumber" Text="카드 번호" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
-                                </Border>
-                                <Border Grid.Column="5" BorderBrush="{StaticResource brush}" BorderThickness="0,0,1,0">
                                     <TextBlock x:Uid="tbDescription" Text="설명" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White"/>
                                 </Border>
                             </Grid>
@@ -140,7 +136,7 @@
                     </ListView.HeaderTemplate>
                     <ListView.ItemTemplate>
                         <DataTemplate x:Name="gridData">
-                            <Grid Height="30">
+                            <Grid Height="40">
                                 <Grid.Resources>
                                     <SolidColorBrush x:Key="brush" Color="White"/>
                                 </Grid.Resources>
@@ -148,16 +144,17 @@
                                     <ColumnDefinition Width="40"/>
                                     <ColumnDefinition Width="250"/>
                                     <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="180"/>
                                     <ColumnDefinition Width="250"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding Index}" FontSize="15" Grid.Column="0"/>
-                                <TextBlock Text="{Binding CardName}" FontSize="15" Grid.Column="1"/>
-                                <TextBlock Text="{Binding CardType}" FontSize="15" Grid.Column="2"/>
-                                <TextBlock Text="{Binding Company}" FontSize="15" Grid.Column="3"/>
-                                <TextBlock Text="{Binding CardNumber}" FontSize="15" Grid.Column="4"/>
-                                <TextBlock Text="{Binding Description}" FontSize="15" Grid.Column="5" />
+                                <TextBlock Text="{Binding Index}" FontSize="15" VerticalAlignment="Center" Grid.Column="0"/>
+                                <TextBlock Text="{Binding CardName}" FontSize="15" VerticalAlignment="Center" Grid.Column="1"/>
+                                <TextBlock Text="{Binding CardType}" FontSize="15" VerticalAlignment="Center" Grid.Column="2"/>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="3">
+                                    <TextBlock Text="{Binding Company}" FontSize="13"/>
+                                    <TextBlock Text="{Binding CardNumber}" FontSize="15"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Description}" FontSize="15" VerticalAlignment="Center" Grid.Column="4" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -165,7 +162,7 @@
             </SplitView.Content>
         </SplitView>
         <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,15,0" Orientation="Horizontal">
-            <Button Name="btnAddNewCard" Content="신규 카드 추가" Background="{StaticResource LightBlueColor}" BorderThickness="0" Foreground="White" Width="200" Height="40" Click="btnAddNewCard_Click" />
+            <Button Name="btnAddNewCard" Content="신규 카드 추가" Style="{StaticResource ExecuteButtonStyle}" Click="btnAddNewCard_Click" />
         </StackPanel>
     </Grid>
 </Page>

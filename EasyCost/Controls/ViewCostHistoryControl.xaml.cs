@@ -16,9 +16,13 @@ namespace EasyCost.Controls
         public delegate void CostItemSelected(CostHistoryModel costInfo);
         public event CostItemSelected CostItemSelectedEvent;
 
+        private List<CardMaster> _cardList;
+
         public ViewCostHistoryControl()
         {
             this.InitializeComponent();
+
+            _cardList = CardManager.GetCardList();
         }
 
         public List<CostInfo> CostInfo { get; private set; }
@@ -96,6 +100,14 @@ namespace EasyCost.Controls
             {
                 tempCostInfo = tempCostInfo.Where(elem => elem.CostType == (string)cboCostType.SelectedValue);
             }
+            if ((string)cboCostCard.SelectedValue != string.Empty)
+            {
+                tempCostInfo = tempCostInfo.Where(elem => elem.CostCard == (string)cboCostCard.SelectedValue);
+            }
+            if ((string)cboCardCompany.SelectedValue != string.Empty)
+            {
+                tempCostInfo = tempCostInfo.Where(elem => GetCardCompany(elem.CostCard) == (string)cboCardCompany.SelectedValue);
+            }
             if (string.IsNullOrWhiteSpace(txtSearchDescrtipion.Text) == false)
             {
                 tempCostInfo = tempCostInfo.Where(elem => elem.Description.Contains(txtSearchDescrtipion.Text.Trim()));
@@ -120,6 +132,10 @@ namespace EasyCost.Controls
                         Category = elem.Category,
                         SubCategory = elem.SubCategory,
                         CostType = elem.CostType,
+                        CostCard = elem.CostCard,
+                        CardCompany = (elem.CostCard == string.Empty) 
+                            ? string.Empty 
+                            : _cardList.Where(x => x.CardName == elem.CostCard).Select(x => x.Company).FirstOrDefault(),
                         Cost = elem.Cost,
                         CostString = elem.Cost.ToString("#,##0").PadLeft(10, ' ') + "원",
                         Percentage = (elem.CategoryType == CategoryType.Expense) ? ((double)elem.Cost * 100 / (double)totalExpenseCost).ToString("#0.#") + "%" : string.Empty,
@@ -141,6 +157,8 @@ namespace EasyCost.Controls
             InitCategoryComboBox();
             InitSubCategoryComboBox();
             InitCostTypeComboBox();
+            InitCostCardComboBox();
+            InitCardCompanyComboBox();
         }
         private void InitCategoryTypeComboBox()
         {
@@ -189,6 +207,36 @@ namespace EasyCost.Controls
                                              .ForEach(x => cboCostType.Items.Add(x.CostType));
             cboCostType.SelectedIndex = 0;
         }
+        private void InitCostCardComboBox()
+        {
+            cboCostCard.Items.Clear();
+            cboCostCard.Items.Add(string.Empty);
+            if (cboCostType.SelectedValue as string != "현금")
+            {
+                CostInfo.Where(x => x.CostCard != string.Empty)
+                        .GroupBy(x => x.CostCard)
+                        .Select(x => x.First()).ToList()
+                        .ForEach(x => cboCostCard.Items.Add(x.CostCard));
+            }
+
+            cboCostCard.SelectedIndex = 0;
+        }
+        private void InitCardCompanyComboBox()
+        {
+            cboCardCompany.Items.Clear();
+            cboCardCompany.Items.Add(string.Empty);
+            if (cboCostType.SelectedValue as string != "현금")
+            {
+                _cardList.ForEach(x => cboCardCompany.Items.Add(x.Company));
+            }
+
+            cboCardCompany.SelectedIndex = 0;
+        }
+
+        private string GetCardCompany(string cardName)
+        {
+            return _cardList.Where(x => x.CardName == cardName).Select(x => x.Company).FirstOrDefault();
+        }
 
         private void lsvHistory_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -213,9 +261,19 @@ namespace EasyCost.Controls
         }
         private void cboCostType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            InitCostCardComboBox();
+            InitCardCompanyComboBox();
             DisplayCostInfoToListView();
         }
         private void txtSearchDescrtipion_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DisplayCostInfoToListView();
+        }
+        private void cboCostCard_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DisplayCostInfoToListView();
+        }
+        private void cboCardCompany_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DisplayCostInfoToListView();
         }

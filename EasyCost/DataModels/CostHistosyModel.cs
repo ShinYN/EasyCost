@@ -59,6 +59,10 @@ namespace EasyCost.DataModels
         /// </summary>
         public string CostCard { get; set; }
         /// <summary>
+        /// 카드 회사
+        /// </summary>
+        public string CardCompany { get; set; }
+        /// <summary>
         /// 지출 금액
         /// </summary>
         public int Cost { get; set; }

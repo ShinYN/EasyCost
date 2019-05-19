@@ -40,6 +40,8 @@ namespace EasyCost.Pages.Settings
             txtDescription.Text = string.Empty;
 
             txtCardName.IsEnabled = true;
+            btnAddCard.Visibility = Visibility.Visible;
+            btnAddCardContinue.Visibility = Visibility.Visible;
             btnUpdateCard.Visibility = Visibility.Collapsed;
             btnDeleteCard.Visibility = Visibility.Collapsed;
 
@@ -136,6 +138,12 @@ namespace EasyCost.Pages.Settings
             {
                 rbCreditCard.Focus(FocusState.Keyboard);
                 throw new Exception("카드 타입을 선택해 주세요");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtCardCompany.Text))
+            {
+                txtCardCompany.Focus(FocusState.Keyboard);
+                throw new Exception("카드 회사를 입력해 주세요");
             }
         }
 

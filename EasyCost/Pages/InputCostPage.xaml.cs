@@ -57,7 +57,15 @@ namespace EasyCost.Pages
             InitCategoryCombo(aCategoryType);
             InitSubCategoryCombo();
 
-            rbTypeCard.IsChecked = true;
+            if (aCategoryType == CategoryType.Income)
+            {
+                rbTypeCash.IsChecked = true;
+            }
+            else
+            {
+                rbTypeCard.IsChecked = true;
+            }
+
             txtDetail.Text = string.Empty;
             txtCost.Text = string.Empty;
         }

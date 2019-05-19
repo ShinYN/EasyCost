@@ -2,15 +2,13 @@
 using EasyCost.Databases;
 using EasyCost.Databases.TableModels;
 using EasyCost.Types;
+using Syncfusion.XlsIO;
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Syncfusion.XlsIO;
 using Windows.Storage.Pickers;
 using Windows.UI.Popups;
 
@@ -109,19 +107,21 @@ namespace EasyCost.Helpers
                 worksheet.Range["C1"].Text = "분류";
                 worksheet.Range["D1"].Text = "세부 분류";
                 worksheet.Range["E1"].Text = "타입";
-                worksheet.Range["F1"].Text = "지출 내역";
-                worksheet.Range["G1"].Text = "지출 금액";
+                worksheet.Range["F1"].Text = "카드 정보";
+                worksheet.Range["G1"].Text = "내역";
+                worksheet.Range["H1"].Text = "금액";
                 
                 int rowIndex = 2;
                 foreach (CostInfo costInfo in aCostInfoList)
                 {
                     worksheet.Range["A" + rowIndex].Text = costInfo.CostDate.ToString("yyyy-MM-dd HH:mm:ss");
-                    worksheet.Range["B" + rowIndex].Text = costInfo.CategoryType;
+                    worksheet.Range["B" + rowIndex].Text = (costInfo.CategoryType == CategoryType.Expense) ? "지출" : "수입";
                     worksheet.Range["C" + rowIndex].Text = costInfo.Category;
                     worksheet.Range["D" + rowIndex].Text = costInfo.SubCategory;
                     worksheet.Range["E" + rowIndex].Text = costInfo.CostType;
-                    worksheet.Range["F" + rowIndex].Text = costInfo.Description;
-                    worksheet.Range["G" + rowIndex].Text = costInfo.Cost.ToString();
+                    worksheet.Range["F" + rowIndex].Text = costInfo.CostCard;
+                    worksheet.Range["G" + rowIndex].Text = costInfo.Description;
+                    worksheet.Range["H" + rowIndex].Text = costInfo.Cost.ToString();
 
                     rowIndex++;
                 }
@@ -132,7 +132,8 @@ namespace EasyCost.Helpers
                 worksheet.Range[1, 4, aCostInfoList.Count, 4].ColumnWidth = 15;
                 worksheet.Range[1, 5, aCostInfoList.Count, 5].ColumnWidth = 10;
                 worksheet.Range[1, 6, aCostInfoList.Count, 6].ColumnWidth = 20;
-                worksheet.Range[1, 7, aCostInfoList.Count, 7].ColumnWidth = 15;
+                worksheet.Range[1, 7, aCostInfoList.Count, 7].ColumnWidth = 20;
+                worksheet.Range[1, 8, aCostInfoList.Count, 8].ColumnWidth = 15;
 
                 worksheet.Range["A1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
                 worksheet.Range["B1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
@@ -141,10 +142,11 @@ namespace EasyCost.Helpers
                 worksheet.Range["E1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
                 worksheet.Range["F1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
                 worksheet.Range["G1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
+                worksheet.Range["H1"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
 
                 FileSavePicker savePicker = new FileSavePicker();
                 savePicker.SuggestedStartLocation = PickerLocationId.Desktop;
-                savePicker.SuggestedFileName = "공감가계부_지출내역";
+                savePicker.SuggestedFileName = "공감가계부_내역";
                 savePicker.FileTypeChoices.Add("Excel Files", new List<string>() { ".xlsx" });
                 StorageFile storageFile = await savePicker.PickSaveFileAsync();
                 
