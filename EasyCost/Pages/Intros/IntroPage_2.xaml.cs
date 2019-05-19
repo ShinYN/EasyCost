@@ -17,7 +17,6 @@ namespace EasyCost.Pages.Intros
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            //DBConnHandler.CreateDB();
             Frame rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(MainPage));
         }

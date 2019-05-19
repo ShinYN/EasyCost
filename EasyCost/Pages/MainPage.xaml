@@ -6,7 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Controls="using:EasyCost.Controls"
     x:Class="EasyCost.Pages.MainPage"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
     <Page.Resources>
         <Style x:Key="MainTitleStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource BMJuaFont}" />

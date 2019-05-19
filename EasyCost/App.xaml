@@ -12,6 +12,7 @@
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="BMJuaFont">ms-appx:/Assets/Fonts/BMJUA_ttf.ttf#BM JUA_TTF</FontFamily>
             <FontFamily x:Key="BMDohyeonFont">ms-appx:/Assets/Fonts/BMDOHYEON_ttf.ttf#배달의민족 도현</FontFamily>
+            <Thickness x:Key="ContentDialogBorderWidth">0</Thickness>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

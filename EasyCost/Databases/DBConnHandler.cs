@@ -4,6 +4,7 @@ using SQLite;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Windows.ApplicationModel;
 
 namespace EasyCost.Databases
 {
@@ -35,6 +36,15 @@ namespace EasyCost.Databases
             }
         }
 
+        public static string GetPackageVersion()
+        {
+            Package package = Package.Current;
+            PackageId packageId = package.Id;
+            PackageVersion version = packageId.Version;
+
+            return string.Format("{0}_{1}_{2}_{3}", version.Major, version.Minor, version.Build, version.Revision);
+        }
+
         public static void CreateDB()
         {
             if (IsFirstConnection)
@@ -43,21 +53,21 @@ namespace EasyCost.Databases
                 DbConnection.CreateTable<UserMaster>();
                 DbConnection.CreateTable<CostInfo>();
                 DbConnection.CreateTable<CardMaster>();
+                DbConnection.CreateTable<UpdateNotice>();
                 CreateCategoryTable();
 
                 CreateInitialCategory();
+                UpdateNoticeData(true);
             }
             else
             {
                 DBVersionType userDBVersion = GetUserDBVersion();
-                if (userDBVersion == LATEST_DB_VERSION)
-                {
-                    return;
-                }
-                else
+                if (userDBVersion != LATEST_DB_VERSION)
                 {
                     MigrationDBData(userDBVersion);
                 }
+
+                UpdateNoticeData(false);
             }
         }
         public static void DropDB()
@@ -68,6 +78,7 @@ namespace EasyCost.Databases
             DbConnection.DropTable<CostInfo>();
             DbConnection.DropTable<DBVersionInfo>();
             DbConnection.DropTable<CardMaster>();
+            DbConnection.DropTable<UpdateNotice>();
         }
 
         private static void MigrationDBData(DBVersionType aDBVersionType)
@@ -86,6 +97,7 @@ namespace EasyCost.Databases
                 CreateCategoryTable();
                 DbConnection.CreateTable<CostInfo>();
                 DbConnection.CreateTable<CardMaster>();
+                DbConnection.CreateTable<UpdateNotice>();
                 DbConnection.CreateTable<DBVersionInfo>();
 
                 categoryMasterList.ForEach(x => x.CategoryType = CategoryType.Expense);
@@ -115,6 +127,7 @@ namespace EasyCost.Databases
 
                 DbConnection.CreateTable<CostInfo>();
                 DbConnection.CreateTable<CardMaster>();
+                DbConnection.CreateTable<UpdateNotice>();
                 DbConnection.CreateTable<DBVersionInfo>();
 
                 DbConnection.InsertAll(costInfoList);
@@ -167,6 +180,17 @@ namespace EasyCost.Databases
             DbConnection.Execute(@"INSERT INTO SubCategoryMaster SELECT 'I', '은행', '펀드', '', 'N', 0, '', 0");
 
             DbConnection.Execute(@"INSERT INTO CategoryMaster SELECT 'I', '기타', ''");
+        }
+
+        private static void UpdateNoticeData(bool isChecked)
+        {
+            DbConnection.CreateTable<UpdateNotice>();
+
+            string packageVersion = GetPackageVersion();
+            int updateChecked = (isChecked) ? 1 : 0;
+            DbConnection.Execute($@" INSERT INTO UpdateNotice (Version, Checked) 
+                                     SELECT '{packageVersion}', {updateChecked} 
+                                     WHERE NOT EXISTS(SELECT 1 FROM UpdateNotice WHERE Version = '{packageVersion}') ");
         }
         
         private static DBVersionType GetUserDBVersion()

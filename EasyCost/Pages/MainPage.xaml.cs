@@ -1,5 +1,8 @@
-﻿using EasyCost.DataModels;
+﻿using EasyCost.Databases;
+using EasyCost.DataModels;
+using EasyCost.Helpers;
 using EasyCost.Pages;
+using EasyCost.Pages.UpdateNotices;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,6 +46,18 @@ namespace EasyCost.Pages
             menuList.Items.Add(new MenuItemModel { ImagePath = "ms-appx:///Assets/MenuIcons/menuSetting_D.png", menuText = "프로그램 설정" });
         }
 
+        private async void ShowNoticeDialog()
+        {
+            string packageVersion = DBConnHandler.GetPackageVersion();
+            bool? isUpdated = UpdateNoticeManager.IsUpdated(packageVersion);
+
+            if (isUpdated != null && isUpdated == false)
+            {
+                var dialog = new UpdateNoticeDialog();
+                await dialog.ShowAsync();
+            }
+        }
+
         private void DisplayMenuFromText(string aMenuText)
         {
             if (aMenuText == MENU_WRITECOST)
@@ -77,6 +92,11 @@ namespace EasyCost.Pages
             {
                 DisplayMenuFromText(((MenuItemModel)e.ClickedItem).menuText);
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ShowNoticeDialog();
         }
     }
 }

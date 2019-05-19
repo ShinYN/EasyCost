@@ -45,8 +45,8 @@ namespace EasyCost.Pages
             lsvSettingItem.Items.Add(new { Item = MENU_EXPENSE_CATEGORY });
             lsvSettingItem.Items.Add(new { Item = MENU_INCOME_CATEGORY });
             lsvSettingItem.Items.Add(new { Item = MENU_CARDMANAGEMENT });
+            lsvSettingItem.Items.Add(new { Item = MENU_DATASYNC });
             lsvSettingItem.Items.Add(new { Item = MENU_PROGRAMINFO });
-            //lsvSettingItem.Items.Add(new { Item = MENU_DATASYNC });
             lsvSettingItem.SelectedIndex = 0;
         }
 

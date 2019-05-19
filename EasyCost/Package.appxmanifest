@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="44922ShinYoungChul.7970897B05B71" Publisher="CN=23BE13D3-1692-4333-AEF3-8EF14060EA5A" Version="1.1.6.0" />
+  <Identity Name="44922ShinYoungChul.7970897B05B71" Publisher="CN=23BE13D3-1692-4333-AEF3-8EF14060EA5A" Version="1.1.8.0" />
   <mp:PhoneIdentity PhoneProductId="1dc5d894-00bc-4e3e-95f2-8cb6e0e73250" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>공감 가계부</DisplayName>
